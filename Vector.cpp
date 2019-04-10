@@ -1,46 +1,134 @@
 #include <vector>
+#include <iostream>
+using namespace std;
 
-template <class T>
-class line_vector
+class Array_Vector
 {
 private:
-    int length;
+	int length;
+	vector<int> elements;
+	int scalar;
+	int norm_squared;
 public:
-    virtual double norm();
-    virtual T operator* (line_vector<T> other);
-    virtual T operator[] (int index);
+	Array_Vector(const int length);
+	Array_Vector(const vector<int>& elements);
+	Array_Vector(const Array_Vector& other);
+
+	int len() const;
+	int operator[] (int index) const;
+	void set(int index, int value);
+	Array_Vector operator+ (const Array_Vector& other);
+	Array_Vector operator- (const Array_Vector& other);
+	int operator* (const Array_Vector& other);
+	Array_Vector operator*(const int scalar);
+	int norm();
 };
 
-template <class T>
-class array_vector : line_vector
+Array_Vector::Array_Vector(const int length)
 {
-private:
-    int length;
-    Vector<T> arr;
-public:
-    array_vector(int length) : length(length)
-    {
-        this.length = length;
-        arr = new Vector<T>(length, 0);
-    }
+	this->norm_squared = -1;//Unintialized
+	this->length = length;
+	this->scalar = 1;
+	this->elements = vector<int>(length, 0);
+}
+Array_Vector::Array_Vector(const vector<int>& elements)
+{
+	this->norm_squared = -1;//Unintialized
+	this->scalar = 1;
+	this->length = elements.size();
+	this->elements = vector<int>(elements);
+}
+Array_Vector::Array_Vector(const Array_Vector& other)
+{
+	this->norm_squared = other.norm_squared;
+	this->scalar = other.scalar;
+	this->length = other.length;
+	this->elements = vector<int>(other.elements);
+}
 
-    T operator[] (int index)
-    {
-        return arr[index];
-    }
+int Array_Vector::len() const
+{
+	return this->length;
+}
+int Array_Vector::operator[](const int index) const
+{
+	return this->elements[index];
+}
 
-    T operator*(line_vector<T> other)
-    {
-        if(this.legnth != other.length)
-            return 0; //illegal input
-        T sum = 0;
-        for(int i=0; i<length; i++)
-            sum += this.arr[i] * other[i];
-        return sum;
-    }
-    int main()
-    {
-        array_vector<int> vec = new array_vector<int>(5);
-        return 0;
-    }
-};
+void Array_Vector::set(int index, int value)
+{
+	norm_squared = -1;
+	if (scalar != 1 && value != 0)
+	{
+		for (int i = 0; i < length; i++)
+		{
+			this->elements[i] *= scalar;
+		}
+	}
+	scalar = 1;
+	this->elements[index] = value;
+}
+Array_Vector Array_Vector:: operator+(const Array_Vector& other)
+{
+	if (this->length != other.length)
+	{
+		throw new exception;
+	}
+	Array_Vector vec(this->length);
+	for (int i = 0; i < this->length; i++)
+	{
+		vec.elements[i] = this->elements[i]*this->scalar + other.elements[i]*other.scalar;
+	}
+	return vec;
+}
+Array_Vector Array_Vector:: operator-(const Array_Vector& other)
+{
+	if (this->length != other.length)
+	{
+		throw new exception;
+	}
+	Array_Vector vec(this->length);
+	for (int i = 0; i < this->length; i++)
+	{
+		vec.elements[i] = this->elements[i] * this->scalar - other.elements[i] * other.scalar;
+	}
+	return vec;
+}
+int Array_Vector:: operator*(const Array_Vector& other)
+{
+	if (this->length != other.length)
+	{
+		throw new exception;
+	}
+	int sum = 0;
+	for (int i = 0; i < this->length; i++)
+	{
+		sum += this->elements[i] * other.elements[i];
+	}
+	return sum * this->scalar*other.scalar;
+}
+Array_Vector Array_Vector:: operator*(const int scalar)
+{
+	Array_Vector vec(this->elements);
+	vec.scalar = this->scalar*scalar;
+	return vec;
+}
+int Array_Vector::norm()
+{
+	if (norm_squared >= 0)
+	{
+		return norm_squared * scalar*scalar;
+	}
+	norm_squared = 0;
+	for (int i = 0; i < length; i++)
+	{
+		norm_squared += elements[i] * elements[i];
+	}
+	return norm_squared * scalar*scalar;
+}
+
+
+int main()
+{
+	return 0;
+}
