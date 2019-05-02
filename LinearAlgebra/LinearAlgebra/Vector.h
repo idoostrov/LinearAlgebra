@@ -9,8 +9,8 @@ class Array_Vector
 private:
 	int length;
 	vector<type> elements;
-	type scalar;
-	type norm_squared;
+	mutable type scalar;
+	mutable type norm_squared;
 public:
 	Array_Vector(const int length);
 	Array_Vector(const vector<type>& elements);

@@ -1,2 +1,5 @@
-﻿  Matrix.cpp
+﻿  LLL.cpp
+  Matrix.cpp
+c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.cpp(98): warning C4018: '>=': signed/unsigned mismatch
+  Generating Code...
   LinearAlgebra.vcxproj -> C:\Users\talth\Documents\GitHub\LinearAlgebra\LinearAlgebra\Debug\LinearAlgebra.exe

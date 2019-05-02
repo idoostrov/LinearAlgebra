@@ -1,10 +1,10 @@
 #include "Matrix.h"
 
-int Matrix::len() const
+int Matrix::getLength() const
 {
 	return this->length;
 }
-int Matrix::wid() const
+int Matrix::getWidth() const
 {
 	return this->width;
 }
@@ -93,17 +93,78 @@ int Matrix::find_not_zero(int col, int start)
 	return -1;
 }
 
-Array_Vector& Matrix::operator[](int row)
+Array_Vector& Matrix::operator[](int row) 
 {
+	if (row >= this->rows.size()) {
+		cout << "Index = " << row << endl;
+		cout << "Length = " << this->length << endl;
+		cout << "Length = " << this->rows.size() << endl;
+		int temp;
+		cin >> temp;
+		throw new exception;
+	}
 	this->det_calculated = false;
 	return this->rows[row];
+}
+
+Matrix Matrix::operator+(Matrix& other)
+{
+	if ((this->length != other.length) || (this->width != other.width))
+	{
+		throw new exception;
+	}
+	Matrix m(this->length, this->width);
+	for (int i = 0; i < this->length; i++)
+	{
+		m[i] = (this->rows[i])*this->scalar + (other[i])*other.scalar;
+	}
+	m.det_calculated = false;
+	return m;
+}
+
+Matrix Matrix::operator*(Matrix& other)
+{
+	if (this->width != other.length)
+	{
+		throw new exception;
+	}
+	Matrix m(other);//How do we do transpose?
+	for (int i = 0; i < this->length; i++)
+		for (int j=0; j <this->width; j++)
+		{
+			m[i].set(j, (this->rows[i]) * (other[j]));
+		}
+	m.scalar = this->scalar*other.scalar;
+	if ((!this->det_calculated) || (!other.det_calculated))
+	{
+		det_calculated = false;
+	}
+	else
+	{
+		det_calculated = true;
+		m.det = this->det*other.det;
+	}
+	return m;
+}
+
+Matrix Matrix::operator~()
+{
+	Matrix m(this->width, this->length);
+	for (int i = 0; i < this->width; i++)
+	{
+		for (int j = 0; j < this->length; j++)
+		{
+			m[i].set(j, this->rows[j][i]);
+		}
+	}
+	return m;
 }
 
 ostream& operator<<(ostream& os, Matrix& p)
 {
 	os << "{";
-	int length = p.len();
-	int width = p.wid();
+	int length = p.getLength();
+	int width = p.getWidth();
 	if (length != 0)
 	{
 		if (width != 0)
@@ -118,25 +179,4 @@ ostream& operator<<(ostream& os, Matrix& p)
 	}
 	os << "}\n";
 	return os;
-}
-
-int main()
-{
-	int len, wid, tmp;
-	cin >> len;
-	cin >> wid;
-	Matrix mat(len, wid);
-	for (int i = 0; i < len; i++) 
-		for (int j = 0; j < wid; j++)
-		{
-			cin >> tmp;
-			mat[i].set(j, tmp);
-		}
-	
-	cout << mat;
-	cout << "det=";
-	cout << mat.deter();
-	cout << "\n";
-	cin >> tmp;
-	return 0;
 }

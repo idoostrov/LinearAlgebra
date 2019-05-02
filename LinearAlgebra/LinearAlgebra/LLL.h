@@ -1,2 +1,4 @@
 #include "Matrix.h"
-#include "Vector.h"
+
+Matrix& GramSchmidt(Matrix& M);
+Matrix& LLL(Matrix& M, float delta);

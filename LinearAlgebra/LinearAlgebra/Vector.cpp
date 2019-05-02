@@ -40,8 +40,8 @@ void Array_Vector::set(int index, type value)
 		{
 			this->elements[i] *= this->scalar;
 		}
+		this->scalar = 1;
 	}
-	this->scalar = 1;
 	this->elements[index] = value;
 }
 Array_Vector Array_Vector:: operator+(const Array_Vector& other)
