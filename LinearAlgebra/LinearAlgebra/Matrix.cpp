@@ -126,12 +126,13 @@ int main()
 	cin >> len;
 	cin >> wid;
 	Matrix mat(len, wid);
-	for (int i = 0; i < len; i++)
+	for (int i = 0; i < len; i++) 
 		for (int j = 0; j < wid; j++)
 		{
 			cin >> tmp;
 			mat[i].set(j, tmp);
 		}
+	
 	cout << mat;
 	cout << "det=";
 	cout << mat.deter();
