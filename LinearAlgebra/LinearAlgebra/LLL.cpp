@@ -57,7 +57,7 @@ int main()
 		for (int j = 0; j < wid; j++)
 		{
 			cin >> tmp;
-			mat[i].set(j, tmp);
+			mat[i][j] = tmp;
 		}
 
 	cout << mat;

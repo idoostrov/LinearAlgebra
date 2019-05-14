@@ -96,15 +96,23 @@ int Matrix::find_not_zero(int col, int start)
 Array_Vector& Matrix::operator[](int row) 
 {
 	if (row >= this->rows.size()) {
-		cout << "Index = " << row << endl;
-		cout << "Length = " << this->length << endl;
-		cout << "Length = " << this->rows.size() << endl;
 		int temp;
 		cin >> temp;
 		throw new exception;
 	}
 	this->det_calculated = false;
 	return this->rows[row];
+}
+
+const Array_Vector& Matrix::operator[](int row) const
+{
+	if (row >= this->rows.size()) {
+		int temp;
+		cin >> temp;
+		throw new exception;
+	}
+	this->det_calculated = false;
+	return rows[row];
 }
 
 Matrix Matrix::operator+(Matrix& other)
@@ -132,7 +140,7 @@ Matrix Matrix::operator*(Matrix& other)
 	for (int i = 0; i < this->length; i++)
 		for (int j=0; j <this->width; j++)
 		{
-			m[i].set(j, (this->rows[i]) * (other[j]));
+			m[i][j] = this->rows[i] * other[j];
 		}
 	m.scalar = this->scalar*other.scalar;
 	if ((!this->det_calculated) || (!other.det_calculated))
@@ -154,7 +162,7 @@ Matrix Matrix::operator~()
 	{
 		for (int j = 0; j < this->length; j++)
 		{
-			m[i].set(j, this->rows[j][i]);
+			m[i][j] = this->rows[j][i];
 		}
 	}
 	return m;

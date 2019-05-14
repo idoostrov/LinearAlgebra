@@ -18,6 +18,7 @@ public:
 
 	int len() const;
 	type operator[] (int index) const;
+	type& operator[] (int index);
 	void set(int index, type value);
 	Array_Vector operator+ (const Array_Vector& other);
 	Array_Vector operator- (const Array_Vector& other);

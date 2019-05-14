@@ -26,11 +26,14 @@ int Array_Vector::len() const
 {
 	return this->length;
 }
-type Array_Vector::operator[](const int index) const
+type Array_Vector::operator[](int index) const
 {
 	return this->elements[index];
 }
-
+type& Array_Vector::operator[](int index)
+{
+	return this->elements[index];
+}
 void Array_Vector::set(int index, type value)
 {
 	this->norm_squared = -1;
