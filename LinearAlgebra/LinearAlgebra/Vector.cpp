@@ -26,18 +26,14 @@ int Array_Vector::len() const
 {
 	return this->length;
 }
-type Array_Vector::operator[](int index) const
+type Array_Vector::operator[](const int index) const
 {
 	return this->elements[index];
 }
 type& Array_Vector::operator[](int index)
 {
-	return this->elements[index];
-}
-void Array_Vector::set(int index, type value)
-{
 	this->norm_squared = -1;
-	if (this->scalar != 1 && value != 0)
+	if (this->scalar != 1)
 	{
 		for (int i = 0; i < length; i++)
 		{
@@ -45,8 +41,9 @@ void Array_Vector::set(int index, type value)
 		}
 		this->scalar = 1;
 	}
-	this->elements[index] = value;
+	return this->elements[index];
 }
+
 Array_Vector Array_Vector:: operator+(const Array_Vector& other)
 {
 	if (this->length != other.length)

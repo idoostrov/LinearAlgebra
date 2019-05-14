@@ -1,7 +1,7 @@
 ﻿  LLL.cpp
   Matrix.cpp
 c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.cpp(98): warning C4018: '>=': signed/unsigned mismatch
-c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.cpp(109): warning C4018: '>=': signed/unsigned mismatch
+c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.cpp(106): warning C4018: '>=': signed/unsigned mismatch
   Vector.cpp
   Generating Code...
   LinearAlgebra.vcxproj -> C:\Users\talth\Documents\GitHub\LinearAlgebra\LinearAlgebra\Debug\LinearAlgebra.exe

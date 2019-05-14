@@ -96,23 +96,17 @@ int Matrix::find_not_zero(int col, int start)
 Array_Vector& Matrix::operator[](int row) 
 {
 	if (row >= this->rows.size()) {
-		int temp;
-		cin >> temp;
 		throw new exception;
 	}
 	this->det_calculated = false;
 	return this->rows[row];
 }
-
 const Array_Vector& Matrix::operator[](int row) const
 {
 	if (row >= this->rows.size()) {
-		int temp;
-		cin >> temp;
 		throw new exception;
 	}
-	this->det_calculated = false;
-	return rows[row];
+	return this->rows[row];
 }
 
 Matrix Matrix::operator+(Matrix& other)
