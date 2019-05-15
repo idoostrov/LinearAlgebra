@@ -1,3 +1,6 @@
+#ifndef VECTOR_H
+#define VECTOR_H
+
 #include <vector>
 #include <iostream>
 
@@ -26,3 +29,5 @@ public:
 	int norm();
 };
 ostream& operator<<(ostream& os, const Array_Vector& p);
+
+#endif//VECTOR_H

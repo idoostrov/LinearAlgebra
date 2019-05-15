@@ -1,6 +1,9 @@
 #include "Vector.h"
 #include <math.h>
 
+#ifndef MATRIX_H
+#define MATRIX_H
+
 class Matrix
 {
 private:
@@ -30,3 +33,5 @@ public:
 	Matrix operator*();
 };
 ostream& operator<<(ostream& os, Matrix& p);
+
+#endif //MATRIX_H
