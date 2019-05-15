@@ -7,3 +7,5 @@ Debug
 #ignore visual studio misc
 .vs
 *.vcxproj
+*.db
+*.ipch
