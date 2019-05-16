@@ -21,7 +21,7 @@ int main()
     }
     //cout << B ;
 
-    Matrix m = (A * B);
+	Matrix m = A*B;
 
     return 0;
 }

@@ -18,6 +18,7 @@ public:
 	int find_not_zero(int col, int start);
 	Matrix(int width, int length);
 	Matrix(Matrix& other);
+	Matrix(const Matrix& other);
 
 	int getLength() const;
 	int getWidth() const;
@@ -29,9 +30,8 @@ public:
     void operator=(const Matrix M);
 	Matrix operator-(const Matrix& b);
 	Matrix operator*(type scalar);
-	Matrix operator*(Matrix& b);
-	Matrix operator~();
-	Matrix operator*();
+	Matrix operator*(const Matrix& b);
+	Matrix operator~() const;
 };
 ostream& operator<<(ostream& os, Matrix& p);
 

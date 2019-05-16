@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="LLL.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -127,4 +128,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project> 
+</Project>

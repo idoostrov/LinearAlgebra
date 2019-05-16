@@ -31,6 +31,17 @@ Matrix::Matrix(Matrix& b)
 	this->rows = vector<Array_Vector>(b.rows);
 }
 
+Matrix::Matrix(const Matrix& b)
+{
+	this->width = b.width;
+	this->length = b.length;
+	this->rank = b.rank;
+	this->scalar = b.scalar;
+	this->det = b.det;
+	this->det_calculated = b.det_calculated;
+	this->rows = vector<Array_Vector>(b.rows);
+}
+
 type Matrix::deter()
 {
 	if (det_calculated)
@@ -135,14 +146,14 @@ Matrix Matrix::operator+(Matrix& other)
 	return m;
 }
 
-Matrix Matrix::operator*(Matrix& other)
+Matrix Matrix::operator*(const Matrix& other)
 {
     cout<<"here";
 	if (this->width != other.length)
 	{
 		throw "Error: dimensions do not match\n";
 	}
-	Matrix m = other;
+	Matrix m = ~other;
 
 	for (int i = 0; i < this->length; i++)
 		for (int j=0; j <this->width; j++)
@@ -163,7 +174,7 @@ Matrix Matrix::operator*(Matrix& other)
 	return m;
 }
 
-Matrix Matrix::operator~()
+Matrix Matrix::operator~() const
 {
 	Matrix m(this->width, this->length);
 	for (int i = 0; i < this->width; i++)

@@ -72,8 +72,11 @@ Array_Vector Array_Vector:: operator-(const Array_Vector& other)
 }
 type Array_Vector:: operator*(const Array_Vector& other)
 {
+	int tmp;
 	if (this->length != other.length)
 	{
+		cout << "What?";
+		cin >> tmp;
 		throw new exception;
 	}
 	int sum = 0;

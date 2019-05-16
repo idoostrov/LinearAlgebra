@@ -1,7 +1,10 @@
 ﻿  LLL.cpp
+c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.h(35): warning C4521: 'Matrix': multiple copy constructors specified
   Matrix.cpp
-c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.cpp(98): warning C4018: '>=': signed/unsigned mismatch
-c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.cpp(106): warning C4018: '>=': signed/unsigned mismatch
-  Vector.cpp
+c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.h(35): warning C4521: 'Matrix': multiple copy constructors specified
+c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.cpp(120): warning C4018: '>=': signed/unsigned mismatch
+c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.cpp(128): warning C4018: '>=': signed/unsigned mismatch
+  Tests.cpp
+c:\users\talth\documents\github\linearalgebra\linearalgebra\linearalgebra\matrix.h(35): warning C4521: 'Matrix': multiple copy constructors specified
   Generating Code...
   LinearAlgebra.vcxproj -> C:\Users\talth\Documents\GitHub\LinearAlgebra\LinearAlgebra\Debug\LinearAlgebra.exe
