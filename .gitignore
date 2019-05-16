@@ -2,7 +2,10 @@
 *.sln
 #ignore .vs directory
 LinearAlgebra/.vs
-
+#ignore misc
+*.vcxproj
+*.vcxproj.files
+*.vcxproj.user
 #ignore Debug directory
 LinearAlgebra/Debug
 
