@@ -1,5 +1,10 @@
 #ignore Visual Studio solutions
 *.sln
+#ignore .vs directory
+LinearAlgebra/.vs
+
+#ignore Debug directory
+LinearAlgebra/Debug
 
 
 ## Ignore Visual Studio temporary files, build results, and
