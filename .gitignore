@@ -4,7 +4,7 @@
 LinearAlgebra/.vs
 #ignore misc
 *.vcxproj
-*.vcxproj.files
+*.vcxproj.filters
 *.vcxproj.user
 #ignore Debug directory
 LinearAlgebra/Debug
