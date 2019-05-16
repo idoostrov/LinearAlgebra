@@ -26,9 +26,9 @@ public:
 	type deter();
 	Array_Vector& operator[](int row);
 	const Array_Vector& operator[](int row) const;
-	Matrix operator+(Matrix& b);
+	Matrix operator+(Matrix b);
     void operator=(const Matrix M);
-	Matrix operator-(const Matrix& b);
+	Matrix operator-(Matrix b);
 	Matrix operator*(type scalar);
 	Matrix operator*(const Matrix& b);
 	Matrix operator~() const;

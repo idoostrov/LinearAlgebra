@@ -131,14 +131,14 @@ const Array_Vector& Matrix::operator[](int row) const
 	return this->rows[row];
 }
 
-Matrix Matrix::operator+(Matrix& other)
+Matrix Matrix::operator+(Matrix other)
 {
 	if ((this->length != other.length) || (this->width != other.width))
 	{
 		throw "Error: dimensions do not match\n";
 	}
-	Matrix m(this->length, this->width);
-	for (int i = 0; i < this->length; i++)
+	Matrix m(this->width, this->length);
+	for (int i = 0; i < this->width; i++)
 	{
 		m[i] = (this->rows[i])*this->scalar + (other[i])*other.scalar;
 	}
@@ -146,42 +146,57 @@ Matrix Matrix::operator+(Matrix& other)
 	return m;
 }
 
-Matrix Matrix::operator*(const Matrix& other)
+Matrix Matrix::operator-(Matrix other)
 {
-    cout<<"here";
-	if (this->width != other.length)
+	if ((this->length != other.length) || (this->width != other.width))
 	{
 		throw "Error: dimensions do not match\n";
 	}
-	Matrix m = ~other;
-
-	for (int i = 0; i < this->length; i++)
-		for (int j=0; j <this->width; j++)
-		{
-			m[i][j] = this->rows[i] * other[j];
-		}
-	m.scalar = this->scalar*other.scalar;
-	if ((!this->det_calculated) || (!other.det_calculated))
+	Matrix m(this->width, this->length);
+	for (int i = 0; i < this->width; i++)
 	{
-		det_calculated = false;
+		m[i] = (this->rows[i])*this->scalar - (other[i])*other.scalar;
+	}
+	m.det_calculated = false;
+	return m;
+}
+
+Matrix Matrix::operator*(const Matrix& other)
+{
+	int tmp;
+	if (this->length != other.width)
+	{
+		throw "Error: dimensions do not match\n";
+	}
+	Matrix temp = ~other;
+	Matrix m(this->width, other.length);
+
+	for (int i = 0; i < this->width; i++)
+		for (int j=0; j <other.length; j++)
+		{
+			m[i][j] = this->rows[i] * temp[j];
+		}
+	m.scalar = this->scalar*temp.scalar;
+	if ((!this->det_calculated) || (!temp.det_calculated))
+	{
+		m.det_calculated = false;
 	}
 	else
 	{
-		det_calculated = true;
-		m.det = this->det*other.det;
+		m.det_calculated = true;
+		m.det = this->det*temp.det;
 	}
-	cout << m;
 	return m;
 }
 
 Matrix Matrix::operator~() const
 {
-	Matrix m(this->width, this->length);
+	Matrix m(this->length, this->width);
 	for (int i = 0; i < this->width; i++)
 	{
 		for (int j = 0; j < this->length; j++)
 		{
-			m[i][j] = this->rows[j][i];
+			m[j][i] = this->rows[i][j];
 		}
 	}
 	return m;

@@ -4,6 +4,7 @@
 
 int main()
 {
+	int tmp;
     Matrix A(2, 3);
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 3; j++) {
@@ -21,7 +22,13 @@ int main()
     }
     //cout << B ;
 
-	Matrix m = A*B;
+	Matrix m = A-(~B);
+	cout << A;
+	cout << B;
+	cout << m;
+	m = A * B;
+	cout << m;
+	cin >> tmp;
 
     return 0;
 }
