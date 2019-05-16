@@ -47,28 +47,3 @@ Matrix& LLL(Matrix& M, float delta)
     
 }
 
-int main()
-{
-	int len, wid, tmp;
-	cin >> len;
-	cin >> wid;
-	Matrix mat(len, wid);
-	for (int i = 0; i < len; i++)
-		for (int j = 0; j < wid; j++)
-		{
-			cin >> tmp;
-			mat[i][j] = tmp;
-		}
-
-	cout << mat;
-	cout << "det=";
-	cout << mat.deter();
-	cout << "\n";
-	mat = LLL(mat, 0.75);
-	cout << mat;
-	cout << "det=";
-	cout << mat.deter();
-	cout << "\n";
-	cin >> tmp;
-	return 0;
-}

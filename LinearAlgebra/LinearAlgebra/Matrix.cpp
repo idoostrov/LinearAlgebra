@@ -17,7 +17,7 @@ Matrix::Matrix(int width, int length)
 	this->scalar = 1;
 	this->det_calculated = true;
 	this->det = 0;
-	this->rows = vector<Array_Vector>(length, Array_Vector(width));
+	this->rows = vector<Array_Vector>(width, Array_Vector(length));
 }
 
 Matrix::Matrix(Matrix& b)
@@ -54,25 +54,25 @@ type Matrix::deter()
 			return 0;
 		}
 		swap(i, cur_row);
-		denominator *= elliminate_col(i, i);
-	}
-	this->det = 1;
-	for (int i = 0; i < this->length; i++)
-	{
-		this->det *= rows[i][i];
-	}
-	this->det = this->det / denominator;
-	return this->det;
+		denominator *= eliminate_col(i, i);
+}
+this->det = 1;
+for (int i = 0; i < this->length; i++)
+{
+this->det *= rows[i][i];
+}
+this->det = this->det / denominator;
+return this->det;
 
 }
 void Matrix::swap(int row1, int row2)
 {
-	Array_Vector temp = Array_Vector(rows[row1]);
-	rows[row1] = rows[row2];
-	rows[row2] = temp;
+    Array_Vector temp = Array_Vector(rows[row1]);
+    rows[row1] = rows[row2];
+    rows[row2] = temp;
 }
 
-int Matrix::elliminate_col(int row, int col)
+int Matrix::eliminate_col(int row, int col)
 {
 	for (int i = row + 1; i < this->length; i++)
 	{
@@ -93,10 +93,21 @@ int Matrix::find_not_zero(int col, int start)
 	return -1;
 }
 
+void Matrix::operator=(const Matrix M)
+{
+    this->det = M.det;
+    this->det_calculated = M.det_calculated;
+    this->length = M.length;
+    this->width = M.width;
+    this->rank = M.rank;
+    this->rows = M.rows;
+    this->scalar = M.scalar;
+}
+
 Array_Vector& Matrix::operator[](int row) 
 {
 	if (row >= this->rows.size()) {
-		throw new exception;
+		throw "Error: index is too big\n";
 	}
 	this->det_calculated = false;
 	return this->rows[row];
@@ -104,7 +115,7 @@ Array_Vector& Matrix::operator[](int row)
 const Array_Vector& Matrix::operator[](int row) const
 {
 	if (row >= this->rows.size()) {
-		throw new exception;
+		throw "Error: index is too big\n";
 	}
 	return this->rows[row];
 }
@@ -113,7 +124,7 @@ Matrix Matrix::operator+(Matrix& other)
 {
 	if ((this->length != other.length) || (this->width != other.width))
 	{
-		throw new exception;
+		throw "Error: dimensions do not match\n";
 	}
 	Matrix m(this->length, this->width);
 	for (int i = 0; i < this->length; i++)
@@ -126,11 +137,13 @@ Matrix Matrix::operator+(Matrix& other)
 
 Matrix Matrix::operator*(Matrix& other)
 {
+    cout<<"here";
 	if (this->width != other.length)
 	{
-		throw new exception;
+		throw "Error: dimensions do not match\n";
 	}
-	Matrix m(other);//How do we do transpose?
+	Matrix m = other;
+
 	for (int i = 0; i < this->length; i++)
 		for (int j=0; j <this->width; j++)
 		{
@@ -146,6 +159,7 @@ Matrix Matrix::operator*(Matrix& other)
 		det_calculated = true;
 		m.det = this->det*other.det;
 	}
+	cout << m;
 	return m;
 }
 
@@ -167,18 +181,17 @@ ostream& operator<<(ostream& os, Matrix& p)
 	os << "{";
 	int length = p.getLength();
 	int width = p.getWidth();
-	if (length != 0)
+	if (width != 0)
 	{
-		if (width != 0)
+		if (length != 0)
 		{
 			os << p[0];
 		}
 	}
-	for (int i = 1; i < length; i++)
+	for (int i = 1; i < width; i++)
 	{
-		os << ", ";
 		os << p[i];
 	}
-	os << "}\n";
+	os << "}" << endl;
 	return os;
 }
