@@ -32,7 +32,8 @@ public:
 	Matrix operator*(type scalar);
 	Matrix operator*(const Matrix& b);
 	Matrix operator~() const;
+    bool operator==(const Matrix other) const;
 };
-ostream& operator<<(ostream& os, Matrix& p);
+ostream& operator<<(ostream& os, const Matrix& p);
 
 #endif //MATRIX_H
