@@ -168,7 +168,6 @@ public:
 		this->scalar = M.scalar;
 	}
 	Matrix operator*(type scalar);
-<<<<<<< HEAD
 	Matrix<T> operator*(const Matrix<T>& other)
 	{
 		if (this->length != other.width)
@@ -229,12 +228,5 @@ public:
 };
 
 
-=======
-	Matrix operator*(const Matrix& b);
-	Matrix operator~() const;
-    bool operator==(const Matrix other) const;
-};
-ostream& operator<<(ostream& os, const Matrix& p);
->>>>>>> 05f1819e037ed8c517f3520e25d0bf4ec1634528
 
 #endif //MATRIX_H
