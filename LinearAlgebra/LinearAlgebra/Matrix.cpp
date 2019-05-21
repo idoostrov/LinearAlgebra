@@ -163,7 +163,6 @@ Matrix Matrix::operator-(Matrix other)
 
 Matrix Matrix::operator*(const Matrix& other)
 {
-	int tmp;
 	if (this->length != other.width)
 	{
 		throw "Error: dimensions do not match\n";
@@ -177,7 +176,7 @@ Matrix Matrix::operator*(const Matrix& other)
 			m[i][j] = this->rows[i] * temp[j];
 		}
 	m.scalar = this->scalar*temp.scalar;
-	if ((!this->det_calculated) || (!temp.det_calculated))
+	if ((!this->det_calculated) || (!other.det_calculated))
 	{
 		m.det_calculated = false;
 	}
@@ -185,13 +184,34 @@ Matrix Matrix::operator*(const Matrix& other)
 	{
 		m.det_calculated = true;
 		m.det = this->det*temp.det;
+		cout << this->det << ", " << temp.det << ", " << m.det << endl;
 	}
 	return m;
 }
 
+Matrix Matrix::operator*(type scalar)
+{
+    Matrix m(this->width, this->length);
+    for (int i = 0; i < this->width; i++)
+    {
+        for (int j = 0; j < this->length; j++)
+        {
+            m[i][j] = this->rows[i][j] * scalar;
+        }
+    }
+    return m;
+}
+
+
 Matrix Matrix::operator~() const
 {
 	Matrix m(this->length, this->width);
+
+    m.det = this->det;
+    m.det_calculated = this->det_calculated;
+    m.rank = this->rank;
+    m.scalar = this->scalar;
+
 	for (int i = 0; i < this->width; i++)
 	{
 		for (int j = 0; j < this->length; j++)
@@ -202,7 +222,23 @@ Matrix Matrix::operator~() const
 	return m;
 }
 
-ostream& operator<<(ostream& os, Matrix& p)
+bool Matrix::operator==(const Matrix other) const
+{
+    if(this->length!=other.length || this->width!=other.width)
+        return false;
+    for(int i=0; i<this->width; i++) {
+        for (int j = 0; j < this->length; j++) {
+            if (this->rows[i][j] != other[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+
+}
+
+
+ostream& operator<<(ostream& os, const Matrix& p)
 {
 	os << "{";
 	int length = p.getLength();
