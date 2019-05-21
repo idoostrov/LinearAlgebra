@@ -11,4 +11,4 @@ add_executable(LinearAlgebra
         Matrix.cpp
         Matrix.h
         Vector.cpp
-        Vector.h Tests.cpp)
+        Vector.h Tests.cpp LLL_Tests.cpp)
