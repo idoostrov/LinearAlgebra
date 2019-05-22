@@ -2,22 +2,22 @@
 
 bool Test1() // checking matrix multiplication
 {
-    Matrix A(2, 3);
+    Matrix<int> A(2, 3);
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 3; j++) {
             A[i][j] = 2 * (i + 1) * (i + 1) + i * j + 3 * j;
         }
     }
 
-    Matrix B(3, 2);
+    Matrix<int> B(3, 2);
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 2; j++) {
             B[i][j] = 7*(i + 1) * (i + 1) - 5 * (i + 3) * (j + 1) + 8 * j;
         }
     }
 
-    Matrix m = A * B;
-    Matrix result(2,2);
+    Matrix<int> m = A * B;
+    Matrix<int> result(2,2);
     result[0][0]=328;
     result[0][1]=118;
     result[1][0]=640;
@@ -27,7 +27,7 @@ bool Test1() // checking matrix multiplication
 
 int Test2() //checking Transpose function
 {
-    Matrix m(3, 2);
+    Matrix<int> m(3, 2);
     m[0][0] = 1;
     m[0][1] = 2;
     m[1][0] = 3;
@@ -35,7 +35,7 @@ int Test2() //checking Transpose function
     m[2][0] = 5;
     m[2][1] = 6;
 
-    Matrix n = ~m;
+    Matrix<int> n = ~m;
 
     return n.getWidth()==2 && n.getLength()==3 && n[0][0] == 1 && n[0][1] == 3 && n[0][2] == 5 && n[1][0] == 2 && n[1][1] == 4 && n[1][2] == 6;
 
@@ -43,15 +43,15 @@ int Test2() //checking Transpose function
 
 int Test3()
 {
-    Matrix m(2, 2);
+    Matrix<int> m(2, 2);
     m[0] = vector<int>(2, 3);
     m[1][0] = 4;
     m[1][1] = -3;
-    Matrix n(m);
+    Matrix<int> n(m);
     n = n + (~m)*3;
     m.deter();
     n.deter();
-    Matrix a = m*n;
+    Matrix<int> a = m*n;
     return m.deter() == -21 && n.deter() == -339 && a.deter()== (21*339);
 }
 
