@@ -3,7 +3,7 @@
 
 bool GramSchmidtTest()
 {
-    Matrix m(3, 3);
+    Matrix<float> m(3, 3);
 
     m[0][0] = 1;
     m[0][1] = 1;
