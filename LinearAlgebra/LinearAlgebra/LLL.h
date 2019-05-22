@@ -9,4 +9,6 @@ Matrix<T>& GramSchmidt(Matrix<T>& M);
 template <typename T>
 Matrix<T>& LLL(Matrix<T>& M, float delta);
 
+#include "LLL.inl"
+
 #endif//LLL_H

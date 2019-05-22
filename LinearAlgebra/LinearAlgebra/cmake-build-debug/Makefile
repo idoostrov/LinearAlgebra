@@ -123,33 +123,6 @@ LinearAlgebra/fast:
 	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/build
 .PHONY : LinearAlgebra/fast
 
-LLL.o: LLL.cpp.o
-
-.PHONY : LLL.o
-
-# target to build an object file
-LLL.cpp.o:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/LLL.cpp.o
-.PHONY : LLL.cpp.o
-
-LLL.i: LLL.cpp.i
-
-.PHONY : LLL.i
-
-# target to preprocess a source file
-LLL.cpp.i:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/LLL.cpp.i
-.PHONY : LLL.cpp.i
-
-LLL.s: LLL.cpp.s
-
-.PHONY : LLL.s
-
-# target to generate assembly for a file
-LLL.cpp.s:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/LLL.cpp.s
-.PHONY : LLL.cpp.s
-
 LLL_Tests.o: LLL_Tests.cpp.o
 
 .PHONY : LLL_Tests.o
@@ -213,9 +186,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... LinearAlgebra"
 	@echo "... edit_cache"
-	@echo "... LLL.o"
-	@echo "... LLL.i"
-	@echo "... LLL.s"
 	@echo "... LLL_Tests.o"
 	@echo "... LLL_Tests.i"
 	@echo "... LLL_Tests.s"

@@ -44,6 +44,16 @@ public:
 		this->det_calculated = b.det_calculated;
 		this->rows = vector<Array_Vector<T>>(b.rows);
 	}
+    Matrix<T>(const Matrix<T>* b)
+    {
+        this->width = b->width;
+        this->length = b->length;
+        this->rank = b->rank;
+        this->scalar = b->scalar;
+        this->det = b->det;
+        this->det_calculated = b->det_calculated;
+        this->rows = vector<Array_Vector<T>>(b->rows);
+    }
 
 	int getLength() const
 	{
@@ -172,7 +182,7 @@ public:
 		m.det_calculated = false;
 		return m;
 	}
-	void operator=(const Matrix<T> M)
+	/*void operator=(const Matrix<T> M)
 	{
 		this->det = M.det;
 		this->det_calculated = M.det_calculated;
@@ -181,8 +191,13 @@ public:
 		this->rank = M.rank;
 		this->rows = M.rows;
 		this->scalar = M.scalar;
-	}
-	Matrix operator*(T scalar);
+	}*/
+	Matrix<T> operator*(T scalar)
+    {
+	    Matrix<T> target(this);
+	    target.scalar *= scalar;
+        return target;
+    }
 	Matrix<T> operator*(const Matrix<T>& other)
 	{
 		if (this->length != other.width)

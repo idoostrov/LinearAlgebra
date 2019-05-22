@@ -6,15 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.cpp
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
+Matrix.h
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+LLL.inl
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
+
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
 LLL.h
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
 math.h
 -
-
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
-Matrix.h
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
 
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL_Tests.cpp
 Matrix.h
@@ -27,10 +29,6 @@ Vector.h
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
 math.h
 -
-
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.cpp
-Matrix.h
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
 
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
 vector

@@ -82,13 +82,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.cpp">
-			<Option target="LinearAlgebra"/>
-		</Unit>
 		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl">
+			<Option target="LinearAlgebra"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL_Tests.cpp">
+			<Option target="LinearAlgebra"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/ListVector.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h">

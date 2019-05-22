@@ -4,7 +4,6 @@
 #include <vector>
 #include <iostream>
 
-#define type int
 using namespace std;
 
 template <class T>
@@ -16,6 +15,10 @@ private:
 	mutable T scalar;
 	mutable T norm_squared;
 public:
+    int get_scalar()
+    {
+        return this->scalar;
+    }
 	Array_Vector<T>(const int length)
 	{
 		this->norm_squared = -1;//Unintialized
@@ -107,7 +110,7 @@ public:
 		vec.scalar = this->scalar*scalar;
 		return vec;
 	}
-	T norm()
+	T get_norm_squared()
 	{
 		if (this->norm_squared >= 0)
 		{

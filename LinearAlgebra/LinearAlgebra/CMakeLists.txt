@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(LinearAlgebra
-        LLL.cpp
+        LLL.inl
         LLL.h
         Matrix.h
-        Vector.h Tests.cpp LLL_Tests.cpp)
+        Vector.h
+        Tests.cpp
+        LLL_Tests.cpp ListVector.h)

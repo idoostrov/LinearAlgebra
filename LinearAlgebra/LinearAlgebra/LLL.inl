@@ -10,7 +10,7 @@ Matrix<T>& GramSchmidt(Matrix<T>& M)
         Array_Vector<T> v(M[i]);
         for(int j=0; j<i; j++)
         {
-            v = v - (M[j] * (M[j]*M[i] / int( sqrt(M[j].norm()))));
+            v = v - (M[j] * (M[j]*M[i] / sqrt(M[j].get_norm_squared())));
         }
         M[i] = v;
     }
@@ -26,13 +26,13 @@ Matrix<T>& LLL(Matrix<T>& M, float delta)
     {
         for(int j = k-1; j>=0; j--)
         {
-            if((M[k]*ortho[j])/ ortho[j].norm() > 0.5)
+            if((M[k]*ortho[j])/ ortho[j].get_norm_squared() > 0.5)
             {
-                M[k] = M[k] - M[j]*((M[k]*ortho[j])/ ortho[j].norm());
+                M[k] = M[k] - M[j]*((M[k]*ortho[j])/ ortho[j].get_norm_squared());
                 ortho = GramSchmidt(M);
             }
         }
-        if(ortho[k].norm() >= (delta - (M[k]*ortho[k-1]/ortho[k-1].norm())*(M[k]*ortho[k-1]/ortho[k-1].norm()))*(ortho[k-1].norm()))
+        if(ortho[k].get_norm_squared() >= (delta - (M[k]*ortho[k-1]/ortho[k-1].get_norm_squared())*(M[k]*ortho[k-1]/ortho[k-1].get_norm_squared()))*(ortho[k-1].get_norm_squared()))
             k++;
         else
         {
