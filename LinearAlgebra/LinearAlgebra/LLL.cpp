@@ -1,11 +1,13 @@
 #include "LLL.h"
 #include <math.h>
 
-Matrix& GramSchmidt(Matrix& M)
+
+template <typename T>
+Matrix<T>& GramSchmidt(Matrix<T>& M)
 {
     for(int i=0; i<M.getLength(); i++)
     {
-        Array_Vector v(M[i]);
+        Array_Vector<T> v(M[i]);
         for(int j=0; j<i; j++)
         {
             v = v - (M[j] * (M[j]*M[i] / int( sqrt(M[j].norm()))));
@@ -15,10 +17,10 @@ Matrix& GramSchmidt(Matrix& M)
     return M;
 }
 
-
-Matrix& LLL(Matrix& M, float delta)
+template <typename T>
+Matrix<T>& LLL(Matrix<T>& M, float delta)
 {
-    Matrix ortho = GramSchmidt(M);
+    Matrix<T> ortho = GramSchmidt(M);
     int k = 1;
     while(k < M.getLength())
     {

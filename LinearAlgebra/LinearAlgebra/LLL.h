@@ -3,7 +3,10 @@
 
 #include "Matrix.h"
 
-Matrix& GramSchmidt(Matrix& M);
-Matrix& LLL(Matrix& M, float delta);
+template <typename T>
+Matrix<T>& GramSchmidt(Matrix<T>& M);
+
+template <typename T>
+Matrix<T>& LLL(Matrix<T>& M, float delta);
 
 #endif//LLL_H

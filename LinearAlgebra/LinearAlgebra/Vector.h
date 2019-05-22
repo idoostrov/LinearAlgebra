@@ -35,7 +35,7 @@ public:
 		this->norm_squared = other.norm_squared;
 		this->scalar = other.scalar;
 		this->length = other.length;
-		this->elements = vector<type>(other.elements);
+		this->elements = vector<T>(other.elements);
 	}
 
 	int len() const
@@ -120,22 +120,25 @@ public:
 		}
 		return this->norm_squared * this->scalar*this->scalar;
 	}
-	ostream& operator<<(ostream& os)
-	{
-		os << "[";
-		int length = this.len();
-		if (length != 0)
-		{
-			os << this[0];
-		}
-		for (int i = 1; i < length; i++)
-		{
-			os << ", ";
-			os << this[i];
-		}
-		os << "]\n";
-		return os;
-	}
+
 };
+
+template <typename T>
+ostream& operator<<(ostream& os, const Array_Vector<T> v)
+{
+    os << "[";
+    int length = v.len();
+    if (length != 0)
+    {
+        os << v[0];
+    }
+    for (int i = 1; i < length; i++)
+    {
+        os << ", ";
+        os << v[i];
+    }
+    os << "]\n";
+    return os;
+}
 
 #endif//VECTOR_H

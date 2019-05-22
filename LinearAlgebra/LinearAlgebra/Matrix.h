@@ -114,7 +114,7 @@ public:
 		return this->det;
 
 	}
-	Array_Vector<T>& Matrix::operator[](int row)
+	Array_Vector<T>& operator[](int row)
 	{
 		if (row >= this->rows.size()) {
 			throw "Error: index is too big\n";
@@ -143,6 +143,21 @@ public:
 		m.det_calculated = false;
 		return m;
 	}
+    bool operator==(const Matrix<T> other) const
+    {
+        if ((this->length != other.length) || (this->width != other.width))
+        {
+            return false;
+        }
+        for (int i = 0; i < this->width; ++i) {
+            for (int j = 0; j < this->length; ++j) {
+                if(this->rows[i][j] != other[i][j]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 	Matrix<T> operator-(Matrix<T> other)
 	{
 		if ((this->length != other.length) || (this->width != other.width))
@@ -167,7 +182,7 @@ public:
 		this->rows = M.rows;
 		this->scalar = M.scalar;
 	}
-	Matrix operator*(type scalar);
+	Matrix operator*(T scalar);
 	Matrix<T> operator*(const Matrix<T>& other)
 	{
 		if (this->length != other.width)
@@ -206,27 +221,29 @@ public:
 		}
 		return m;
 	}
-	ostream& operator<<(ostream& os)
-	{
-		os << "{";
-		int length = this.getLength();
-		int width = this.getWidth();
-		if (width != 0)
-		{
-			if (length != 0)
-			{
-				os << this[0];
-			}
-		}
-		for (int i = 1; i < width; i++)
-		{
-			os << this[i];
-		}
-		os << "}" << endl;
-		return os;
-	}
+
 };
 
+template <typename T>
+ostream& operator<<(ostream& os, const Matrix<T> m )
+{
+    os << "{";
+    int length = m.getLength();
+    int width = m.getWidth();
+    if (width != 0)
+    {
+        if (length != 0)
+        {
+            os << m[0];
+        }
+    }
+    for (int i = 1; i < width; i++)
+    {
+        os << m[i];
+    }
+    os << "}" << endl;
+    return os;
+}
 
 
 #endif //MATRIX_H
