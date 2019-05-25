@@ -1,8 +1,11 @@
 #include "Matrix.h"
 #include "LLL.h"
+#include "ListVector.h"
 
 bool GramSchmidtTest()
 {
+    List_Vector<int> L(12);
+    cout << L;
     Matrix<double> m(3, 3);
 
     m[0][0] = 1;
