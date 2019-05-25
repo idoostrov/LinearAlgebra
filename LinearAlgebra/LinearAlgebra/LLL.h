@@ -4,7 +4,7 @@
 #include "Matrix.h"
 
 template <typename T>
-Matrix<T>& GramSchmidt(Matrix<T>& M);
+Matrix<T> GramSchmidt(Matrix<T>& M);
 
 template <typename T>
 Matrix<T>& LLL(Matrix<T>& M, float delta);

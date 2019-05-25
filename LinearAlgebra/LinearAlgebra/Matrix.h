@@ -11,7 +11,7 @@ private:
 	int width, length;
 	mutable int rank;
 	vector<Array_Vector<T>> rows;
-	mutable T det, scalar;
+	mutable T det;
 	mutable bool det_calculated;
 public:
 	Matrix<T>(int width, int length)
@@ -19,7 +19,6 @@ public:
 		this->width = width;
 		this->length = length;
 		this->rank = 0;
-		this->scalar = 1;
 		this->det_calculated = true;
 		this->det = 0;
 		this->rows = vector<Array_Vector<T>>(width, Array_Vector<T>(length));
@@ -29,7 +28,6 @@ public:
 		this->width = b.width;
 		this->length = b.length;
 		this->rank = b.rank;
-		this->scalar = b.scalar;
 		this->det = b.det;
 		this->det_calculated = b.det_calculated;
 		this->rows = vector<Array_Vector<T>>(b.rows);
@@ -39,7 +37,6 @@ public:
 		this->width = b.width;
 		this->length = b.length;
 		this->rank = b.rank;
-		this->scalar = b.scalar;
 		this->det = b.det;
 		this->det_calculated = b.det_calculated;
 		this->rows = vector<Array_Vector<T>>(b.rows);
@@ -49,7 +46,6 @@ public:
         this->width = b->width;
         this->length = b->length;
         this->rank = b->rank;
-        this->scalar = b->scalar;
         this->det = b->det;
         this->det_calculated = b->det_calculated;
         this->rows = vector<Array_Vector<T>>(b->rows);
@@ -148,7 +144,7 @@ public:
 		Matrix<T> m(this->width, this->length);
 		for (int i = 0; i < this->width; i++)
 		{
-			m[i] = (this->rows[i])*this->scalar + (other[i])*other.scalar;
+			m[i] = (this->rows[i]) + (other[i]);
 		}
 		m.det_calculated = false;
 		return m;
@@ -160,10 +156,8 @@ public:
             return false;
         }
         for (int i = 0; i < this->width; ++i) {
-            for (int j = 0; j < this->length; ++j) {
-                if(this->rows[i][j] != other[i][j]){
+                if(this->rows[i] != other.rows[i]){
                     return false;
-                }
             }
         }
         return true;
@@ -177,7 +171,7 @@ public:
 		Matrix<T> m(this->width, this->length);
 		for (int i = 0; i < this->width; i++)
 		{
-			m[i] = (this->rows[i])*this->scalar - (other[i])*other.scalar;
+			m[i] = (this->rows[i]) - (other[i]);
 		}
 		m.det_calculated = false;
 		return m;
@@ -190,12 +184,13 @@ public:
 		this->width = M.width;
 		this->rank = M.rank;
 		this->rows = M.rows;
-		this->scalar = M.scalar;
 	}*/
 	Matrix<T> operator*(T scalar)
     {
 	    Matrix<T> target(this);
-	    target.scalar *= scalar;
+        for (int i = 0; i < target.width; ++i) {
+            target[i] = target[i] * scalar;
+        }
         return target;
     }
 	Matrix<T> operator*(const Matrix<T>& other)
@@ -212,7 +207,6 @@ public:
 			{
 				m[i][j] = this->rows[i] * temp[j];
 			}
-		m.scalar = this->scalar*temp.scalar;
 		if ((!this->det_calculated) || (!temp.det_calculated))
 		{
 			m.det_calculated = false;

@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <iostream>
+#include <math.h>
+
+#define MAX_ERROR 0.001
 
 using namespace std;
 
@@ -47,7 +50,7 @@ public:
 	}
 	T operator[](const int index) const
 	{
-		return this->elements[index];
+		return this->elements[index] * this->scalar;
 	}
 	T& operator[](int index)
 	{
@@ -97,11 +100,11 @@ public:
 			cin >> tmp;
 			throw new exception;
 		}
-		int sum = 0;
+		T sum = 0;
 		for (int i = 0; i < this->length; i++)
-		{
+        {
 			sum += this->elements[i] * other.elements[i];
-		}
+        }
 		return sum * this->scalar*other.scalar;
 	}
 	Array_Vector<T> operator*(const T scalar)
@@ -123,6 +126,20 @@ public:
 		}
 		return this->norm_squared * this->scalar*this->scalar;
 	}
+	bool operator==(const Array_Vector<T> other) const
+	{
+        if(this->length != other.length)
+            return false;
+        for (int i = 0; i < this->length; ++i) {
+            if(abs(this->elements[i] - other[i]) > MAX_ERROR)
+                return false;
+        }
+        return true;
+	}
+	bool operator!=(const Array_Vector<T> other) const
+    {
+        return !(this->operator==(other));
+    }
 
 };
 

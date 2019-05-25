@@ -17,10 +17,22 @@ bool GramSchmidtTest()
     m[2][1] = 5;
     m[2][2] = 6;
 
-    GramSchmidt(m);
-    cout << m;
+    m = GramSchmidt(m);
+    Matrix<double> result(3,3);
 
+    result[0][0] = 1;
+    result[0][1] = 1;
+    result[0][2] = 1;
 
+    result[1][0] = -4.0/3;
+    result[1][1] = -1.0/3;
+    result[1][2] = 5.0/3;
+
+    result[2][0] = -3.0/7;
+    result[2][1] = 9.0/14;
+    result[2][2] = -3.0/14;
+
+    return m == result;
 }
 
 bool LLLTest()
