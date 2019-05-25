@@ -5,12 +5,23 @@
 template <typename T>
 Matrix<T>& GramSchmidt(Matrix<T>& M)
 {
-    for(int i=0; i<M.getLength(); i++)
+    for(int i=0; i<M.getWidth(); i++)
     {
         Array_Vector<T> v(M[i]);
+        cout << "i = " << i << "and v= " << v;
         for(int j=0; j<i; j++)
         {
-            v = v - (M[j] * (M[j]*M[i] / sqrt(M[j].get_norm_squared())));
+            if(i==2 && j==1)
+            {
+                cout << M;
+                cout << M[i] << "\n" << M[j] << "\n" << M[i]*M[j] << endl;
+                cout << "V = " << v;
+                cout << v - (M[j] * (M[j]*M[i] / M[j].get_norm_squared()));
+            }
+            v = v - (M[j] * (M[j]*M[i] / M[j].get_norm_squared()));
+            if(i==2 && j==0)
+                cout << v;
+            //cout << "i = " << i << ", j = " << j << "\n" << M ;
         }
         M[i] = v;
     }
