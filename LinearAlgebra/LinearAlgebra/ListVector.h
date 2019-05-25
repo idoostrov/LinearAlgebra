@@ -6,19 +6,18 @@
 #define LINEARALGEBRA_LISTVECTOR_H
 
 #include <list>
+#include <tuple>
 #include <iostream>
 #include "Vector.h"
 
 using namespace std;
-
-
 
 template <class T>
 class List_Vector
 {
 private:
     int length;
-    list<T> elements;
+    list<tuple<int, T>> elements;
     mutable T scalar;
     mutable T norm_squared;
 public:
@@ -27,21 +26,21 @@ public:
         this->norm_squared = -1;//Unintialized
         this->length = length;
         this->scalar = 1;
-        this->elements = list<T>();
+        this->elements = list<tuple<int, T>>();
     }
     List_Vector<T>(const Array_Vector<T>& vec)
     {
         this->norm_squared = vec.get_norm_squared();
         this->scalar = vec.get_scalar();
         this->length = vec.len();
-        this->elements = vector<T>(elements);
-    }
-    Array_Vector<T>(const Array_Vector& other)
-    {
-        this->norm_squared = other.norm_squared;
-        this->scalar = other.scalar;
-        this->length = other.length;
-        this->elements = vector<T>(other.elements);
+        this->elements = list<tuple<int, T>>();
+		for (int i = 0; i < this->length; i++)
+		{
+			if (vec[i] != 0)
+			{
+				elements.push_back(tuple<int, T>(i, vec[i]));
+			}
+		}
     }
 
     int len() const
@@ -50,7 +49,15 @@ public:
     }
     T operator[](const int index) const
     {
-        return this->elements[index];
+		list < tuple<int, T>::iterator it;
+		for (it = elements.begin(); it != elements.end(); ++it)
+		{
+			if (get<0>(*it) > index)
+				break;
+			if (get<0>(*it) == index)
+				return get <1>(*it);
+		}
+		return 0;
     }
     T& operator[](int index)
     {
@@ -63,88 +70,111 @@ public:
             }
             this->scalar = 1;
         }
-        return this->elements[index];
-    }
+		list < tuple<int, T>::iterator it;
+		for (it = elements.begin(); it != elements.end(); ++it)
+		{
+			if (get<0>(*it) > index)
+				break;
+			if (get<0>(*it) == index)
+				return get<1>(*it);
+		}
+		tuple<int, T> tmp(index, 0);
+		this->elements.insert(it, tmp);
+        return get<1>(tmp);
+    } 
     Array_Vector<T> operator+(const Array_Vector<T>& other)
     {
-        if (this->length != other.length)
+        if (this->length != other.len())
         {
             throw new exception;
         }
-        Array_Vector<T> vec(this->length);
-        for (int i = 0; i < this->length; i++)
-        {
-            vec.elements[i] = this->elements[i] * this->scalar + other.elements[i] * other.scalar;
-        }
+		Array_Vector<T> vec(other);
+		list < tuple<int, T>::iterator it;
+		for (it = elements.begin(); it != elements.end(); ++it)
+		{
+			vec[get<0>(*it)] += get<1>(*it)*this->scalar;
+		}
         return vec;
     }
+	List_Vector<T> operator+(const List_Vector<T>& other)
+	{
+		if (this->length != other.length)
+		{
+			throw new exception;
+		}
+		List_Vector<T> vec(other);
+		list < tuple<int, T>::iterator it;
+		for (it = elements.begin(); it != elements.end(); ++it)
+		{
+			vec[get<0>(*it)] += get<1>(*it)*this->scalar;
+		}
+		return vec;
+	}
     Array_Vector<T> operator-(const Array_Vector<T>& other)
     {
-        if (this->length != other.length)
-        {
-            throw new exception;
-        }
-        Array_Vector<T> vec(this->length);
-        for (int i = 0; i < this->length; i++)
-        {
-            vec.elements[i] = this->elements[i] * this->scalar - other.elements[i] * other.scalar;
-        }
-        return vec;
+		return this->operator+(other*(-1));
     }
+	List_Vector<T> operator-(const List_Vector<T>& other)
+	{
+		return this->operator+(other*(-1));
+	}
     T operator*(const Array_Vector<T>& other)
     {
         int tmp;
-        if (this->length != other.length)
+        if (this->length != other.len())
         {
             cout << "What?";
             cin >> tmp;
             throw new exception;
         }
         int sum = 0;
-        for (int i = 0; i < this->length; i++)
-        {
-            sum += this->elements[i] * other.elements[i];
-        }
-        return sum * this->scalar*other.scalar;
+		list < tuple<int, T>::iterator it;
+		for (it = elements.begin(); it != elements.end(); ++it)
+		{
+			sum += get<1>(*it)*other[get<0>(*it)];
+		}
+        return sum * this->scalar;
     }
-    Array_Vector<T> operator*(const T scalar)
+	T operator*(const List_Vector<T>& other)
+	{
+		int tmp;
+		if (this->length != other.length)
+		{
+			cout << "What?";
+			cin >> tmp;
+			throw new exception;
+		}
+		int sum = 0;
+		list < tuple<int, T>::iterator it;
+		for (it = elements.begin(); it != elements.end(); ++it)
+		{
+			sum += get<1>(*it)*other[get<0>(*it)];
+		}
+		return sum * this->scalar;
+	}
+    List_Vector<T> operator*(const T scalar)
     {
-        Array_Vector<T> vec(this->elements);
+        List_Vector<T> vec(this->elements);
         vec.scalar = this->scalar*scalar;
         return vec;
     }
-    T norm()
+    T get_norm_squared()
     {
         if (this->norm_squared >= 0)
         {
             return this->norm_squared * this->scalar*this->scalar;
         }
-        this->norm_squared = 0;
-        for (int i = 0; i < length; i++)
-        {
-            this->norm_squared += this->elements[i] * this->elements[i];
-        }
-        return this->norm_squared * this->scalar*this->scalar;
+		this->norm_squared = this->operator*(this);
+		return this->norm_squared;
     }
 
 };
 
 template <typename T>
-ostream& operator<<(ostream& os, const Array_Vector<T> v)
+ostream& operator<<(ostream& os, const List_Vector<T> v)
 {
-    os << "[";
-    int length = v.len();
-    if (length != 0)
-    {
-        os << v[0];
-    }
-    for (int i = 1; i < length; i++)
-    {
-        os << ", ";
-        os << v[i];
-    }
-    os << "]\n";
-    return os;
+	os << (v + Array_Vector<T>(v.len()));
+	return os;
 }
 
 
