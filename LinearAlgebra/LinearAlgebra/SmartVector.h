@@ -24,6 +24,7 @@ private:
 	bool is_array;
 	int non_zero_amount;
 public:
+	/////////////////////////////////////Constructors///////////////////////////////////
 	//////////////////////////////////////////////////Undone///////////////////////////////////
 	Smart_Vector<T>(const int length)
 	{
@@ -67,6 +68,7 @@ public:
 	{
 		return this->length;
 	}
+	///////////////////////////////////// [] Operators ///////////////////////////////////
 	T operator[](const int index) const
 	{
 		if (is_array)
@@ -83,6 +85,8 @@ public:
 		else
 			return list[index];
 	}
+
+	///////////////////////////////////// + Operators ///////////////////////////////////
 	Smart_Vector<T> operator+(const Array_Vector<T>& other) const
 	{
 		if (is_array)
@@ -97,6 +101,8 @@ public:
 		else
 			return Smart_Vector<T>(other + this->list);
 	}
+
+	///////////////////////////////////// - Operators///////////////////////////////////
 	Smart_Vector<T> operator-(const Array_Vector<T>& other) const
 	{
 		return this->operator+(other*(-1));
@@ -105,6 +111,8 @@ public:
 	{
 		return this->operator+(other*(-1));
 	}
+
+	///////////////////////////////////// * Operators ///////////////////////////////////
 	T operator*(const Array_Vector<T>& other) const
 	{
 		if (is_array)
@@ -126,6 +134,8 @@ public:
 		else
 			return this->list * scalar;
 	}
+
+	///////////////////////////////////// Miscellaneous ///////////////////////////////////
 	T get_norm_squared()
 	{
 		if (is_array)

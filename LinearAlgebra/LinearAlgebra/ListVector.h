@@ -22,6 +22,7 @@ private:
     mutable T scalar;
     mutable T norm_squared;
 public:
+	/////////////////////////////////////Constructors///////////////////////////////////
     List_Vector<T>(const int length)
     {
         this->norm_squared = -1;//Unintialized
@@ -44,10 +45,7 @@ public:
 		}
     }
 
-    int len() const
-    {
-        return this->length;
-    }
+	///////////////////////////////////// [] Operators ///////////////////////////////////
     T operator[](const int index) const
     {
         iterator<int ,T> it;
@@ -83,6 +81,8 @@ public:
 		this->elements.insert(it, tmp);
         return get<1>(tmp);
     }
+
+	///////////////////////////////////// + Operators ///////////////////////////////////
     Array_Vector<T> operator+(const Array_Vector<T>& other) const
     {
         if (this->length != other.len())
@@ -111,6 +111,8 @@ public:
 		}
 		return vec;
 	}
+
+	///////////////////////////////////// - Operators ///////////////////////////////////
     Array_Vector<T> operator-(const Array_Vector<T>& other) const
     {
 		return this->operator+(other*(-1));
@@ -119,6 +121,8 @@ public:
 	{
 		return this->operator+(other*(-1));
 	}
+
+	///////////////////////////////////// * Operators ///////////////////////////////////
     T operator*(const Array_Vector<T>& other) const
     {
         int tmp;
@@ -159,6 +163,8 @@ public:
         vec.scalar = this->scalar*scalar;
         return vec;
     }
+
+	///////////////////////////////////// Miscellaneous ///////////////////////////////////
     T get_norm_squared()
     {
         if (this->norm_squared >= 0)
@@ -168,6 +174,10 @@ public:
 		this->norm_squared = this->operator*(this);
 		return this->norm_squared;
     }
+	int len() const
+	{
+		return this->length;
+	}
 
 };
 

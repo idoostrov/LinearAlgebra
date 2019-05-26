@@ -18,10 +18,8 @@ private:
 	mutable T scalar;
 	mutable T norm_squared;
 public:
-    int get_scalar()
-    {
-        return this->scalar;
-    }
+    
+	/////////////////////////////////////Constructors///////////////////////////////////
 	Array_Vector<T>(const int length)
 	{
 		this->norm_squared = -1;//Unintialized
@@ -44,10 +42,8 @@ public:
 		this->elements = vector<T>(other.elements);
 	}
 
-	int len() const
-	{
-		return this->length;
-	}
+
+	///////////////////////////////////// [] Operators ///////////////////////////////////
 	T operator[](const int index) const
 	{
 		return this->elements[index] * this->scalar;
@@ -65,6 +61,8 @@ public:
 		}
 		return this->elements[index];
 	}
+
+	///////////////////////////////////// + Operators ///////////////////////////////////
 	Array_Vector<T> operator+(const Array_Vector<T>& other)
 	{
 		if (this->length != other.length)
@@ -78,6 +76,8 @@ public:
 		}
 		return vec;
 	}
+
+	///////////////////////////////////// - Operators ///////////////////////////////////
 	Array_Vector<T> operator-(const Array_Vector<T>& other)
 	{
 		if (this->length != other.length)
@@ -91,6 +91,8 @@ public:
 		}
 		return vec;
 	}
+
+	///////////////////////////////////// * Operators ///////////////////////////////////
 	T operator*(const Array_Vector<T>& other)
 	{
 		int tmp;
@@ -113,19 +115,8 @@ public:
 		vec.scalar = this->scalar*scalar;
 		return vec;
 	}
-	T get_norm_squared()
-	{
-		if (this->norm_squared >= 0)
-		{
-			return this->norm_squared * this->scalar*this->scalar;
-		}
-		this->norm_squared = 0;
-		for (int i = 0; i < length; i++)
-		{
-			this->norm_squared += this->elements[i] * this->elements[i];
-		}
-		return this->norm_squared * this->scalar*this->scalar;
-	}
+	
+	///////////////////////////////////// Comparison Operators ///////////////////////////////////
 	bool operator==(const Array_Vector<T> other) const
 	{
         if(this->length != other.length)
@@ -140,6 +131,29 @@ public:
     {
         return !(this->operator==(other));
     }
+
+	///////////////////////////////////// Miscellaneous ///////////////////////////////////
+	T get_norm_squared()
+	{
+		if (this->norm_squared >= 0)
+		{
+			return this->norm_squared * this->scalar*this->scalar;
+		}
+		this->norm_squared = 0;
+		for (int i = 0; i < length; i++)
+		{
+			this->norm_squared += this->elements[i] * this->elements[i];
+		}
+		return this->norm_squared * this->scalar*this->scalar;
+	}
+	int len() const
+	{
+		return this->length;
+	}
+	int get_scalar()
+	{
+		return this->scalar;
+	}
 
 };
 
