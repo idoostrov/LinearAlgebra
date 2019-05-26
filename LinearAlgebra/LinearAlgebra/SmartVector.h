@@ -58,7 +58,7 @@ public:
 			return list[index];
 	}
 	
-	////////Done only till this place//////////////////////////////////////////////////////
+	//////////////////////////////////////////////////Undone///////////////////////////////////
 	T& operator[](int index)
 	{
 		if (is_array)
@@ -66,90 +66,55 @@ public:
 		else
 			return list[index];
 	}
-	Array_Vector<T> operator+(const Array_Vector<T>& other) const
+	Smart_Vector<T> operator+(const Array_Vector<T>& other) const
 	{
-		if (this->length != other.len())
-		{
-			throw new exception;
-		}
-		Array_Vector<T> vec(other);
-		list<tuple<int, T>>::iterator it;
-		for (it = elements.begin(); it != elements.end(); ++it)
-		{
-			vec[get<0>(*it)] += get<1>(*it)*this->scalar;
-		}
-		return vec;
+		if (is_array)
+			return Smart_Vector<T>(this->arr + other);
+		else
+			return Smart_Vector<T>(this->list + other);
 	}
-	List_Vector<T> operator+(const List_Vector<T>& other) const
+	Smart_Vector<T> operator+(const List_Vector<T>& other) const
 	{
-		if (this->length != other.length)
-		{
-			throw new exception;
-		}
-		List_Vector<T> vec(other);
-		iterator<int, T> it;
-		for (it = elements.begin(); it != elements.end(); ++it)
-		{
-			vec[get<0>(*it)] += get<1>(*it)*this->scalar;
-		}
-		return vec;
+		if (is_array)
+			return Smart_Vector<T>(other + this->arr);
+		else
+			return Smart_Vector<T>(other + this->list);
 	}
-	Array_Vector<T> operator-(const Array_Vector<T>& other) const
+	Smart_Vector<T> operator-(const Array_Vector<T>& other) const
 	{
 		return this->operator+(other*(-1));
 	}
-	List_Vector<T> operator-(const List_Vector<T>& other) const
+	Smart_Vector<T> operator-(const List_Vector<T>& other) const
 	{
 		return this->operator+(other*(-1));
 	}
 	T operator*(const Array_Vector<T>& other) const
 	{
-		int tmp;
-		if (this->length != other.len())
-		{
-			cout << "What?";
-			cin >> tmp;
-			throw new exception;
-		}
-		int sum = 0;
-		iterator<int, T> it;
-		for (it = elements.begin(); it != elements.end(); ++it)
-		{
-			sum += get<1>(*it)*other[get<0>(*it)];
-		}
-		return sum * this->scalar;
+		if (is_array)
+			return this->arr * other;
+		else
+			return this->list * other;
 	}
 	T operator*(const List_Vector<T>& other) const
 	{
-		int tmp;
-		if (this->length != other.length)
-		{
-			cout << "What?";
-			cin >> tmp;
-			throw new exception;
-		}
-		int sum = 0;
-		iterator<int, T> it;
-		for (it = elements.begin(); it != elements.end(); ++it)
-		{
-			sum += get<1>(*it)*other[get<0>(*it)];
-		}
-		return sum * this->scalar;
+		if (is_array)
+			return other * this->arr;
+		else
+			return other * this->list;
 	}
-	List_Vector<T> operator*(const T scalar) const
+	Smart_Vector<T> operator*(const T scalar) const
 	{
-		List_Vector<T> vec(this->elements);
-		vec.scalar = this->scalar*scalar;
-		return vec;
+		if (is_array)
+			return this->arr * scalar;
+		else
+			return this->list * scalar;
 	}
 	T get_norm_squared()
 	{
-		if (this->norm_squared >= 0)
-		{
-			return this->norm_squared * this->scalar*this->scalar;
-		}
-		this->norm_squared = this->operator*(this);
-		return this->norm_squared;
+		if (is_array)
+			return this->arr.get_norm_squared();
+		else
+			return this->list.get_norm_squared();
 	}
 
 };
