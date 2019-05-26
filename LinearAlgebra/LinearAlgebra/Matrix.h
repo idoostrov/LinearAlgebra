@@ -14,6 +14,8 @@ private:
 	mutable T det;
 	mutable bool det_calculated;
 public:
+
+	/////////////////////////////////////Constructors///////////////////////////////////
 	Matrix<T>(int width, int length)
 	{
 		this->width = width;
@@ -51,6 +53,7 @@ public:
         this->rows = vector<Array_Vector<T>>(b->rows);
     }
 
+	///////////////////////////////////// Miscellaneous ///////////////////////////////////
 	int getLength() const
 	{
 		return this->length;
@@ -60,6 +63,7 @@ public:
 		return this->width;
 	}
 
+	///////////////////////////////////// LLL Miscellaneous ///////////////////////////////////
 	void swap(int row1, int row2)
 	{
 		Array_Vector<T> temp = Array_Vector<T>(rows[row1]);
@@ -85,7 +89,6 @@ public:
 		}
 		return -1;
 	}
-
 	T deter()
 	{
 		if (det_calculated)
@@ -120,6 +123,8 @@ public:
 		return this->det;
 
 	}
+
+	///////////////////////////////////// [] Operators ///////////////////////////////////
 	Array_Vector<T>& operator[](int row)
 	{
 		if (row >= this->rows.size()) {
@@ -135,6 +140,8 @@ public:
 		}
 		return this->rows[row];
 	}
+
+	///////////////////////////////////// + Operators ///////////////////////////////////
 	Matrix<T> operator+(Matrix<T> other)
 	{
 		if ((this->length != other.length) || (this->width != other.width))
@@ -149,6 +156,8 @@ public:
 		m.det_calculated = false;
 		return m;
 	}
+
+	///////////////////////////////////// Comparison Operators ///////////////////////////////////
     bool operator==(const Matrix<T> other) const
     {
         if ((this->length != other.length) || (this->width != other.width))
@@ -162,6 +171,8 @@ public:
         }
         return true;
     }
+
+	///////////////////////////////////// - Operators ///////////////////////////////////
 	Matrix<T> operator-(Matrix<T> other)
 	{
 		if ((this->length != other.length) || (this->width != other.width))
@@ -176,15 +187,8 @@ public:
 		m.det_calculated = false;
 		return m;
 	}
-	/*void operator=(const Matrix<T> M)
-	{
-		this->det = M.det;
-		this->det_calculated = M.det_calculated;
-		this->length = M.length;
-		this->width = M.width;
-		this->rank = M.rank;
-		this->rows = M.rows;
-	}*/
+
+	///////////////////////////////////// * Operators ///////////////////////////////////
 	Matrix<T> operator*(T scalar)
     {
 	    Matrix<T> target(this);
@@ -218,6 +222,8 @@ public:
 		}
 		return m;
 	}
+
+	///////////////////////////////////// Inverse Operator ///////////////////////////////////
 	Matrix<T> operator~() const
 	{
 		Matrix<T> m(this->length, this->width);
@@ -230,6 +236,17 @@ public:
 		}
 		return m;
 	}
+
+	///////////////////////////////////// Assignment Operators ///////////////////////////////////
+	/*void operator=(const Matrix<T> M)
+	{
+		this->det = M.det;
+		this->det_calculated = M.det_calculated;
+		this->length = M.length;
+		this->width = M.width;
+		this->rank = M.rank;
+		this->rows = M.rows;
+	}*/
 
 };
 
