@@ -24,6 +24,7 @@ private:
 	bool is_array;
 	int non_zero_amount;
 public:
+	//////////////////////////////////////////////////Undone///////////////////////////////////
 	Smart_Vector<T>(const int length)
 	{
 		this->length = length;
@@ -31,11 +32,27 @@ public:
 		this->is_array = false;
 		this->non_zero_amount = 0;
 	}
+	//////////////////////////////////////////////////Undone///////////////////////////////////
 	Smart_Vector<T>(const Array_Vector<T>& vec)
 	{
 		this->length = vec.len();
 		this->arr = Array_Vector<T>(vec);
 		this->is_array = true;
+		this->non_zero_amount = 0;
+		for (int i = 0; i < this->length; i++)
+		{
+			if (vec[i] != 0)
+			{
+				this->non_zero_amount++;
+			}
+		}
+	}
+	//////////////////////////////////////////////////Undone///////////////////////////////////
+	Smart_Vector<T>(const List_Vector<T>& vec)
+	{
+		this->length = vec.len();
+		this->list = List_Vector<T>(vec);
+		this->is_array = false;
 		this->non_zero_amount = 0;
 		for (int i = 0; i < this->length; i++)
 		{
