@@ -7,6 +7,10 @@
 
 #define MAX_ERROR 0.001
 
+/////////////////Forward declarations///////////////////////////
+template <class T>
+class List_Vector;
+
 using namespace std;
 
 template <class T>

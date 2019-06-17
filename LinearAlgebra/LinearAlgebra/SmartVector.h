@@ -12,6 +12,9 @@
 #include "Vector.h"
 #include "ListVector.h"
 
+#define LOW_BOUND 5
+#define HIGH_BOUND 10
+
 using namespace std;
 
 template <class T>
@@ -22,18 +25,18 @@ private:
 	List_Vector<T> list;
 	Array_Vector<T> arr;
 	bool is_array;
+	bool is_list;
 	int non_zero_amount;
 public:
 	/////////////////////////////////////Constructors///////////////////////////////////
-	//////////////////////////////////////////////////Undone///////////////////////////////////
 	Smart_Vector<T>(const int length)
 	{
 		this->length = length;
 		this->list = List_Vector<T>(length);
 		this->is_array = false;
+		this->is_list = true;
 		this->non_zero_amount = 0;
 	}
-	//////////////////////////////////////////////////Undone///////////////////////////////////
 	Smart_Vector<T>(const Array_Vector<T>& vec)
 	{
 		this->length = vec.len();
@@ -47,18 +50,25 @@ public:
 				this->non_zero_amount++;
 			}
 		}
+		if(this->non_zero_amount < LOW_BOUND)
+        {
+		    this->list = List_Vector<T>(vec);
+		    this->is_list = true;
+        }
 	}
-	//////////////////////////////////////////////////Undone///////////////////////////////////
 	Smart_Vector<T>(const List_Vector<T>& vec)
 	{
 		this->length = vec.len();
 		this->list = List_Vector<T>(vec);
-		this->is_array = false;
+		this->arr = Array_Vector<T>(length);
+		this->is_array = true;
+		this->is_list = true;
 		this->non_zero_amount = 0;
 		for (int i = 0; i < this->length; i++)
 		{
 			if (vec[i] != 0)
 			{
+			    this->arr = vec[i];
 				this->non_zero_amount++;
 			}
 		}
