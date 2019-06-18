@@ -55,24 +55,43 @@ public:
 		    this->list = List_Vector<T>(vec);
 		    this->is_list = true;
         }
+		else
+        {
+		    this->is_list = false;
+        }
 	}
 	Smart_Vector<T>(const List_Vector<T>& vec)
 	{
 		this->length = vec.len();
-		this->list = List_Vector<T>(vec);
-		this->arr = Array_Vector<T>(length);
-		this->is_array = true;
-		this->is_list = true;
-		this->non_zero_amount = 0;
-		for (int i = 0; i < this->length; i++)
-		{
-			if (vec[i] != 0)
-			{
-			    this->arr = vec[i];
-				this->non_zero_amount++;
-			}
-		}
+		this->is_list = false;
+		this->is_array = false;
+		this->non_zero_amount = vec.size();
+		if(this->non_zero_amount < HIGH_BOUND)
+        {
+		    this->is_list = true;
+		    this->list = List_Vector<T>(vec);
+        }
+		if(this->non_zero_amount > LOW_BOUND)
+        {
+		    this->is_array = true;
+		    this->array = Array_Vector<T>(vec);
+        }
 	}
+	Smart_Vector<T>(const Smart_Vector<T>& vec)
+    {
+	    this->length = vec.length;
+	    this->is_array = vec.is_array;
+	    this->is_list = vec.is_list;
+	    this->non_zero_amount = vec.non_zero_amount;
+	    if(this->is_array)
+        {
+	        this->arr = Array_Vector<T>(vec.arr);
+        }
+	    if(this->is_list)
+        {
+	        this->list = List_Vector<T>(vec.list);
+        }
+    }
 
 	int len() const
 	{
@@ -88,12 +107,17 @@ public:
 	}
 	
 	//////////////////////////////////////////////////Undone///////////////////////////////////
-	T& operator[](int index)
+	Assignment_Buffer<T>& operator[](int index)
 	{
-		if (is_array)
-			return arr[index];
-		else
-			return list[index];
+	    if(is_array)
+        {
+	        if(is_list)
+            {
+	            return Assignment_Buffer<T>(this->arr, this->list, index, &this->non_zero_amount);
+            }
+            return Assignment_Buffer<T>(this->arr, index, &this->non_zero_amount);
+        }
+        return Assignment_Buffer<T>(this->list, index, &this->non_zero_amount);
 	}
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
@@ -148,10 +172,10 @@ public:
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
 	T get_norm_squared()
 	{
-		if (is_array)
-			return this->arr.get_norm_squared();
-		else
+		if (is_list)
 			return this->list.get_norm_squared();
+		else
+			return this->arr.get_norm_squared();
 	}
 
 };

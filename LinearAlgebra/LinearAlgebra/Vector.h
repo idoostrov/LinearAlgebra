@@ -9,7 +9,7 @@
 
 /////////////////Forward declarations///////////////////////////
 template <class T>
-class List_Vector;
+class List_Vector<T>;
 
 using namespace std;
 
@@ -43,8 +43,20 @@ public:
 		this->norm_squared = other.norm_squared;
 		this->scalar = other.scalar;
 		this->length = other.length;
-		this->elements = vector<T>(other.elements);
+        this->elements = vector<T>(other.elements);
 	}
+    Array_Vector<T>(const List_Vector& other)
+    {
+        this->norm_squared = other.norm_squared;
+        this->scalar = other.scalar;
+        this->length = other.length;
+        this->elements = vector<T>(length, 0);
+        iterator<int , T> it;
+        for(it = other.begin(); it != other.end(); ++it)
+        {
+            elements[get<0>(*it)] = get<1>(*it);
+        }
+    }
 
 
 	///////////////////////////////////// [] Operators ///////////////////////////////////

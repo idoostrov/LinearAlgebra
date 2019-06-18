@@ -61,15 +61,15 @@ public:
     T& operator[](int index)
     {
         this->norm_squared = -1;
+        iterator<int ,T> it;
         if (this->scalar != 1)
         {
-            for (int i = 0; i < length; i++)
+            for (it = elements.begin(); it != elements.end(); ++it)
             {
-                this->elements[i] *= this->scalar;
+                this->elements[get<0>(*it)] *= this->scalar;
             }
             this->scalar = 1;
         }
-		iterator<int ,T> it;
 		for (it = elements.begin(); it != elements.end(); ++it)
 		{
 			if (get<0>(*it) > index)
@@ -178,7 +178,18 @@ public:
 	{
 		return this->length;
 	}
-
+	int size() const
+    {
+	    return this->elements.size();
+    }
+	iterator<int, T> begin() const
+    {
+	    return elements.begin();
+    }
+    iterator<int, T> end() const
+    {
+	    return elements.end();
+    }
 };
 
 template <typename T>
