@@ -12,4 +12,4 @@ add_executable(LinearAlgebra
         Vector.h
         Tests.cpp
         LLL_Tests.cpp
-        ListVector.h cmake-build-debug/AssignmentBuffer.h)
+        ListVector.h cmake-build-debug/AssignmentBuffer.h AssignmentBuffer.h)
