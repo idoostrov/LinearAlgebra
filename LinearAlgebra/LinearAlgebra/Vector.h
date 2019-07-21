@@ -4,12 +4,14 @@
 #include <vector>
 #include <iostream>
 #include <math.h>
+#include <tuple>
+
 
 #define MAX_ERROR 0.001
 
 /////////////////Forward declarations///////////////////////////
 template <class T>
-class List_Vector<T>;
+class List_Vector;
 
 using namespace std;
 
@@ -45,7 +47,7 @@ public:
 		this->length = other.length;
         this->elements = vector<T>(other.elements);
 	}
-    Array_Vector<T>(const List_Vector& other)
+    Array_Vector<T>(const List_Vector<T>& other)
     {
         this->norm_squared = other.norm_squared;
         this->scalar = other.scalar;
@@ -54,7 +56,7 @@ public:
         iterator<int , T> it;
         for(it = other.begin(); it != other.end(); ++it)
         {
-            elements[get<0>(*it)] = get<1>(*it);
+            elements[std::get<0>(*it)] = std::get<1>(*it);
         }
     }
 

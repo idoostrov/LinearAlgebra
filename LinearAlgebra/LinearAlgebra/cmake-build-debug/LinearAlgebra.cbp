@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/AssignmentBuffer.h">
+			<Option target="LinearAlgebra"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
@@ -101,6 +104,9 @@
 			<Option target="LinearAlgebra"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h">
+			<Option target="LinearAlgebra"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/AssignmentBuffer.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/CMakeLists.txt">

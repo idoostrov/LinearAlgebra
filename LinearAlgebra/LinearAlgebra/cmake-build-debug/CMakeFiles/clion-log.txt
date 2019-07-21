@@ -1,1 +1,4 @@
-Visual Studio not found at: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community Configure
+C:\Users\ido_o\.CLion2019.1\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug

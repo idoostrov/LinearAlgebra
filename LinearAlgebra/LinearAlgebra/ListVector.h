@@ -83,14 +83,14 @@ public:
     }
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
-    Array_Vector<T> operator+(const Array_Vector<T>& other) const
+	Array_Vector<T> operator+(const Array_Vector<T>& other) const
     {
         if (this->length != other.len())
         {
             throw new exception;
         }
 		Array_Vector<T> vec(other);
-        list<tuple<int, T>>:: iterator it;
+        typename std::list<int,T>::const_iterator it;
 		for (it = elements.begin(); it != elements.end(); ++it)
 		{
 			vec[get<0>(*it)] += get<1>(*it)*this->scalar;
