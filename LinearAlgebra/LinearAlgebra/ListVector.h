@@ -17,20 +17,20 @@ template <class T>
 class List_Vector
 {
 private:
-    int length;
+    int length{};
     list<tuple<int, T>> elements;
     mutable T scalar;
     mutable T norm_squared;
 public:
 	/////////////////////////////////////Constructors///////////////////////////////////
-    List_Vector<T>(const int length)
+    explicit List_Vector<T>(const int length)
     {
         this->norm_squared = -1;//Unintialized
         this->length = length;
         this->scalar = 1;
         this->elements = list<tuple<int, T>>();
     }
-    List_Vector<T>(const Array_Vector<T>& vec)
+    explicit List_Vector<T>(const Array_Vector<T>& vec)
     {
         this->norm_squared = vec.get_norm_squared();
         this->scalar = vec.get_scalar();
@@ -90,7 +90,7 @@ public:
             throw new exception;
         }
 		Array_Vector<T> vec(other);
-        typename std::list<int,T>::const_iterator it;
+        typename std::list<tuple<int,T>>::const_iterator it;
 		for (it = elements.begin(); it != elements.end(); ++it)
 		{
 			vec[get<0>(*it)] += get<1>(*it)*this->scalar;
