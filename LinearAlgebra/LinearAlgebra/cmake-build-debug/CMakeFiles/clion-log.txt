@@ -1,4 +1,1 @@
-C:\Users\ido_o\.CLion2019.1\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra
--- Configuring done
--- Generating done
--- Build files have been written to: /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug
+CMake executable is incorrect Configure
