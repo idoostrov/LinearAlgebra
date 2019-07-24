@@ -150,6 +150,33 @@ LLL_Tests.cpp.s:
 	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.s
 .PHONY : LLL_Tests.cpp.s
 
+Manger.o: Manger.cpp.o
+
+.PHONY : Manger.o
+
+# target to build an object file
+Manger.cpp.o:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.o
+.PHONY : Manger.cpp.o
+
+Manger.i: Manger.cpp.i
+
+.PHONY : Manger.i
+
+# target to preprocess a source file
+Manger.cpp.i:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.i
+.PHONY : Manger.cpp.i
+
+Manger.s: Manger.cpp.s
+
+.PHONY : Manger.s
+
+# target to generate assembly for a file
+Manger.cpp.s:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.s
+.PHONY : Manger.cpp.s
+
 Tests.o: Tests.cpp.o
 
 .PHONY : Tests.o
@@ -189,6 +216,9 @@ help:
 	@echo "... LLL_Tests.o"
 	@echo "... LLL_Tests.i"
 	@echo "... LLL_Tests.s"
+	@echo "... Manger.o"
+	@echo "... Manger.i"
+	@echo "... Manger.s"
 	@echo "... Tests.o"
 	@echo "... Tests.i"
 	@echo "... Tests.s"

@@ -8,6 +8,8 @@ CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o: ../ListVector.h
 CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o: ../Matrix.h
 CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o: ../Vector.h
 
+CMakeFiles/LinearAlgebra.dir/Manger.cpp.o: ../Manger.cpp
+
 CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../Matrix.h
 CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../Tests.cpp
 CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../Vector.h

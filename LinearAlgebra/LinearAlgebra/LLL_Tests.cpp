@@ -5,7 +5,6 @@
 bool GramSchmidtTest()
 {
     List_Vector<int> L(12);
-    cout << L;
     Matrix<double> m(3, 3);
 
     m[0][0] = 1;
@@ -72,6 +71,7 @@ bool LLLTest()
 
 }
 
+/*
 int main()
 {
     bool flag = true;
@@ -88,4 +88,4 @@ int main()
     if(flag)
         cout << "success in LLL tester!" << endl;
     return 0;
-}
+}*/
