@@ -6,6 +6,10 @@
 #include <iostream>
 #include <math.h>
 #include <tuple>
+#include <thread>
+#include <vector>
+#include "Matrix.h"
+#include "LLL.h"
 
 using namespace std;
 
@@ -91,7 +95,7 @@ tuple<unsigned long , unsigned long> step3(unsigned long c, unsigned long f2) //
         {
             m_max = (i*N+B) / f3;
         }
-        else //meaning f3*m is in [i*n+B, i*n+2B)
+        else // f3*m is in [i*n+B, i*n+2B)
         {
             m_min = (i * N + B) / f3;
             if ((i * N + B) % f3 != 0)
@@ -103,15 +107,50 @@ tuple<unsigned long , unsigned long> step3(unsigned long c, unsigned long f2) //
 
 }
 
-tuple<unsigned long , unsigned long> MangerAttack(unsigned long c)
+tuple<unsigned long , unsigned long> MangerAttack(unsigned long c, int number_of_oracle_calls)
 {
-    NUMBER_OF_ORACLE_CALLS = -1;
+    NUMBER_OF_ORACLE_CALLS = number_of_oracle_calls; // -1 means unlimited number of calls
     unsigned long f1 = step1(c);
     unsigned long f2 = step2(c, f1);
     return step3(c, f2);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+void ThreadHandle(int oracle_calls, int cipher, int i, Matrix<unsigned long> m)
+{
+    tuple<unsigned long, unsigned long> tup = MangerAttack(cipher, oracle_calls);
+    unsigned long a = get<0>(tup);
+    unsigned long s = get<1>(tup);
+    m[i][0] = s;
+    m[i][i+1] = N;
+    m[i][m.getLength()] = a;
+    cout << "finished!" << endl;
+}
+
+unsigned long ParallelizedMangerAttack(int thread_count, int oracle_calls, int cipher)
+{
+    Matrix<unsigned long> m(thread_count + 2, thread_count + 2);
+    vector<thread> threads(thread_count);
+    for (int i = 0; i < thread_count; ++i)
+    {
+        threads[i] = thread(ThreadHandle, oracle_calls, cipher, i, m);
+    }
+    cout << "YEAH!!!" << endl;
+    for (int i = 0; i < thread_count; ++i)
+    {
+        threads[i].join();
+    }
+
+    unsigned long s1 = m[0][0];
+    unsigned long a1 = m[0][thread_count + 1];
+    m = LLL(m, 0.75);
+    cout << m;
+
+    unsigned long r1 = m[1][0];
+    return (r1+a1)
+}
+
 int main()
 {
-    cout << get<0>(MangerAttack(modpow(ulong(900),e,N))) << std::endl;
+    ParallelizedMangerAttack(3, 20, modpow(ulong(900), e,N));
 }
