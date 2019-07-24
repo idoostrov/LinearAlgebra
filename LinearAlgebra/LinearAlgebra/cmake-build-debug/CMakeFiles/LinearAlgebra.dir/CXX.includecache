@@ -11,4 +11,8 @@ stdlib.h
 -
 iostream
 -
+math.h
+-
+tuple
+-
 
