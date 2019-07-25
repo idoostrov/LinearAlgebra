@@ -6,24 +6,7 @@
 
 #IncludeRegexTransform: 
 
-.././LLL.h
-Matrix.h
-.././Matrix.h
-LLL.inl
-.././LLL.inl
-
-.././LLL.inl
-LLL.h
-.././LLL.h
-math.h
--
-
-.././Matrix.h
-Vector.h
-.././Vector.h
-math.h
--
-
+<<<<<<< HEAD
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/AssignmentBuffer.h
 Vector.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
@@ -70,13 +53,13 @@ Matrix.h
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
 LLL.inl
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
--
+
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
 LLL.h
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
 math.h
 -
--
+
 /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp
 stdlib.h
 >>>>>>> fe9ea4a1d1ca21bc9552eaa769a6535ca846ce74
@@ -101,4 +84,21 @@ gmp.h
 -
 gmpxx.h
 -
+
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+Vector.h
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+math.h
+-
+
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+vector
+-
+iostream
+-
+math.h
+-
+tuple
+-
+>>>>>>> fe9ea4a1d1ca21bc9552eaa769a6535ca846ce74
 

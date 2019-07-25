@@ -9,15 +9,21 @@ CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
 CMakeFiles/LinearAlgebra.dir/Manger.cpp.o
+<<<<<<< HEAD
+ /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp
 CMakeFiles/LinearAlgebra.dir/SmartTests.cpp.o
- .././LLL.h
- .././LLL.inl
- .././Matrix.h
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/AssignmentBuffer.h
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/ListVector.h
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/SmartTests.cpp
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/SmartVector.h
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+=======
+ /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
+ /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
+ /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp
+ /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+ /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+>>>>>>> fe9ea4a1d1ca21bc9552eaa769a6535ca846ce74
 CMakeFiles/LinearAlgebra.dir/Tests.cpp.o
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
  /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.cpp
