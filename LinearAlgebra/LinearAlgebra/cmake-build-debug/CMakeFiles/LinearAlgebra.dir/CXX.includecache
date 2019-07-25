@@ -6,6 +6,7 @@
 
 #IncludeRegexTransform: 
 
+<<<<<<< HEAD
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/AssignmentBuffer.h
 Vector.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
@@ -46,6 +47,22 @@ AssignmentBuffer.h
 
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
 vector
+=======
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
+Matrix.h
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+LLL.inl
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
+
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
+LLL.h
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
+math.h
+-
+
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp
+stdlib.h
+>>>>>>> fe9ea4a1d1ca21bc9552eaa769a6535ca846ce74
 -
 iostream
 -
@@ -53,4 +70,35 @@ math.h
 -
 tuple
 -
+<<<<<<< HEAD
+=======
+thread
+-
+vector
+-
+Matrix.h
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+LLL.h
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
+gmp.h
+-
+gmpxx.h
+-
+
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+Vector.h
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+math.h
+-
+
+/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+vector
+-
+iostream
+-
+math.h
+-
+tuple
+-
+>>>>>>> fe9ea4a1d1ca21bc9552eaa769a6535ca846ce74
 
