@@ -17,3 +17,4 @@ add_executable(LinearAlgebra
 
 
 set(CMAKE_C_FLAGS "-lgmp")
+target_link_libraries(LinearAlgebra gmp gmpxx libgmp)
