@@ -6,27 +6,29 @@
 
 #IncludeRegexTransform: 
 
-.././LLL.h
-Matrix.h
-.././Matrix.h
-LLL.inl
-.././LLL.inl
-
-.././LLL.inl
-LLL.h
-.././LLL.h
-math.h
--
-
-.././Matrix.h
-Vector.h
-.././Vector.h
-math.h
--
-
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/AssignmentBuffer.h
 Vector.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+ListVector.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/ListVector.h
+
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
+Matrix.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+LLL.inl
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
+
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
+LLL.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
+math.h
+-
+
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL_Tests.cpp
+Matrix.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+LLL.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
 ListVector.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/ListVector.h
 
@@ -41,6 +43,12 @@ iterator
 -
 Vector.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+Vector.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
+math.h
+-
 
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/SmartTests.cpp
 SmartVector.h
@@ -62,43 +70,17 @@ ListVector.h
 AssignmentBuffer.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/AssignmentBuffer.h
 
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.cpp
+Matrix.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
+
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h
 vector
-=======
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
-Matrix.h
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
-LLL.inl
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
--
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl
-LLL.h
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
-math.h
--
--
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp
-stdlib.h
->>>>>>> fe9ea4a1d1ca21bc9552eaa769a6535ca846ce74
 -
 iostream
 -
 math.h
 -
 tuple
--
-<<<<<<< HEAD
-=======
-thread
--
-vector
--
-Matrix.h
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h
-LLL.h
-/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h
-gmp.h
--
-gmpxx.h
 -
 

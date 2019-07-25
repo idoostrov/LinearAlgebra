@@ -9,7 +9,6 @@ add_executable(LinearAlgebra
         LLL.inl
         LLL.h
         Matrix.h
-        Vector.h
         Tests.cpp
         LLL_Tests.cpp
         SmartTests.cpp

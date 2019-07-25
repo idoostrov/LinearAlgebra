@@ -109,9 +109,6 @@
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.cpp">
 			<Option target="LinearAlgebra"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Vector.h">
-			<Option target="LinearAlgebra"/>
-		</Unit>
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/AssignmentBuffer.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
