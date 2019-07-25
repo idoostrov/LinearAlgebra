@@ -27,7 +27,7 @@ Matrix<T>& LLL(Matrix<T>& M, float delta)
     {
         for(int j = k-1; j>=0; j--)
         {
-            if(abs(long((M[k]*ortho[j])))/ ortho[j].get_norm_squared() > 0.5) // added cast to long
+            if(abs((M[k]*ortho[j]))/ ortho[j].get_norm_squared() > 0.5)
             {
                 M[k] = M[k] - M[j]*round(((M[k]*ortho[j])/ ortho[j].get_norm_squared()));
                 ortho = GramSchmidt(M);
