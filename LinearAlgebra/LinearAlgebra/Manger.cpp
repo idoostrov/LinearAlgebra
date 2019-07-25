@@ -15,15 +15,47 @@
 
 using namespace std;
 
-mpz_class p = 33083; //unknown
-mpz_class q = 33637; //unknown
-mpz_class e = 5; //known
-mpz_class d = 445098461; //unknown
+// modInverse code credit: https://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/
+mpz_class modInverse(mpz_class a, mpz_class m)
+{
+    mpz_class m0 = m;
+    mpz_class y = 0, x = 1;
+
+    if (m == 1)
+        return 0;
+
+    while (a > 1)
+    {
+        // q is quotient
+        mpz_class q = a / m;
+        mpz_class t = m;
+
+        // m is remainder now, process same as
+        // Euclid's algo
+        m = a % m, a = t;
+        t = y;
+
+        // Update y and x
+        y = x - q * y;
+        x = t;
+    }
+
+    // Make x positive
+    if (x < 0)
+        x += m0;
+
+    return x;
+}
+
+mpz_class p = 1000000002217; //unknown
+mpz_class q = 999999995207; //unknown
 mpz_class N = p*q; //known
 mpz_class phi = (p-1)*(q-1); //unknown
+mpz_class e = 65537; //known
+mpz_class d = modInverse(e,phi); //unknown
 
-unsigned int k = 4; // length of the key in bytes
-mpz_class B = ulong(1) << (8*(k-1)); // the approximate size of the key without the first byte
+unsigned int k = 10; // length of the key in bytes
+mpz_class B = mpz_class(1) << (8*(k-1)); // the approximate size of the key without the first byte
 
 int NUMBER_OF_ORACLE_CALLS = -1;
 
@@ -117,15 +149,18 @@ tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_call
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-void ThreadHandle(int oracle_calls, int cipher, int i, Matrix<mpz_class> m)
+
+void ThreadHandle(int oracle_calls, mpz_class cipher, int i, Matrix<mpz_class> m)
 {
+    cout << "start!" << endl;
     tuple<mpz_class, mpz_class> tup = MangerAttack(cipher, oracle_calls);
     mpz_class a = get<0>(tup);
     mpz_class s = get<1>(tup);
+    cout << i << endl;
+
     m[i][0] = s;
     m[i][i+1] = N;
-    m[i][m.getLength()] = a;
+    m[i][m.getLength()-1] = a;
     cout << "finished!" << endl;
 }
 
@@ -145,18 +180,19 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
 
     mpz_class s1 = m[0][0];
     mpz_class a1 = m[0][thread_count + 1];
-    m = LLL(m, 0.75);
+    //m = LLL(m, 0.75);
     cout << m;
 
     mpz_class r1 = m[1][0];
     return (r1+a1);
 }
-*/
+
 
 int main()
 {
-    //ParallelizedMangerAttack(3, 20, modpow(mpz_class(900), e,N));
-    mpz_class m = 900;
-    cout << get<0>(MangerAttack(modpow(m,e,N), -1)) << endl;
+    ParallelizedMangerAttack(3, 60, modpow(mpz_class(900), e,N));
+    //mpz_class m = 1000932335;
+    //cout << get<0>(MangerAttack(modpow(m,e,N), 76)) << endl;
+
     return 0;
 }

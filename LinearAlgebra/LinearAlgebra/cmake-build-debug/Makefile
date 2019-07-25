@@ -177,33 +177,6 @@ Manger.cpp.s:
 	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.s
 .PHONY : Manger.cpp.s
 
-SmartTests.o: SmartTests.cpp.o
-
-.PHONY : SmartTests.o
-
-# target to build an object file
-SmartTests.cpp.o:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/SmartTests.cpp.o
-.PHONY : SmartTests.cpp.o
-
-SmartTests.i: SmartTests.cpp.i
-
-.PHONY : SmartTests.i
-
-# target to preprocess a source file
-SmartTests.cpp.i:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/SmartTests.cpp.i
-.PHONY : SmartTests.cpp.i
-
-SmartTests.s: SmartTests.cpp.s
-
-.PHONY : SmartTests.s
-
-# target to generate assembly for a file
-SmartTests.cpp.s:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/SmartTests.cpp.s
-.PHONY : SmartTests.cpp.s
-
 Tests.o: Tests.cpp.o
 
 .PHONY : Tests.o
@@ -246,9 +219,6 @@ help:
 	@echo "... Manger.o"
 	@echo "... Manger.i"
 	@echo "... Manger.s"
-	@echo "... SmartTests.o"
-	@echo "... SmartTests.i"
-	@echo "... SmartTests.s"
 	@echo "... Tests.o"
 	@echo "... Tests.i"
 	@echo "... Tests.s"
