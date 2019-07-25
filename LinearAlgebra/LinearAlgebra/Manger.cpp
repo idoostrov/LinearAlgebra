@@ -31,7 +31,7 @@ int Manger_Oracle(unsigned long c)
     return (res >> 40) == 0;
 }
 
-int main()
+/*int main()
 {
     std::cout << (d*e)%phi << std::endl;
     std::cout << modpow(ulong(5), ulong(6), ulong(23)) << std::endl;
@@ -40,4 +40,4 @@ int main()
     std::cout << Manger_Oracle(modpow(ulong(10),e,N)) << std::endl;
 
     return 0;
-}
+}*/

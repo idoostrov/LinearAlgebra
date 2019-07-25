@@ -12,4 +12,5 @@ add_executable(LinearAlgebra
         Vector.h
         Tests.cpp
         LLL_Tests.cpp
+        SmartTests.cpp
         ListVector.h cmake-build-debug/AssignmentBuffer.h AssignmentBuffer.h Manger.cpp)

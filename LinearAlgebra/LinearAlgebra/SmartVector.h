@@ -11,6 +11,7 @@
 #include <iterator>
 #include "Vector.h"
 #include "ListVector.h"
+#include "AssignmentBuffer.h"
 
 #define LOW_BOUND 5
 #define HIGH_BOUND 10
@@ -18,7 +19,7 @@
 using namespace std;
 
 template <class T>
-class Smart_Vector<T>
+class Smart_Vector
 {
 private:
 	int length;

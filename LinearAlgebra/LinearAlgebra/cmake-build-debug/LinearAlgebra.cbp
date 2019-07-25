@@ -103,6 +103,9 @@
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/SmartTests.cpp">
+			<Option target="LinearAlgebra"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.cpp">
 			<Option target="LinearAlgebra"/>
 		</Unit>

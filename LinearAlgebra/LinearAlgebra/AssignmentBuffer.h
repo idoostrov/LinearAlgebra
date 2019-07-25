@@ -19,7 +19,7 @@ private:
     int *non_zero_amount;
 
 public:
-    Assignment_Buffer<T>(Array_Vector <T> arr, List_Vector <T> list, int index, &int non_zero_amount)
+    Assignment_Buffer<T>(Array_Vector <T> arr, List_Vector <T> list, int index, int& non_zero_amount)
     {
         this->index = index;
         this->is_array = true;
@@ -29,7 +29,7 @@ public:
         this->non_zero_amount = non_zero_amount;
     }
 
-    Assignment_Buffer<T>(Array_Vector <T> arr, int index, &int non_zero_amount)
+    Assignment_Buffer<T>(Array_Vector <T> arr, int index, int& non_zero_amount)
     {
         this->index = index;
         this->is_array = true;
@@ -38,7 +38,7 @@ public:
         this->non_zero_amount = non_zero_amount;
     }
 
-    Assignment_Buffer<T>(List_Vector <T> list, int index, &int non_zero_amount)
+    Assignment_Buffer<T>(List_Vector <T> list, int index, int& non_zero_amount)
     {
         this->index = index;
         this->is_array = false;
@@ -47,7 +47,7 @@ public:
         this->non_zero_amount = non_zero_amount;
     }
 
-    operator=(T input) {
+    void operator=(T input) {
         if (is_array) {
             if (arr[index] != 0) {
                 if (input != 0) {
