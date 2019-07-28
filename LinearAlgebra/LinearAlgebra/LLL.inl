@@ -18,6 +18,7 @@ Matrix<T> GramSchmidt(Matrix<T>& m)
     return M;
 }
 
+
 template <typename T>
 Matrix<T>& LLL(Matrix<T>& M, float delta)
 {
@@ -29,7 +30,7 @@ Matrix<T>& LLL(Matrix<T>& M, float delta)
         {
             if(abs((M[k]*ortho[j]))/ ortho[j].get_norm_squared() > 0.5)
             {
-                M[k] = M[k] - M[j]*round(((M[k]*ortho[j])/ ortho[j].get_norm_squared()));
+                M[k] = M[k] - M[j]*((M[k]*ortho[j])/ ortho[j].get_norm_squared());
                 ortho = GramSchmidt(M);
             }
         }

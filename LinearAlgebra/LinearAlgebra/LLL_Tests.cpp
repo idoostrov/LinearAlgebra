@@ -39,7 +39,7 @@ bool GramSchmidtTest()
 
 bool LLLTest()
 {
-    Matrix<double> m(3, 3);
+    Matrix<int> m(3, 3);
 
     m[0][0] = 1;
     m[0][1] = 1;
@@ -53,7 +53,7 @@ bool LLLTest()
     m[2][1] = 5;
     m[2][2] = 6;
 
-    Matrix<double> result(3,3);
+    Matrix<int> result(3,3);
 
     result[0][0] = 0;
     result[0][1] = 1;
@@ -66,6 +66,8 @@ bool LLLTest()
     result[2][0] = -1;
     result[2][1] = 0;
     result[2][2] = 2;
+
+    cout << LLL(m,0.75) ;
 
     return result == LLL(m, 0.75);
 

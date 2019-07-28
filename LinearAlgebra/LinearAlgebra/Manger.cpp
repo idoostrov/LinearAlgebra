@@ -12,6 +12,7 @@
 #include "LLL.h"
 #include <gmp.h>
 #include <gmpxx.h>
+#include <time.h>
 
 using namespace std;
 
@@ -57,9 +58,6 @@ mpz_class d = modInverse(e,phi); //unknown
 unsigned int k = 10; // length of the key in bytes
 mpz_class B = mpz_class(1) << (8*(k-1)); // the approximate size of the key without the first byte
 
-int NUMBER_OF_ORACLE_CALLS = -1;
-
-
 
 // modpow's code credit: https://stackoverflow.com/questions/8496182/calculating-powa-b-mod-n
 mpz_class modpow(mpz_class base, mpz_class exp, mpz_class modulus) {
@@ -81,30 +79,31 @@ int Manger_Oracle(mpz_class c)
     return (res >> ((k-1)*8)) == 0;
 }
 
-mpz_class step1(mpz_class c) //returns f1 such that m*f1/2 is in the interval [B/2, B)
+mpz_class step1(mpz_class c, int& number_of_oracle_calls) //returns f1 such that m*f1/2 is in the interval [B/2, B)
 {
-    mpz_class f1 = 2;
-    while(Manger_Oracle((modpow(f1,e,N)*c)) && NUMBER_OF_ORACLE_CALLS--)
+    mpz_class f1 = rand() % N;
+    while(Manger_Oracle((modpow(f1,e,N)*c)) && number_of_oracle_calls--)
     {
         f1 *= 2;
+        //f1 = rand() % N;
     }
     return f1;
 }
 
-mpz_class step2(mpz_class c, mpz_class f1) // returns f2 such that f2*m is in the interval [n, n+B)
+mpz_class step2(mpz_class c, mpz_class f1, int& number_of_oracle_calls) // returns f2 such that f2*m is in the interval [N, N+B)
 {
-    mpz_class f2 = ((N+B)/B) * f1/2; // f2*m is in the interval [n/2, n+B)
-    while(Manger_Oracle(((modpow(f2,e,N)*c))) == 0 && NUMBER_OF_ORACLE_CALLS--)
+    mpz_class f2 = ((N+B)/B) * f1/2; // f2*m is in the interval [N/2, N+B)
+    while(Manger_Oracle(((modpow(f2,e,N)*c))) == 0 && number_of_oracle_calls--)
     {
 
-        // if reached here, then f2*m is in the interval [n/2, n)
+        // if reached here, then f2*m is in the interval [N/2, N)
 
-        f2 += f1/2; // the new f2 value is in the interval [n/2, n+B)
+        f2 += f1/2; // the new f2 value is in the interval [N/2, n+B)
     }
     return f2;
 }
 
-tuple<mpz_class , mpz_class> step3(mpz_class c, mpz_class f2) // returns lower bound on m and f3 such that m*f3 is in a small range
+tuple<mpz_class , mpz_class> step3(mpz_class c, mpz_class f2, int& number_of_oracle_calls) // returns lower bound on m and f3 such that m*f3 is in a small range
 {
     mpz_class m_min = N/f2;
     if(N % f2 != 0)
@@ -114,21 +113,21 @@ tuple<mpz_class , mpz_class> step3(mpz_class c, mpz_class f2) // returns lower b
     mpz_class i;
     mpz_class f3;
 
-    while(m_max - m_min >= 1 && NUMBER_OF_ORACLE_CALLS--)
+    while(m_max - m_min >= 1 && number_of_oracle_calls--)
     {
         f_tmp = 2*B / (m_max - m_min);
         i = (f_tmp * m_min) / N;
 
-        //find f3 such that f3*m is in the interval [i*n, i*n+2B)
+        //find f3 such that f3*m is in the interval [i*N, i*N+2B)
         f3 = (i*N) / m_min;
         if((i*N) % m_min != 0)
             f3 ++;
 
-        if(Manger_Oracle(modpow(f3,e,N)*c)) //meaning f3*m is in [i*n, i*n+B)
+        if(Manger_Oracle(modpow(f3,e,N)*c)) //meaning f3*m is in [i*N, i*N+B)
         {
             m_max = (i*N+B) / f3;
         }
-        else // f3*m is in [i*n+B, i*n+2B)
+        else // f3*m is in [i*N+B, i*N+2B)
         {
             m_min = (i * N + B) / f3;
             if ((i * N + B) % f3 != 0)
@@ -142,57 +141,59 @@ tuple<mpz_class , mpz_class> step3(mpz_class c, mpz_class f2) // returns lower b
 
 tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_calls)
 {
-    NUMBER_OF_ORACLE_CALLS = number_of_oracle_calls; // -1 means unlimited number of calls
-    mpz_class f1 = step1(c);
-    mpz_class f2 = step2(c, f1);
-    return step3(c, f2);
+    int copy_number_of_oracle_calls = number_of_oracle_calls;
+    mpz_class f1 = step1(c, ref(copy_number_of_oracle_calls));
+    mpz_class f2 = step2(c, f1, ref(copy_number_of_oracle_calls));
+    return step3(c, f2, ref(copy_number_of_oracle_calls));
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ThreadHandle(int oracle_calls, mpz_class cipher, int i, Matrix<mpz_class> m)
+void ThreadHandle(int oracle_calls, mpz_class cipher, int i, Matrix<mpz_class>& m)
 {
-    cout << "start!" << endl;
+    srand(time(0) + i);
     tuple<mpz_class, mpz_class> tup = MangerAttack(cipher, oracle_calls);
     mpz_class a = get<0>(tup);
     mpz_class s = get<1>(tup);
-    cout << i << endl;
 
-    m[i][0] = s;
-    m[i][i+1] = N;
-    m[i][m.getLength()-1] = a;
-    cout << "finished!" << endl;
+    m[0][i] = s;
+    m[i+1][i] = N;
+    m[m.getLength()-1][i] = a;
 }
 
 mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class cipher)
 {
-    Matrix<mpz_class> m(thread_count + 2, thread_count + 2);
+    Matrix<mpz_class> matrix(thread_count + 2, thread_count + 2);
     vector<thread> threads(thread_count);
     for (int i = 0; i < thread_count; ++i)
     {
-        threads[i] = thread(ThreadHandle, oracle_calls, cipher, i, m);
+        threads[i] = thread(ThreadHandle, oracle_calls, cipher, i, ref(matrix));
     }
-    cout << "YEAH!!!" << endl;
     for (int i = 0; i < thread_count; ++i)
     {
         threads[i].join();
     }
+    mpz_class s1 = matrix[0][0] ;
+    mpz_class a1 = matrix[0][thread_count + 1];
 
-    mpz_class s1 = m[0][0];
-    mpz_class a1 = m[0][thread_count + 1];
-    //m = LLL(m, 0.75);
-    cout << m;
+    //matrix = matrix * thread_count;
+    matrix[thread_count + 1][thread_count] = N*(thread_count - 1) / thread_count;
 
-    mpz_class r1 = m[1][0];
-    return (r1+a1);
+    cout << matrix;
+
+    matrix = LLL(matrix, 0.75);
+    cout << matrix;
+
+    mpz_class r1 = matrix[1][0];
+    return ((r1+a1)*modInverse(s1, N)) % N;
 }
 
 
 int main()
 {
-    ParallelizedMangerAttack(3, 60, modpow(mpz_class(900), e,N));
+    mpz_class a = ParallelizedMangerAttack(3, 60, modpow(mpz_class(1000932335), e,N));
     //mpz_class m = 1000932335;
     //cout << get<0>(MangerAttack(modpow(m,e,N), 76)) << endl;
-
+    cout << a << endl;
     return 0;
 }
