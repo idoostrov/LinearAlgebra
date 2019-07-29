@@ -91,10 +91,10 @@
 		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl">
 			<Option target="LinearAlgebra"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL_Tests.cpp">
+		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/ListVector.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/ListVector.h">
+		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp">
 			<Option target="LinearAlgebra"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h">

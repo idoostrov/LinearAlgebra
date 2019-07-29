@@ -79,14 +79,28 @@ int Manger_Oracle(mpz_class c)
     return (res >> ((k-1)*8)) == 0;
 }
 
+mpz_class blinding(mpz_class c, int& number_of_oracle_calls)
+{
+    gmp_randclass r1();
+    mpz_class s = randclass.get_z_range(N-2)+2;
+    while(Manger_Oracle((modpow(s,e,N)*c)) && number_of_oracle_calls--)
+    {
+        s = rand() % (N - 2) + 2;
+    }
+    if(number_of_oracle_calls == -1)
+        number_of_oracle_calls = 0;
+    return s;
+}
 mpz_class step1(mpz_class c, int& number_of_oracle_calls) //returns f1 such that m*f1/2 is in the interval [B/2, B)
 {
-    mpz_class f1 = rand() % N;
+    mpz_class f1 = 2;
     while(Manger_Oracle((modpow(f1,e,N)*c)) && number_of_oracle_calls--)
     {
         f1 *= 2;
         //f1 = rand() % N;
     }
+    if(number_of_oracle_calls == -1)
+        number_of_oracle_calls = 0;
     return f1;
 }
 
@@ -95,15 +109,16 @@ mpz_class step2(mpz_class c, mpz_class f1, int& number_of_oracle_calls) // retur
     mpz_class f2 = ((N+B)/B) * f1/2; // f2*m is in the interval [N/2, N+B)
     while(Manger_Oracle(((modpow(f2,e,N)*c))) == 0 && number_of_oracle_calls--)
     {
-
         // if reached here, then f2*m is in the interval [N/2, N)
 
         f2 += f1/2; // the new f2 value is in the interval [N/2, n+B)
     }
+    if(number_of_oracle_calls == -1)
+        number_of_oracle_calls = 0;
     return f2;
 }
 
-tuple<mpz_class , mpz_class> step3(mpz_class c, mpz_class f2, int& number_of_oracle_calls) // returns lower bound on m and f3 such that m*f3 is in a small range
+mpz_class step3(mpz_class c, mpz_class f2, int& number_of_oracle_calls) // returns lower bound on m and f3 such that m*f3 is in a small range
 {
     mpz_class m_min = N/f2;
     if(N % f2 != 0)
@@ -134,17 +149,23 @@ tuple<mpz_class , mpz_class> step3(mpz_class c, mpz_class f2, int& number_of_ora
                 m_min++;
         }
     }
-    tuple<mpz_class, mpz_class> tup(m_min, f3);
-    return tup;
+    /*f3 = (i*N) / m_min;
+    if((i*N) % m_min != 0)
+        f3 ++;*/
+    return m_min;
 
 }
 
 tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_calls)
 {
     int copy_number_of_oracle_calls = number_of_oracle_calls;
+    mpz_class s = blinding(c, ref(copy_number_of_oracle_calls));
+    c *= modpow(s, e, N);
     mpz_class f1 = step1(c, ref(copy_number_of_oracle_calls));
     mpz_class f2 = step2(c, f1, ref(copy_number_of_oracle_calls));
-    return step3(c, f2, ref(copy_number_of_oracle_calls));
+    mpz_class m_min = step3(c, f2, ref(copy_number_of_oracle_calls));
+    tuple<mpz_class, mpz_class> tup(m_min, s);
+    return tup;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,27 +195,29 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
         threads[i].join();
     }
     mpz_class s1 = matrix[0][0] ;
-    mpz_class a1 = matrix[0][thread_count + 1];
+    mpz_class a1 = matrix[thread_count + 1][0];
 
-    //matrix = matrix * thread_count;
-    matrix[thread_count + 1][thread_count] = N*(thread_count - 1) / thread_count;
+    matrix = matrix * thread_count;
+    matrix[thread_count + 1][thread_count] = N*(thread_count - 1);
     matrix = ~matrix;
 
     cout << matrix;
-
     matrix = LLL(matrix, 0.75);
     cout << matrix;
 
-    mpz_class r1 = matrix[1][0];
+    mpz_class r1 = matrix[1][0] / thread_count;
     return ((r1+a1)*modInverse(s1, N)) % N;
 }
 
 
 int main()
 {
-    mpz_class a = ParallelizedMangerAttack(3, 60, modpow(mpz_class(1000932335), e,N));
-    //mpz_class m = 1000932335;
-    //cout << get<0>(MangerAttack(modpow(m,e,N), 76)) << endl;
+    srand(time(0));
+    mpz_class m = rand();
+    std::cout << m << std::endl;
+    mpz_class a = ParallelizedMangerAttack(5, -1, modpow(mpz_class(m), e,N));
+    //tuple<mpz_class, mpz_class> tup = MangerAttack(modpow(m,e,N), -1);
+    //mpz_class a = (get<0>(tup) * modInverse(get<1>(tup), N))% N;
     cout << a << endl;
     return 0;
 }

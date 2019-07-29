@@ -10,12 +10,12 @@ add_executable(LinearAlgebra
         LLL.h
         Matrix.h
         Tests.cpp
-        LLL_Tests.cpp
+        #LLL_Tests.cpp
         #SmartTests.cpp
         ListVector.h
         cmake-build-debug/AssignmentBuffer.h
         AssignmentBuffer.h
-        #Manger.cpp
+        Manger.cpp
         )
 
 

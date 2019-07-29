@@ -66,8 +66,6 @@ bool LLLTest()
     result[2][1] = 0;
     result[2][2] = 2;
 
-    cout << LLL(m,0.75) ;
-
     return result == LLL(m, 0.75);
 
 }

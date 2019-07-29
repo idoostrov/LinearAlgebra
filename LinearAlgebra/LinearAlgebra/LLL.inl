@@ -17,12 +17,17 @@ Matrix<T> GramSchmidt(Matrix<T>& m)
     return M;
 }
 
-mpz_class mpz_floor(mpq_class mpq)
+mpz_class mpz_round(mpq_class mpq)
 {
-    mpz_class num, den;
+    mpz_class num, den, tmp;
     num = mpq.get_num();
     den = mpq.get_den();
-    return num/den;
+    tmp = num/den;
+    if(2*(num-(tmp*den))>= den)
+    {
+        return tmp+1;
+    }
+    return tmp;
 }
 
 Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta)
@@ -46,7 +51,8 @@ Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta)
         {
             if(abs((M[k]*ortho[j]))/ ortho[j].get_norm_squared() > 0.5)
             {
-                M[k] = M[k] - M[j]*mpz_floor((M[k]*ortho[j])/ ortho[j].get_norm_squared());
+                M[k] = M[k] - M[j]*mpz_round((M[k]*ortho[j])/ ortho[j].get_norm_squared());
+
                 //M[k] = M[k] - M[j]*((M[k]*ortho[j])/ ortho[j].get_norm_squared());
                 ortho = GramSchmidt(M);
             }

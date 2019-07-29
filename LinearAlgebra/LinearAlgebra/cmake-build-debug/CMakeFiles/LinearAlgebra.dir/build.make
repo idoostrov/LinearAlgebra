@@ -70,29 +70,29 @@ CMakeFiles/LinearAlgebra.dir/Tests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LinearAlgebra.dir/Tests.cpp.s"
 	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.cpp -o CMakeFiles/LinearAlgebra.dir/Tests.cpp.s
 
-CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o: CMakeFiles/LinearAlgebra.dir/flags.make
-CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o: ../LLL_Tests.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o"
-	/usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o -c /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL_Tests.cpp
+CMakeFiles/LinearAlgebra.dir/Manger.cpp.o: CMakeFiles/LinearAlgebra.dir/flags.make
+CMakeFiles/LinearAlgebra.dir/Manger.cpp.o: ../Manger.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/LinearAlgebra.dir/Manger.cpp.o"
+	/usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LinearAlgebra.dir/Manger.cpp.o -c /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp
 
-CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.i"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL_Tests.cpp > CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.i
+CMakeFiles/LinearAlgebra.dir/Manger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LinearAlgebra.dir/Manger.cpp.i"
+	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp > CMakeFiles/LinearAlgebra.dir/Manger.cpp.i
 
-CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.s"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL_Tests.cpp -o CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.s
+CMakeFiles/LinearAlgebra.dir/Manger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LinearAlgebra.dir/Manger.cpp.s"
+	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp -o CMakeFiles/LinearAlgebra.dir/Manger.cpp.s
 
 # Object files for target LinearAlgebra
 LinearAlgebra_OBJECTS = \
 "CMakeFiles/LinearAlgebra.dir/Tests.cpp.o" \
-"CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o"
+"CMakeFiles/LinearAlgebra.dir/Manger.cpp.o"
 
 # External object files for target LinearAlgebra
 LinearAlgebra_EXTERNAL_OBJECTS =
 
 LinearAlgebra.exe: CMakeFiles/LinearAlgebra.dir/Tests.cpp.o
-LinearAlgebra.exe: CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o
+LinearAlgebra.exe: CMakeFiles/LinearAlgebra.dir/Manger.cpp.o
 LinearAlgebra.exe: CMakeFiles/LinearAlgebra.dir/build.make
 LinearAlgebra.exe: CMakeFiles/LinearAlgebra.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable LinearAlgebra.exe"

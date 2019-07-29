@@ -123,32 +123,32 @@ LinearAlgebra/fast:
 	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/build
 .PHONY : LinearAlgebra/fast
 
-LLL_Tests.o: LLL_Tests.cpp.o
+Manger.o: Manger.cpp.o
 
-.PHONY : LLL_Tests.o
+.PHONY : Manger.o
 
 # target to build an object file
-LLL_Tests.cpp.o:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.o
-.PHONY : LLL_Tests.cpp.o
+Manger.cpp.o:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.o
+.PHONY : Manger.cpp.o
 
-LLL_Tests.i: LLL_Tests.cpp.i
+Manger.i: Manger.cpp.i
 
-.PHONY : LLL_Tests.i
+.PHONY : Manger.i
 
 # target to preprocess a source file
-LLL_Tests.cpp.i:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.i
-.PHONY : LLL_Tests.cpp.i
+Manger.cpp.i:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.i
+.PHONY : Manger.cpp.i
 
-LLL_Tests.s: LLL_Tests.cpp.s
+Manger.s: Manger.cpp.s
 
-.PHONY : LLL_Tests.s
+.PHONY : Manger.s
 
 # target to generate assembly for a file
-LLL_Tests.cpp.s:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/LLL_Tests.cpp.s
-.PHONY : LLL_Tests.cpp.s
+Manger.cpp.s:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.s
+.PHONY : Manger.cpp.s
 
 Tests.o: Tests.cpp.o
 
@@ -186,9 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... LinearAlgebra"
 	@echo "... edit_cache"
-	@echo "... LLL_Tests.o"
-	@echo "... LLL_Tests.i"
-	@echo "... LLL_Tests.s"
+	@echo "... Manger.o"
+	@echo "... Manger.i"
+	@echo "... Manger.s"
 	@echo "... Tests.o"
 	@echo "... Tests.i"
 	@echo "... Tests.s"
