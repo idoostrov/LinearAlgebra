@@ -15,7 +15,7 @@ add_executable(LinearAlgebra
         ListVector.h
         cmake-build-debug/AssignmentBuffer.h
         AssignmentBuffer.h
-        Manger.cpp
+        #Manger.cpp
         )
 
 

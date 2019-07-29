@@ -4,7 +4,7 @@
 
 bool GramSchmidtTest()
 {
-    Matrix<double> m(3, 3);
+    Matrix<mpq_class> m(3, 3);
 
     m[0][0] = 1;
     m[0][1] = 1;
@@ -19,7 +19,7 @@ bool GramSchmidtTest()
     m[2][2] = 6;
 
     m = GramSchmidt(m);
-    Matrix<double> result(3,3);
+    Matrix<mpq_class> result(3,3);
 
     result[0][0] = 1;
     result[0][1] = 1;
@@ -72,7 +72,7 @@ bool LLLTest()
 
 }
 
-/*
+
 int main()
 {
     bool flag = true;
@@ -90,4 +90,3 @@ int main()
         cout << "success in LLL tester!" << endl;
     return 0;
 }
-*/

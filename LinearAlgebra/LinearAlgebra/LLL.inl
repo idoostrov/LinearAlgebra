@@ -1,7 +1,5 @@
 #include "LLL.h"
-#include <math.h>
-#include <gmp.h>
-#include <gmpxx.h>
+
 
 template <typename T>
 Matrix<T> GramSchmidt(Matrix<T>& m)
@@ -49,6 +47,7 @@ Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta)
             if(abs((M[k]*ortho[j]))/ ortho[j].get_norm_squared() > 0.5)
             {
                 M[k] = M[k] - M[j]*mpz_floor((M[k]*ortho[j])/ ortho[j].get_norm_squared());
+                //M[k] = M[k] - M[j]*((M[k]*ortho[j])/ ortho[j].get_norm_squared());
                 ortho = GramSchmidt(M);
             }
         }
