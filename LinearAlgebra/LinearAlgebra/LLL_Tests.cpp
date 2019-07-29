@@ -4,7 +4,6 @@
 
 bool GramSchmidtTest()
 {
-    List_Vector<int> L(12);
     Matrix<double> m(3, 3);
 
     m[0][0] = 1;
@@ -39,7 +38,7 @@ bool GramSchmidtTest()
 
 bool LLLTest()
 {
-    Matrix<int> m(3, 3);
+    Matrix<mpz_class> m(3, 3);
 
     m[0][0] = 1;
     m[0][1] = 1;
@@ -53,7 +52,7 @@ bool LLLTest()
     m[2][1] = 5;
     m[2][2] = 6;
 
-    Matrix<int> result(3,3);
+    Matrix<mpz_class> result(3,3);
 
     result[0][0] = 0;
     result[0][1] = 1;

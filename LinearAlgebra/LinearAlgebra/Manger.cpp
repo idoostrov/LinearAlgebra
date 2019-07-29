@@ -158,12 +158,12 @@ void ThreadHandle(int oracle_calls, mpz_class cipher, int i, Matrix<mpz_class>& 
 
     m[0][i] = s;
     m[i+1][i] = N;
-    m[m.getLength()-1][i] = a;
+    m[m.getWidth()-1][i] = a;
 }
 
 mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class cipher)
 {
-    Matrix<mpz_class> matrix(thread_count + 2, thread_count + 2);
+    Matrix<mpz_class> matrix(thread_count + 2, thread_count + 1);
     vector<thread> threads(thread_count);
     for (int i = 0; i < thread_count; ++i)
     {
@@ -178,6 +178,7 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
 
     //matrix = matrix * thread_count;
     matrix[thread_count + 1][thread_count] = N*(thread_count - 1) / thread_count;
+    matrix = ~matrix;
 
     cout << matrix;
 
