@@ -10,7 +10,8 @@ Matrix<T> GramSchmidt(Matrix<T>& m)
         Array_Vector<T> v(M[i]);
         for(int j=0; j<i; j++)
         {
-            v = v - (M[j] * (M[j]*M[i] / M[j].get_norm_squared()));
+            if(M[j].get_norm_squared() != 0)
+                v = v - (M[j] * (M[j]*M[i] / M[j].get_norm_squared()));
         }
         M[i] = v;
     }
