@@ -10,4 +10,5 @@ int main()
     lllTests();
     //SmartTests();
     mangerTests();
+    return 0;
 }

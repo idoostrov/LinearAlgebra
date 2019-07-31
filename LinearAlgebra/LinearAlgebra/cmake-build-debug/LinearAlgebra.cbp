@@ -82,28 +82,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/AssignmentBuffer.h">
-			<Option target="LinearAlgebra"/>
-		</Unit>
-		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.h">
-			<Option target="LinearAlgebra"/>
-		</Unit>
-		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/LLL.inl">
-			<Option target="LinearAlgebra"/>
-		</Unit>
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/ListVector.h">
-			<Option target="LinearAlgebra"/>
-		</Unit>
-		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Matrix.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.cpp">
 			<Option target="LinearAlgebra"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.h">
-			<Option target="LinearAlgebra"/>
-		</Unit>
-		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/AssignmentBuffer.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/CMakeLists.txt">

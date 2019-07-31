@@ -49,8 +49,6 @@ int Test3()
     m[1][1] = -3;
     Matrix<int> n(m);
     n = n + (~m)*3;
-    m.deter();
-    n.deter();
     Matrix<int> a = m*n;
     return m.deter() == -21 && n.deter() == -339 && a.deter()== (21*339);
 }

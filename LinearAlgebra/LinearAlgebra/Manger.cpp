@@ -202,9 +202,9 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
 
    //matrix = ~matrix;
 
-    cout << matrix;
-    matrix = LLL(matrix, 0.75);
-    cout << matrix;
+    //cout << matrix;
+    //matrix = LLL(matrix, 0.75);
+    //cout << matrix;
 
     mpz_class r1 = matrix[1][0] / thread_count;
     return ((r1+a1)*modInverse(s1, N)) % N;
@@ -213,11 +213,18 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
 
 void mangerTests()
 {
-
+    cout << "||||||||||||||||||||||||||||||Manger||||||||||||||||||||||||||||||" << endl;
+    cout << "Number of threads: ";
+    int thread_count;
+    cin >> thread_count;
+    cout << "Number of oracle calls: ";
+    int calls_count;
+    cin >> calls_count;
+    cout << endl;
     srand(time(0));
     mpz_class m = rand();
     std::cout << m << std::endl;
-    mpz_class a = ParallelizedMangerAttack(5, 200, modpow(mpz_class(m), e,N));
+    mpz_class a = ParallelizedMangerAttack(thread_count, calls_count, modpow(mpz_class(m), e,N));
     //tuple<mpz_class, mpz_class> tup = MangerAttack(modpow(m,e,N), -1);
     //mpz_class a = (get<0>(tup) * modInverse(get<1>(tup), N))% N;
     cout << a << endl;

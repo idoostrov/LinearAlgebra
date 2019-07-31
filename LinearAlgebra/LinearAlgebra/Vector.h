@@ -133,7 +133,7 @@ public:
 		vec.scalar = this->scalar*scalar;
 		return vec;
 	}
-	
+
 	///////////////////////////////////// Comparison Operators ///////////////////////////////////
 	bool operator==(const Array_Vector<T> other) const
 	{
