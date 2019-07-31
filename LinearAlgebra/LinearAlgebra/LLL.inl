@@ -46,27 +46,30 @@ Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta)
     ortho = GramSchmidt(ortho);
 
     int k = 1;
-    while(k < M.getWidth())
-    {
-        for(int j = k-1; j>=0; j--)
-        {
-            if(abs((M[k]*ortho[j]))/ ortho[j].get_norm_squared() > 0.5)
-            {
-                M[k] = M[k] - M[j]*mpz_round((M[k]*ortho[j])/ ortho[j].get_norm_squared());
-
-                //M[k] = M[k] - M[j]*((M[k]*ortho[j])/ ortho[j].get_norm_squared());
-                ortho = GramSchmidt(M);
+    while(k < M.getWidth()) {
+        for (int j = k - 1; j >= 0; j--) {
+            if (ortho[j].get_norm_squared() != 0) {
+                if (abs((M[k] * ortho[j])) / ortho[j].get_norm_squared() > 0.5) {
+                    M[k] = M[k] - M[j] * mpz_round((M[k] * ortho[j]) / ortho[j].get_norm_squared());
+                    //M[k] = M[k] - M[j]*((M[k]*ortho[j])/ ortho[j].get_norm_squared());
+                    ortho = GramSchmidt(M);
+                }
             }
         }
-        if(ortho[k].get_norm_squared() >= (delta - (M[k]*ortho[k-1]/ortho[k-1].get_norm_squared())*(M[k]*ortho[k-1]/ortho[k-1].get_norm_squared()))*(ortho[k-1].get_norm_squared()))
-            k++;
-        else
+        if (ortho[k - 1].get_norm_squared() != 0)
         {
-            M.swap(k, k-1);
-            ortho = GramSchmidt(M);
-            k = max(k-1, 1);
-        }
-        
+            if (ortho[k].get_norm_squared() >= (delta - (M[k] * ortho[k - 1] / ortho[k - 1].get_norm_squared()) *
+                                                        (M[k] * ortho[k - 1] / ortho[k - 1].get_norm_squared())) *
+                                               (ortho[k - 1].get_norm_squared()))
+                k++;
+            else {
+                M.swap(k, k - 1);
+                ortho = GramSchmidt(M);
+                k = max(k - 1, 1);
+            }
+        } else
+            k++;
+
     }
     for (int i = 0; i < mat.getWidth(); ++i)
     {

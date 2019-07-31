@@ -9,14 +9,18 @@
 #include <tuple>
 #include <iostream>
 #include <iterator>
-#include "Vector.h"
-#include "ListVector.h"
 #include "AssignmentBuffer.h"
 
 #define LOW_BOUND 5
 #define HIGH_BOUND 10
 
 using namespace std;
+
+template <class T>
+class Array_Vector;
+
+template <class T>
+class List_Vector;
 
 template <class T>
 class Smart_Vector
@@ -182,14 +186,25 @@ public:
 };
 
 template <typename T>
-ostream& operator<<(ostream& os, const List_Vector<T> v)
+ostream& operator<<(ostream& os, const Smart_Vector<T> v)
 {
-	const Array_Vector<T> tmp(v.len());
-	os << (v.operator+(tmp));
-	return os;
+    os << "[";
+    int length = v.len();
+    if (length != 0)
+    {
+        os << v[0];
+    }
+    for (int i = 1; i < length; i++)
+    {
+        os << ", ";
+        os << v[i];
+    }
+    os << "]\n";
+    return os;
 }
 
 
-
+#include "Vector.h"
+#include "ListVector.h"
 
 #endif //LINEARALGEBRA_LISTVECTOR_H

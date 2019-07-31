@@ -21,7 +21,8 @@ void test0()
     cout << A << endl;
 }
 
-int main()
+void smartTests()
 {
     test0();
+    return;
 }

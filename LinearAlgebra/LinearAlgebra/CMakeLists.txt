@@ -9,14 +9,10 @@ add_executable(LinearAlgebra
         LLL.inl
         LLL.h
         Matrix.h
-        Tests.cpp
-        #LLL_Tests.cpp
-        #SmartTests.cpp
         ListVector.h
         cmake-build-debug/AssignmentBuffer.h
         AssignmentBuffer.h
-        Manger.cpp
-        )
+        Tests.cpp Tests.h)
 
 
 set(CMAKE_C_FLAGS "-lgmp")
