@@ -80,10 +80,10 @@ int Manger_Oracle(mpz_class c)
     return tmp;
 }
 
-mpz_class blinding(mpz_class c, int& number_of_oracle_calls, int i)
+mpz_class blinding(mpz_class c, int& number_of_oracle_calls, int seed)
 {
     gmp_randclass rr(gmp_randinit_default);
-    rr.seed(time(NULL) + i);
+    rr.seed(time(NULL) + seed);
 
     mpz_class s = rr.get_z_range(N-2) + 2;
     while(Manger_Oracle((modpow(s,e,N)*c))==0 /*&& number_of_oracle_calls--*/)
@@ -157,10 +157,10 @@ mpz_class step3(mpz_class c, mpz_class f2, int& number_of_oracle_calls) // retur
 
 }
 
-tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_calls, int i)
+tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_calls, int seed)
 {
     int copy_number_of_oracle_calls = number_of_oracle_calls;
-    mpz_class s = blinding(c, ref(copy_number_of_oracle_calls), i);
+    mpz_class s = blinding(c, ref(copy_number_of_oracle_calls), seed);
     c *= modpow(s, e, N);
     mpz_class f1 = step1(c, ref(copy_number_of_oracle_calls));
     mpz_class f2 = step2(c, f1, ref(copy_number_of_oracle_calls));
@@ -200,11 +200,11 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
     matrix = matrix * thread_count;
     matrix[thread_count + 1][thread_count] = N*(thread_count - 1);
 
-   //matrix = ~matrix;
+    //matrix[thread_count][thread_count + 1] = 1;
 
-    //cout << matrix;
-    //matrix = LLL(matrix, 0.75);
-    //cout << matrix;
+    cout << matrix;
+    matrix = LLL(matrix, 0.75);
+    cout << matrix;
 
     mpz_class r1 = matrix[1][0] / thread_count;
     return ((r1+a1)*modInverse(s1, N)) % N;
@@ -213,6 +213,7 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
 
 void mangerTests()
 {
+
     cout << "||||||||||||||||||||||||||||||Manger||||||||||||||||||||||||||||||" << endl;
     cout << "Number of threads: ";
     int thread_count;
@@ -223,14 +224,19 @@ void mangerTests()
     cout << endl;
     srand(time(0));
     mpz_class m = rand();
-    std::cout << m << std::endl;
+    std::cout << "m = " << m << std::endl;
+
+    tuple<mpz_class, mpz_class> tup = MangerAttack(modpow(m,e,N), -1, 0);
+    cout << "not parallelized: " << (get<0>(tup) * modInverse(get<1>(tup), N)) % N << endl;
+    cout << "parallelized: " << endl;
+
     mpz_class a = ParallelizedMangerAttack(thread_count, calls_count, modpow(mpz_class(m), e,N));
     //tuple<mpz_class, mpz_class> tup = MangerAttack(modpow(m,e,N), -1);
     //mpz_class a = (get<0>(tup) * modInverse(get<1>(tup), N))% N;
     cout << a << endl;
 
-/*
-    Matrix<mpz_class> m(3,3);
+
+    /*Matrix<mpz_class> m(3,3);
     m[0][0] = 1;
     m[0][1] = 2;
     m[0][2] = 0;
