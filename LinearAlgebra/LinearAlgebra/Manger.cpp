@@ -82,7 +82,6 @@ int Manger_Oracle(mpz_class c)
 
 mpz_class blinding(mpz_class c, int& number_of_oracle_calls, int seed)
 {
-    return 2;
     gmp_randclass rr(gmp_randinit_default);
     rr.seed(time(NULL) + seed);
 
