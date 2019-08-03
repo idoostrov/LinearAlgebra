@@ -53,6 +53,31 @@ int Test3()
     return m.deter() == -21 && n.deter() == -339 && a.deter()== (21*339);
 }
 
+int Test4()
+{
+    Matrix<int> m(3, 3);
+    for(int i=0; i < 3; i++)
+    {
+        for(int j=0; j < 3; j++)
+        {
+            m[i][j] = i;
+        }
+    }
+    m.swap(0,1);
+    for(int i=0; i < 2; i++)
+    {
+        for(int j=0; j < 3; j++)
+        {
+            if(m[i][j] != 1-i)
+                return false;
+        }
+    }
+    for(int j=0; j < 3; j++)
+        if(m[2][j] != 2)
+            return false;
+    return true;
+}
+
 
 
 
@@ -75,6 +100,11 @@ void matrixTests()
     {
         flag = false;
         cout << "failed on test matrix 3" << endl;
+    }
+    if(!Test4())
+    {
+        flag = false;
+        cout << "failed on test matrix 4" << endl;
     }
 
     if(flag)

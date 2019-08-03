@@ -100,24 +100,24 @@ public:
 		{
 			return 0;
 		}
-		Matrix<T> m = *this;
+		Matrix<T> m(this);
 		T denominator = 1;
 		int cur_row;
 		for (int i = 0; i < this->length; i++)
 		{
-			cur_row = find_not_zero(i, i);
+			cur_row = m.find_not_zero(i, i);
 			if (cur_row == -1)
 			{
 				this->det = 0;
 				return 0;
 			}
-			swap(i, cur_row);
-			denominator *= eliminate_col(i, i);
+			m.swap(i, cur_row);
+			denominator *= m.eliminate_col(i, i);
 		}
 		this->det = 1;
 		for (int i = 0; i < this->length; i++)
 		{
-			this->det *= rows[i][i];
+			this->det *= m.rows[i][i];
 		}
 		this->det = this->det / denominator;
 		return this->det;
