@@ -160,6 +160,7 @@ mpz_class step3(mpz_class c, mpz_class f2, int& number_of_oracle_calls) // retur
 tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_calls, int seed)
 {
     int copy_number_of_oracle_calls = number_of_oracle_calls;
+    //mpz_class s = 2;
     mpz_class s = blinding(c, ref(copy_number_of_oracle_calls), seed);
     c *= modpow(s, e, N);
     mpz_class f1 = step1(c, ref(copy_number_of_oracle_calls));
