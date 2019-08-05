@@ -86,9 +86,9 @@ mpz_class blinding(mpz_class c, int& number_of_oracle_calls, int seed)
     rr.seed(time(NULL) + seed);
 
     mpz_class s = rr.get_z_range(N-2) + 2;
-    while(Manger_Oracle((modpow(s,e,N)*c))==0 /*&& number_of_oracle_calls--*/)
+    while(Manger_Oracle((modpow(s,e,N)*c)) /*&& number_of_oracle_calls--*/)
     {
-        s = rr.get_z_range(N-3) + 2;
+        s = rr.get_z_range(N-2) + 2;
     }
     if(number_of_oracle_calls == -1)
         number_of_oracle_calls = 0;
