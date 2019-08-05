@@ -163,6 +163,7 @@ tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_call
     //mpz_class s = 2;
     mpz_class s = blinding(c, ref(copy_number_of_oracle_calls), seed);
     c *= modpow(s, e, N);
+    c %= N;
     mpz_class f1 = step1(c, ref(copy_number_of_oracle_calls));
     mpz_class f2 = step2(c, f1, ref(copy_number_of_oracle_calls));
     mpz_class m_min = step3(c, f2, ref(copy_number_of_oracle_calls));
