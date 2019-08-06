@@ -6,7 +6,7 @@
 
 int main()
 {
-    vectorTest();
+    vectorTests();
     matrixTests();
     lllTests();
     //smartTests();
