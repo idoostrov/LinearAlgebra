@@ -1,2 +1,1 @@
-C:/cygwin64/bin/ar.exe qc libLinearAlgebra.a  CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o
-C:/cygwin64/bin/ranlib.exe libLinearAlgebra.a
+C:/cygwin64/bin/g++.exe -g  -Wl,--enable-auto-import CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o  -o LinearAlgebra.exe -Wl,--out-implib,libLinearAlgebra.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -lgmp -lgmpxx -llibgmp 

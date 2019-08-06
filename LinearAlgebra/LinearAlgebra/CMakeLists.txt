@@ -8,12 +8,12 @@ include_directories(.)
 add_executable(LinearAlgebra
         ListVector.h
         ListVector.inl
-        SmartVector.h
-        SmartVector.inl
+        #SmartVector.h
+        #SmartVector.inl
         ArrayVector.h
         ArrayVector.inl
-        #Tests/Tests.h
-        #Tests/Tests.cpp
+        Tests/Tests.h
+        Tests/Tests.cpp
         )
 
 
