@@ -33,7 +33,7 @@ add_library(LinearAlgebra SHARED
         LLL.h
         LLL.inl
         AssignmentBuffer.h
-        Manger.cpp)
+        Manger.cpp Manger.h)
 
 add_executable(main
         Tests/Tests.cpp
@@ -45,3 +45,5 @@ target_link_libraries(main LinearAlgebra)
 add_executable(LinearAlgebra_tests Tests/LLL_Tests.cpp)
 add_dependencies(LinearAlgebra_tests googletest LinearAlgebra)
 target_link_libraries(LinearAlgebra_tests gtest gtest_main LinearAlgebra)
+set(CMAKE_C_FLAGS "-lgmp")
+target_link_libraries(LinearAlgebra gmp gmpxx libgmp)

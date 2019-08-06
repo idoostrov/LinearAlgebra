@@ -1,0 +1,1 @@
+C:/cygwin64/bin/g++.exe -g  -Wl,--enable-auto-import CMakeFiles/unit_tests.dir/Tests/example.cpp.o  -o unit_tests.exe -Wl,--out-implib,libunit_tests.dll.a -Wl,--major-image-version,0,--minor-image-version,0 libLinearAlgebra.a googletest/googletest-build/googlemock/gtest/libgtest_main.a -lgmp -lgmpxx -llibgmp googletest/googletest-build/googlemock/gtest/libgtest.a 

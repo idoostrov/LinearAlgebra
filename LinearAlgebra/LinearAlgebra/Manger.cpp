@@ -13,6 +13,7 @@
 #include <gmp.h>
 #include <gmpxx.h>
 #include <time.h>
+#include "Manger.h"
 
 using namespace std;
 

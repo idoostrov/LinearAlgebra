@@ -244,6 +244,9 @@ GIT_EXECUTABLE:FILEPATH=/cygdrive/c/Program Files/Git/cmd/git.exe
 //Value Computed by CMake
 LinearAlgebra_BINARY_DIR:STATIC=/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug
 
+//Dependencies for the target
+LinearAlgebra_LIB_DEPENDS:STATIC=general;gmp;general;gmpxx;general;libgmp;
+
 //Value Computed by CMake
 LinearAlgebra_SOURCE_DIR:STATIC=/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra
 

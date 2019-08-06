@@ -1,3 +1,5 @@
+#include "Matrix.h"
+
 template <class T>
 void threadFunk(const Matrix<T>& M, const Matrix<T>& A, const Matrix<T>& B)
 {

@@ -14,6 +14,6 @@ void mangerTests();
 #include "MatrixTests.cpp"
 #include "LLL_Tests.cpp"
 //#include "SmartTests.cpp"
-#include "Manger.cpp"
+#include "Manger.h"
 
 #endif //LINEARALGEBRA_TESTS_H

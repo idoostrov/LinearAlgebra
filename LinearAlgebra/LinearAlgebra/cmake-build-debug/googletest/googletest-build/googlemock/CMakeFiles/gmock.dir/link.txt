@@ -1,0 +1,2 @@
+C:/cygwin64/bin/ar.exe qc libgmock.a  CMakeFiles/gmock.dir/__/googletest/src/gtest-all.cc.o CMakeFiles/gmock.dir/src/gmock-all.cc.o
+C:/cygwin64/bin/ranlib.exe libgmock.a
