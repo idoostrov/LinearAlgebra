@@ -16,6 +16,15 @@ private:
 public:
 
 	/////////////////////////////////////Constructors///////////////////////////////////
+    Matrix<T>(int size)
+    {
+        this->width = size;
+        this->length = size;
+        this->rank = 0;
+        this->det_calculated = true;
+        this->det = 0;
+        this->rows = vector<Array_Vector<T>>(size, Array_Vector<T>(size));
+    }
 	Matrix<T>(int width, int length)
 	{
 		this->width = width;
@@ -189,6 +198,7 @@ public:
 	}
 
 	///////////////////////////////////// * Operators ///////////////////////////////////
+	///////////////////////////////////// * Operators ///////////////////////////////////
 	Matrix<T> operator*(T scalar)
     {
 	    Matrix<T> target(this);
@@ -197,9 +207,130 @@ public:
         }
         return target;
     }
+    Matrix<T> StrssenAlgorithm(const Matrix<T>& other, bool is_first = 1)
+    {
+	    // last iteration
+	    if(this->length == 1)
+        {
+	        Matrix<T> tmp(1);
+	        tmp[0][0] = this->rows[0][0]*other[0][0];
+	        return tmp;
+        }
+	    // if first iteration
+	    if(is_first)
+        {
+            int newSize = pow(2,(ceil(log2(max(max(this->length, this->width), max(other.length, other.width))))));
+            Matrix<T> A(newSize,newSize);
+            Matrix<T> B(newSize,newSize);
+
+            // initialize new matrix's
+            for (int i = 0; i < this->width; ++i) {
+                for (int j = 0; j < this->length; ++j) {
+                    A[i][j] = this->rows[i][j];
+                }
+            }
+            cout << A;
+            for (int i = 0; i < other.width; ++i) {
+                for (int j = 0; j < other.length; ++j) {
+                    B[i][j] = other[i][j];
+                }
+            }
+            cout << B;
+
+            is_first = 0;
+            A = A.StrssenAlgorithm(B, is_first);
+
+            Matrix<T> sol(this->width, other.length);
+
+            for (int i = 0; i < sol.width; ++i) {
+                for (int j = 0; j < sol.length; ++j) {
+                    sol[i][j] = A[i][j];
+                }
+            }
+
+            return sol;
+        }
+
+
+        //strassen algorithem
+
+        // initialize sub matrix's
+        int sub_matrix_size = this->length / 2;
+        Matrix<T> A11(sub_matrix_size);
+        Matrix<T> A12(sub_matrix_size);
+        Matrix<T> A21(sub_matrix_size);
+        Matrix<T> A22(sub_matrix_size);
+        Matrix<T> B11(sub_matrix_size);
+        Matrix<T> B12(sub_matrix_size);
+        Matrix<T> B21(sub_matrix_size);
+        Matrix<T> B22(sub_matrix_size);
+
+        for (int i = 0; i < this->length; ++i) {
+            for (int j = 0; j < this->width; ++j) {
+                if(i/sub_matrix_size == 0 && j/sub_matrix_size == 0)
+                {
+                    A11[i % sub_matrix_size][j % sub_matrix_size] = this->rows[i][j];
+                    B11[i % sub_matrix_size][j % sub_matrix_size] = other[i][j];
+                }
+                if(i/sub_matrix_size == 0 && j/sub_matrix_size == 1)
+                {
+                    A12[i % sub_matrix_size][j % sub_matrix_size] = this->rows[i][j];
+                    B12[i % sub_matrix_size][j % sub_matrix_size] = other[i][j];
+                }
+                if(i/sub_matrix_size == 1 && j/sub_matrix_size == 0)
+                {
+                    A21[i % sub_matrix_size][j % sub_matrix_size] = this->rows[i][j];
+                    B21[i % sub_matrix_size][j % sub_matrix_size] = other[i][j];
+                }
+                if(i/sub_matrix_size == 1 && j/sub_matrix_size == 1)
+                {
+                    A22[i % sub_matrix_size][j % sub_matrix_size] = this->rows[i][j];
+                    B22[i % sub_matrix_size][j % sub_matrix_size] = other[i][j];
+                }
+            }
+        }
+
+        Matrix<T> M1 = (A11 + A22).StrssenAlgorithm((B11 + B22), is_first);
+        Matrix<T> M2 = (A21 + A22).StrssenAlgorithm(B11, is_first);
+        Matrix<T> M3 = (A11).StrssenAlgorithm((B12 - B22), is_first);
+        Matrix<T> M4 = (A22).StrssenAlgorithm((B21 - B11), is_first);
+        Matrix<T> M5 = (A11 + A12).StrssenAlgorithm((B22), is_first);
+        Matrix<T> M6 = (A21 - A11).StrssenAlgorithm((B11 + B12), is_first);
+        Matrix<T> M7 = (A12 - A22).StrssenAlgorithm((B21 - B22), is_first);
+
+        Matrix<T> C11(M1 + M4 - M5 + M7);
+        Matrix<T> C12(M3 + M5);
+        Matrix<T> C21(M2 + M4);
+        Matrix<T> C22(M1 - M2 + M3 + M6);
+
+        Matrix<T> res(this->length);
+
+        for (int i = 0; i < this->length; ++i) {
+            for(int j = 0; j < this->width; ++j){
+                if(i/sub_matrix_size == 0 && j/sub_matrix_size == 0)
+                {
+                    res[i][j] = C11[i % sub_matrix_size][j % sub_matrix_size];
+                }
+                if(i/sub_matrix_size == 0 && j/sub_matrix_size == 1)
+                {
+                    res[i][j] = C12[i % sub_matrix_size][j % sub_matrix_size];
+                }
+                if(i/sub_matrix_size == 1 && j/sub_matrix_size == 0)
+                {
+                    res[i][j] = C21[i % sub_matrix_size][j % sub_matrix_size];
+                }
+                if(i/sub_matrix_size == 1 && j/sub_matrix_size == 1)
+                {
+                    res[i][j] = C22[i % sub_matrix_size][j % sub_matrix_size];
+                }
+            }
+        }
+        return res;
+    }
 	Matrix<T> operator*(const Matrix<T>& other)
 	{
-		if (this->length != other.width)
+	    return this->StrssenAlgorithm(other);
+		/*if (this->length != other.width)
 		{
 			throw "Error: dimensions do not match\n";
 		}
@@ -220,7 +351,7 @@ public:
 			m.det_calculated = true;
 			m.det = this->det*temp.det;
 		}
-		return m;
+		return m;*/
 	}
 
 	///////////////////////////////////// Inverse Operator ///////////////////////////////////

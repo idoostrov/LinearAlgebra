@@ -17,6 +17,7 @@ bool Test1() // checking matrix multiplication
     }
 
     Matrix<int> m = A * B;
+    cout << m;
     Matrix<int> result(2,2);
     result[0][0]=328;
     result[0][1]=118;
@@ -50,6 +51,7 @@ int Test3()
     Matrix<int> n(m);
     n = n + (~m)*3;
     Matrix<int> a = m*n;
+    cout << a;
     return m.deter() == -21 && n.deter() == -339 && a.deter()== (21*339);
 }
 
@@ -75,6 +77,28 @@ int Test4()
     for(int j=0; j < 3; j++)
         if(m[2][j] != 2)
             return false;
+    return true;
+}
+bool Test5()
+{
+    Matrix<int> A(2), B(2);
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            A[i][j] = B[i][j] = (i==j?1:0);
+
+        }
+
+    }
+    Matrix<int> C = A*B;
+    cout << C;
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            if(C[i][j] != A[i][j])
+                return false;
+
+        }
+
+    }
     return true;
 }
 
@@ -105,6 +129,11 @@ void matrixTests()
     {
         flag = false;
         cout << "failed on test matrix 4" << endl;
+    }
+    if(!Test5())
+    {
+        flag = false;
+        cout << "failed on test matrix 5" << endl;
     }
 
     if(flag)

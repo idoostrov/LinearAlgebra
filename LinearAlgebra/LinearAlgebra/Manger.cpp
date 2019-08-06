@@ -199,7 +199,7 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
     mpz_class s1 = matrix[0][0] ;
     mpz_class a1 = matrix[thread_count + 1][0];
 
-    matrix = matrix * thread_count;
+    matrix = matrix * (mpz_class)thread_count;
     matrix[thread_count + 1][thread_count] = N*(thread_count - 1);
 
     //matrix[thread_count][thread_count + 1] = 1;

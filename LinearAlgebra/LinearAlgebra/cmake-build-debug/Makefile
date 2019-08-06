@@ -123,59 +123,32 @@ LinearAlgebra/fast:
 	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/build
 .PHONY : LinearAlgebra/fast
 
-Tests.o: Tests.cpp.o
+Tests/Tests.o: Tests/Tests.cpp.o
 
-.PHONY : Tests.o
-
-# target to build an object file
-Tests.cpp.o:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests.cpp.o
-.PHONY : Tests.cpp.o
-
-Tests.i: Tests.cpp.i
-
-.PHONY : Tests.i
-
-# target to preprocess a source file
-Tests.cpp.i:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests.cpp.i
-.PHONY : Tests.cpp.i
-
-Tests.s: Tests.cpp.s
-
-.PHONY : Tests.s
-
-# target to generate assembly for a file
-Tests.cpp.s:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests.cpp.s
-.PHONY : Tests.cpp.s
-
-VectorTests.o: VectorTests.cpp.o
-
-.PHONY : VectorTests.o
+.PHONY : Tests/Tests.o
 
 # target to build an object file
-VectorTests.cpp.o:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.o
-.PHONY : VectorTests.cpp.o
+Tests/Tests.cpp.o:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o
+.PHONY : Tests/Tests.cpp.o
 
-VectorTests.i: VectorTests.cpp.i
+Tests/Tests.i: Tests/Tests.cpp.i
 
-.PHONY : VectorTests.i
+.PHONY : Tests/Tests.i
 
 # target to preprocess a source file
-VectorTests.cpp.i:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.i
-.PHONY : VectorTests.cpp.i
+Tests/Tests.cpp.i:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.i
+.PHONY : Tests/Tests.cpp.i
 
-VectorTests.s: VectorTests.cpp.s
+Tests/Tests.s: Tests/Tests.cpp.s
 
-.PHONY : VectorTests.s
+.PHONY : Tests/Tests.s
 
 # target to generate assembly for a file
-VectorTests.cpp.s:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.s
-.PHONY : VectorTests.cpp.s
+Tests/Tests.cpp.s:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.s
+.PHONY : Tests/Tests.cpp.s
 
 # Help Target
 help:
@@ -186,12 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... LinearAlgebra"
 	@echo "... edit_cache"
-	@echo "... Tests.o"
-	@echo "... Tests.i"
-	@echo "... Tests.s"
-	@echo "... VectorTests.o"
-	@echo "... VectorTests.i"
-	@echo "... VectorTests.s"
+	@echo "... Tests/Tests.o"
+	@echo "... Tests/Tests.i"
+	@echo "... Tests/Tests.s"
 .PHONY : help
 
 

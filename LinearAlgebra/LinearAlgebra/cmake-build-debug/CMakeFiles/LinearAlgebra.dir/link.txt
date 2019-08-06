@@ -1,1 +1,1 @@
-C:/cygwin64/bin/g++.exe -g  -Wl,--enable-auto-import CMakeFiles/LinearAlgebra.dir/Tests.cpp.o CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.o  -o LinearAlgebra.exe -Wl,--out-implib,libLinearAlgebra.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -lgmp -lgmpxx -llibgmp 
+C:/cygwin64/bin/g++.exe -g  -Wl,--enable-auto-import CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o  -o LinearAlgebra.exe -Wl,--out-implib,libLinearAlgebra.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -lgmp -lgmpxx -llibgmp 

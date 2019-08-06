@@ -7,8 +7,8 @@ include_directories(.)
 
 add_executable(LinearAlgebra
         ListVector.h
-        Tests.h
-        Tests.cpp)
+        Tests/Tests.h
+        Tests/Tests.cpp)
 
 
 set(CMAKE_C_FLAGS "-lgmp")
