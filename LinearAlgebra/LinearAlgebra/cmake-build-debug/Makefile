@@ -111,6 +111,45 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named LinearAlgebra_tests
+
+# Build rule for target.
+LinearAlgebra_tests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 LinearAlgebra_tests
+.PHONY : LinearAlgebra_tests
+
+# fast build rule for target.
+LinearAlgebra_tests/fast:
+	$(MAKE) -f CMakeFiles/LinearAlgebra_tests.dir/build.make CMakeFiles/LinearAlgebra_tests.dir/build
+.PHONY : LinearAlgebra_tests/fast
+
+#=============================================================================
+# Target rules for targets named main
+
+# Build rule for target.
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
+
+# fast build rule for target.
+main/fast:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+#=============================================================================
+# Target rules for targets named googletest
+
+# Build rule for target.
+googletest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 googletest
+.PHONY : googletest
+
+# fast build rule for target.
+googletest/fast:
+	$(MAKE) -f CMakeFiles/googletest.dir/build.make CMakeFiles/googletest.dir/build
+.PHONY : googletest/fast
+
+#=============================================================================
 # Target rules for targets named LinearAlgebra
 
 # Build rule for target.
@@ -123,13 +162,67 @@ LinearAlgebra/fast:
 	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/build
 .PHONY : LinearAlgebra/fast
 
+Manger.o: Manger.cpp.o
+
+.PHONY : Manger.o
+
+# target to build an object file
+Manger.cpp.o:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.o
+.PHONY : Manger.cpp.o
+
+Manger.i: Manger.cpp.i
+
+.PHONY : Manger.i
+
+# target to preprocess a source file
+Manger.cpp.i:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.i
+.PHONY : Manger.cpp.i
+
+Manger.s: Manger.cpp.s
+
+.PHONY : Manger.s
+
+# target to generate assembly for a file
+Manger.cpp.s:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Manger.cpp.s
+.PHONY : Manger.cpp.s
+
+Tests/LLL_Tests.o: Tests/LLL_Tests.cpp.o
+
+.PHONY : Tests/LLL_Tests.o
+
+# target to build an object file
+Tests/LLL_Tests.cpp.o:
+	$(MAKE) -f CMakeFiles/LinearAlgebra_tests.dir/build.make CMakeFiles/LinearAlgebra_tests.dir/Tests/LLL_Tests.cpp.o
+.PHONY : Tests/LLL_Tests.cpp.o
+
+Tests/LLL_Tests.i: Tests/LLL_Tests.cpp.i
+
+.PHONY : Tests/LLL_Tests.i
+
+# target to preprocess a source file
+Tests/LLL_Tests.cpp.i:
+	$(MAKE) -f CMakeFiles/LinearAlgebra_tests.dir/build.make CMakeFiles/LinearAlgebra_tests.dir/Tests/LLL_Tests.cpp.i
+.PHONY : Tests/LLL_Tests.cpp.i
+
+Tests/LLL_Tests.s: Tests/LLL_Tests.cpp.s
+
+.PHONY : Tests/LLL_Tests.s
+
+# target to generate assembly for a file
+Tests/LLL_Tests.cpp.s:
+	$(MAKE) -f CMakeFiles/LinearAlgebra_tests.dir/build.make CMakeFiles/LinearAlgebra_tests.dir/Tests/LLL_Tests.cpp.s
+.PHONY : Tests/LLL_Tests.cpp.s
+
 Tests/Tests.o: Tests/Tests.cpp.o
 
 .PHONY : Tests/Tests.o
 
 # target to build an object file
 Tests/Tests.cpp.o:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/Tests.cpp.o
 .PHONY : Tests/Tests.cpp.o
 
 Tests/Tests.i: Tests/Tests.cpp.i
@@ -138,7 +231,7 @@ Tests/Tests.i: Tests/Tests.cpp.i
 
 # target to preprocess a source file
 Tests/Tests.cpp.i:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.i
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/Tests.cpp.i
 .PHONY : Tests/Tests.cpp.i
 
 Tests/Tests.s: Tests/Tests.cpp.s
@@ -147,7 +240,7 @@ Tests/Tests.s: Tests/Tests.cpp.s
 
 # target to generate assembly for a file
 Tests/Tests.cpp.s:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.s
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/Tests.cpp.s
 .PHONY : Tests/Tests.cpp.s
 
 # Help Target
@@ -157,8 +250,17 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... LinearAlgebra"
+	@echo "... LinearAlgebra_tests"
 	@echo "... edit_cache"
+	@echo "... main"
+	@echo "... googletest"
+	@echo "... LinearAlgebra"
+	@echo "... Manger.o"
+	@echo "... Manger.i"
+	@echo "... Manger.s"
+	@echo "... Tests/LLL_Tests.o"
+	@echo "... Tests/LLL_Tests.i"
+	@echo "... Tests/LLL_Tests.s"
 	@echo "... Tests/Tests.o"
 	@echo "... Tests/Tests.i"
 	@echo "... Tests/Tests.s"

@@ -65,6 +65,118 @@ CMAKE_SOURCE_DIR = /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/Linear
 CMAKE_BINARY_DIR = /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug
 
 #=============================================================================
+# Target rules for target CMakeFiles/LinearAlgebra_tests.dir
+
+# All Build rule for target.
+CMakeFiles/LinearAlgebra_tests.dir/all: CMakeFiles/googletest.dir/all
+CMakeFiles/LinearAlgebra_tests.dir/all: CMakeFiles/LinearAlgebra.dir/all
+	$(MAKE) -f CMakeFiles/LinearAlgebra_tests.dir/build.make CMakeFiles/LinearAlgebra_tests.dir/depend
+	$(MAKE) -f CMakeFiles/LinearAlgebra_tests.dir/build.make CMakeFiles/LinearAlgebra_tests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target LinearAlgebra_tests"
+.PHONY : CMakeFiles/LinearAlgebra_tests.dir/all
+
+# Include target in all.
+all: CMakeFiles/LinearAlgebra_tests.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/LinearAlgebra_tests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles 12
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/LinearAlgebra_tests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/LinearAlgebra_tests.dir/rule
+
+# Convenience name for target.
+LinearAlgebra_tests: CMakeFiles/LinearAlgebra_tests.dir/rule
+
+.PHONY : LinearAlgebra_tests
+
+# clean rule for target.
+CMakeFiles/LinearAlgebra_tests.dir/clean:
+	$(MAKE) -f CMakeFiles/LinearAlgebra_tests.dir/build.make CMakeFiles/LinearAlgebra_tests.dir/clean
+.PHONY : CMakeFiles/LinearAlgebra_tests.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/LinearAlgebra_tests.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/main.dir
+
+# All Build rule for target.
+CMakeFiles/main.dir/all: CMakeFiles/LinearAlgebra.dir/all
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles --progress-num=13,14 "Built target main"
+.PHONY : CMakeFiles/main.dir/all
+
+# Include target in all.
+all: CMakeFiles/main.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/main.dir/rule
+
+# Convenience name for target.
+main: CMakeFiles/main.dir/rule
+
+.PHONY : main
+
+# clean rule for target.
+CMakeFiles/main.dir/clean:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/clean
+.PHONY : CMakeFiles/main.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/main.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/googletest.dir
+
+# All Build rule for target.
+CMakeFiles/googletest.dir/all:
+	$(MAKE) -f CMakeFiles/googletest.dir/build.make CMakeFiles/googletest.dir/depend
+	$(MAKE) -f CMakeFiles/googletest.dir/build.make CMakeFiles/googletest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles --progress-num=5,6,7,8,9,10,11,12 "Built target googletest"
+.PHONY : CMakeFiles/googletest.dir/all
+
+# Include target in all.
+all: CMakeFiles/googletest.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/googletest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles 8
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/googletest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/googletest.dir/rule
+
+# Convenience name for target.
+googletest: CMakeFiles/googletest.dir/rule
+
+.PHONY : googletest
+
+# clean rule for target.
+CMakeFiles/googletest.dir/clean:
+	$(MAKE) -f CMakeFiles/googletest.dir/build.make CMakeFiles/googletest.dir/clean
+.PHONY : CMakeFiles/googletest.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/googletest.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/LinearAlgebra.dir
 
 # All Build rule for target.

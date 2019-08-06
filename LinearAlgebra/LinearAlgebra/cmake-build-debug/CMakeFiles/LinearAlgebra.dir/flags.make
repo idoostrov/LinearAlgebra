@@ -4,7 +4,7 @@
 # compile CXX with C:/cygwin64/bin/g++.exe
 CXX_FLAGS = -g   -std=gnu++14
 
-CXX_DEFINES = 
+CXX_DEFINES = -DLinearAlgebra_EXPORTS
 
-CXX_INCLUDES = -I/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/. 
+CXX_INCLUDES = -I/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/external/include -I/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/. 
 

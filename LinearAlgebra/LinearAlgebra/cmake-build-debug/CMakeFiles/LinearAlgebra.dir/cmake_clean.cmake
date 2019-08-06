@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o"
-  "LinearAlgebra.pdb"
-  "LinearAlgebra.exe"
+  "CMakeFiles/LinearAlgebra.dir/Manger.cpp.o"
+  "cygLinearAlgebra.pdb"
+  "cygLinearAlgebra.dll"
   "libLinearAlgebra.dll.a"
 )
 

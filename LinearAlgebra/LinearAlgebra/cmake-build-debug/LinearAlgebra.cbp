@@ -94,12 +94,6 @@
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/ListVector.inl">
 			<Option target="LinearAlgebra"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Tests.cpp">
-			<Option target="LinearAlgebra"/>
-		</Unit>
-		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Tests.h">
-			<Option target="LinearAlgebra"/>
-		</Unit>
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
