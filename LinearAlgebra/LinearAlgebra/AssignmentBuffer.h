@@ -5,7 +5,7 @@
 #ifndef LINEARALGEBRA_ASSIGNMENTBUFFER_H
 #define LINEARALGEBRA_ASSIGNMENTBUFFER_H
 
-#include "Vector.h"
+#include "ArrayVector.h"
 #include "ListVector.h"
 
 template <class T>

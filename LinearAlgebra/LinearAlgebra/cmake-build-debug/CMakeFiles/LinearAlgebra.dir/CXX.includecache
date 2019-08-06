@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+.././ArrayVector.h
+vector
+-
+iostream
+-
+math.h
+-
+tuple
+-
+
 .././LLL.h
 Matrix.h
 .././Matrix.h
@@ -31,8 +41,8 @@ iostream
 -
 iterator
 -
-Vector.h
-.././Vector.h
+ArrayVector.h
+.././ArrayVector.h
 
 .././Manger.cpp
 stdlib.h
@@ -59,19 +69,11 @@ time.h
 -
 
 .././Matrix.h
-Vector.h
-.././Vector.h
+ArrayVector.h
+.././ArrayVector.h
 math.h
 -
-
-.././Vector.h
-vector
--
-iostream
--
-math.h
--
-tuple
+thread
 -
 
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/LLL_Tests.cpp
@@ -101,8 +103,8 @@ Manger.cpp
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Manger.cpp
 
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/VectorTests.cpp
-Vector.h
-/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Vector.h
+ArrayVector.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/ArrayVector.h
 ListVector.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/ListVector.h
 

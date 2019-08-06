@@ -123,33 +123,6 @@ LinearAlgebra/fast:
 	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/build
 .PHONY : LinearAlgebra/fast
 
-Tests/Tests.o: Tests/Tests.cpp.o
-
-.PHONY : Tests/Tests.o
-
-# target to build an object file
-Tests/Tests.cpp.o:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o
-.PHONY : Tests/Tests.cpp.o
-
-Tests/Tests.i: Tests/Tests.cpp.i
-
-.PHONY : Tests/Tests.i
-
-# target to preprocess a source file
-Tests/Tests.cpp.i:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.i
-.PHONY : Tests/Tests.cpp.i
-
-Tests/Tests.s: Tests/Tests.cpp.s
-
-.PHONY : Tests/Tests.s
-
-# target to generate assembly for a file
-Tests/Tests.cpp.s:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.s
-.PHONY : Tests/Tests.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +132,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... LinearAlgebra"
 	@echo "... edit_cache"
-	@echo "... Tests/Tests.o"
-	@echo "... Tests/Tests.i"
-	@echo "... Tests/Tests.s"
 .PHONY : help
 
 

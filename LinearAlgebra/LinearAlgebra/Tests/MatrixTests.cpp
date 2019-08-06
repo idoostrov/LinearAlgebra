@@ -90,7 +90,6 @@ bool Test5()
 
     }
     Matrix<int> C = A*B;
-    cout << C;
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < 2; ++j) {
             if(C[i][j] != A[i][j])

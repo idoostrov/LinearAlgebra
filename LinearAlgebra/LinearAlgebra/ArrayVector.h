@@ -62,116 +62,27 @@ public:
 
 
 	///////////////////////////////////// [] Operators ///////////////////////////////////
-	T operator[](const int index) const
-	{
-		return this->elements[index] * this->scalar;
-	}
-	T& operator[](int index)
-	{
-		this->norm_squared = -1;
-		if (this->scalar != 1)
-		{
-			for (int i = 0; i < length; i++)
-			{
-				this->elements[i] *= this->scalar;
-			}
-			this->scalar = 1;
-		}
-		return this->elements[index];
-	}
+	T operator[](const int index) const;
+	T& operator[](int index);
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
-	Array_Vector<T> operator+(const Array_Vector<T>& other)
-	{
-		if (this->length != other.length)
-		{
-			throw new exception;
-		}
-		Array_Vector<T> vec(this->length);
-		for (int i = 0; i < this->length; i++)
-		{
-			vec.elements[i] = this->elements[i] * this->scalar + other.elements[i] * other.scalar;
-		}
-		return vec;
-	}
+	Array_Vector<T> operator+(const Array_Vector<T>& other);
 
 	///////////////////////////////////// - Operators ///////////////////////////////////
-	Array_Vector<T> operator-(const Array_Vector<T>& other)
-	{
-		if (this->length != other.length)
-		{
-			throw new exception;
-		}
-		Array_Vector<T> vec(this->length);
-		for (int i = 0; i < this->length; i++)
-		{
-			vec.elements[i] = this->elements[i] * this->scalar - other.elements[i] * other.scalar;
-		}
-		return vec;
-	}
+	Array_Vector<T> operator-(const Array_Vector<T>& other);
 
 	///////////////////////////////////// * Operators ///////////////////////////////////
-	T operator*(const Array_Vector<T>& other)
-	{
-		int tmp;
-		if (this->length != other.length)
-		{
-			cout << "What?";
-			cin >> tmp;
-			throw new exception;
-		}
-		T sum = 0;
-		for (int i = 0; i < this->length; i++)
-        {
-			sum += this->elements[i] * other.elements[i];
-        }
-		return sum * this->scalar*other.scalar;
-	}
-	Array_Vector<T> operator*(const T scalar)
-	{
-		Array_Vector<T> vec(this->elements);
-		vec.scalar = this->scalar*scalar;
-		return vec;
-	}
+	T operator*(const Array_Vector<T>& other);
+	Array_Vector<T> operator*(const T scalar);
 
 	///////////////////////////////////// Comparison Operators ///////////////////////////////////
-	bool operator==(const Array_Vector<T> other) const
-	{
-        if(this->length != other.length)
-            return false;
-        for (int i = 0; i < this->length; ++i) {
-            if(abs(this->elements[i] - other[i]) > MAX_ERROR)
-                return false;
-        }
-        return true;
-	}
-	bool operator!=(const Array_Vector<T> other) const
-    {
-        return !(this->operator==(other));
-    }
+	bool operator==(const Array_Vector<T> other) const;
+	bool operator!=(const Array_Vector<T> other) const;
 
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
-	T get_norm_squared()
-	{
-		if (this->norm_squared >= 0)
-		{
-			return this->norm_squared * this->scalar*this->scalar;
-		}
-		this->norm_squared = 0;
-		for (int i = 0; i < length; i++)
-		{
-			this->norm_squared += this->elements[i] * this->elements[i];
-		}
-		return this->norm_squared * this->scalar*this->scalar;
-	}
-	int len() const
-	{
-		return this->length;
-	}
-	int get_scalar()
-	{
-		return this->scalar;
-	}
+	T get_norm_squared();
+	int len() const;
+	int get_scalar();
 
 };
 

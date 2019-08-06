@@ -11,7 +11,7 @@
 #include <iterator>
 #include "AssignmentBuffer.h"
 #include "ListVector.h"
-#include "Vector.h"
+#include "ArrayVector.h"
 
 #define LOW_BOUND 5
 #define HIGH_BOUND 10
@@ -120,13 +120,7 @@ public:
 	 * @param index
 	 * @return the value at the specific index
 	 */
-	T operator[](const int index) const
-	{
-		if (is_array)
-			return arr[index];
-		else
-			return list[index];
-	}
+	T operator[](const int index) const;
 	
 	//////////////////////////////////////////////////Assignment Operators///////////////////////////////////
 	/**
@@ -134,83 +128,29 @@ public:
 	 * @param index
 	 * @return
 	 */
-	Assignment_Buffer<T>& operator[](int index)
-	{
-	    if(is_array)
-        {
-	        if(is_list)
-            {
-	            return Assignment_Buffer<T>(this->arr, this->list, index, &this->non_zero_amount);
-            }
-            return Assignment_Buffer<T>(this->arr, index, &this->non_zero_amount);
-        }
-        return Assignment_Buffer<T>(this->list, index, &this->non_zero_amount);
-	}
+	Assignment_Buffer<T>& operator[](int index);
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
-	Smart_Vector<T> operator+(const Array_Vector<T>& other) const
-	{
-		if (is_array)
-			return Smart_Vector<T>(this->arr + other);
-		else
-			return Smart_Vector<T>(this->list + other);
-	}
-	Smart_Vector<T> operator+(const List_Vector<T>& other) const
-	{
-		if (is_array)
-			return Smart_Vector<T>(other + this->arr);
-		else
-			return Smart_Vector<T>(other + this->list);
-	}
+	Smart_Vector<T> operator+(const Array_Vector<T>& other) const;
+	Smart_Vector<T> operator+(const List_Vector<T>& other) const;
 
 	///////////////////////////////////// - Operators///////////////////////////////////
-	Smart_Vector<T> operator-(const Array_Vector<T>& other) const
-	{
-		return this->operator+(other*(-1));
-	}
-	Smart_Vector<T> operator-(const List_Vector<T>& other) const
-	{
-		return this->operator+(other*(-1));
-	}
+	Smart_Vector<T> operator-(const Array_Vector<T>& other) const;
+	Smart_Vector<T> operator-(const List_Vector<T>& other) const;
 
 	///////////////////////////////////// * Operators ///////////////////////////////////
-	T operator*(const Array_Vector<T>& other) const
-	{
-		if (is_array)
-			return this->arr * other;
-		else
-			return this->list * other;
-	}
-	T operator*(const List_Vector<T>& other) const
-	{
-		if (is_array)
-			return other * this->arr;
-		else
-			return other * this->list;
-	}
-	Smart_Vector<T> operator*(const T scalar) const
-	{
-		if (is_array)
-			return this->arr * scalar;
-		else
-			return this->list * scalar;
-	}
+	T operator*(const Array_Vector<T>& other) const;
+	T operator*(const List_Vector<T>& other) const;
+	Smart_Vector<T> operator*(const T scalar) const;
 
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
-    int len() const
-    {
-        return this->length;
-    }
+    int len() const;
 
-	T get_norm_squared()
-	{
-		if (is_list)
-			return this->list.get_norm_squared();
-		else
-			return this->arr.get_norm_squared();
-	}
+	T get_norm_squared();
 
 };
+
+
 
 template <typename T>
 ostream& operator<<(ostream& os, const Smart_Vector<T> v)

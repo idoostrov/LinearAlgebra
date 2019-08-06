@@ -2,7 +2,7 @@
 // Created by talth on 06/08/2019.
 //
 
-#include "Vector.h"
+#include "ArrayVector.h"
 #include "ListVector.h"
 
 bool arrayVectorTests()
@@ -37,10 +37,7 @@ bool arrayVectorTests()
     return true;
 }*/
 
-void vectorTests()
+bool vectorTests()
 {
-    if(arrayVectorTests() /*&& listVectorTests()*/)
-    {
-        cout << "Success on vectorTests!" << endl;
-    }
+    return (arrayVectorTests() /*&& listVectorTests()*/);
 }
