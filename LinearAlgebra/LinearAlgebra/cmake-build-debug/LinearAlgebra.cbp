@@ -91,6 +91,9 @@
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests.h">
 			<Option target="LinearAlgebra"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/VectorTests.cpp">
+			<Option target="LinearAlgebra"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

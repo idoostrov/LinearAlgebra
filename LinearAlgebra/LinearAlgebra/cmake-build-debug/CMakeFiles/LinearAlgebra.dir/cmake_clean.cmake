@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/LinearAlgebra.dir/Tests.cpp.o"
+  "CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.o"
   "LinearAlgebra.pdb"
   "LinearAlgebra.exe"
   "libLinearAlgebra.dll.a"

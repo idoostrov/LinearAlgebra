@@ -10,6 +10,7 @@ void lllTests();
 //void SmartTests();
 void mangerTests();
 
+#include "VectorTests.cpp"
 #include "MatrixTests.cpp"
 #include "LLL_Tests.cpp"
 //#include "SmartTests.cpp"

@@ -10,5 +10,10 @@ CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../MatrixTests.cpp
 CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../Tests.cpp
 CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../Tests.h
 CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../Vector.h
+CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../VectorTests.cpp
 CMakeFiles/LinearAlgebra.dir/Tests.cpp.o: ../manger.cpp
+
+CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.o: ../ListVector.h
+CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.o: ../Vector.h
+CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.o: ../VectorTests.cpp
 

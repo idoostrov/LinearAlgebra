@@ -150,6 +150,33 @@ Tests.cpp.s:
 	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests.cpp.s
 .PHONY : Tests.cpp.s
 
+VectorTests.o: VectorTests.cpp.o
+
+.PHONY : VectorTests.o
+
+# target to build an object file
+VectorTests.cpp.o:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.o
+.PHONY : VectorTests.cpp.o
+
+VectorTests.i: VectorTests.cpp.i
+
+.PHONY : VectorTests.i
+
+# target to preprocess a source file
+VectorTests.cpp.i:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.i
+.PHONY : VectorTests.cpp.i
+
+VectorTests.s: VectorTests.cpp.s
+
+.PHONY : VectorTests.s
+
+# target to generate assembly for a file
+VectorTests.cpp.s:
+	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/VectorTests.cpp.s
+.PHONY : VectorTests.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +189,9 @@ help:
 	@echo "... Tests.o"
 	@echo "... Tests.i"
 	@echo "... Tests.s"
+	@echo "... VectorTests.o"
+	@echo "... VectorTests.i"
+	@echo "... VectorTests.s"
 .PHONY : help
 
 

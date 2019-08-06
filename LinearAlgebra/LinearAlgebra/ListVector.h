@@ -79,7 +79,7 @@ public:
 		}
 		tuple<int, T> tmp(index, 0);
 		this->elements.insert(it, tmp);
-        return get<1>(tmp);
+        return ref(get<1>(tmp));
     }
 
 	///////////////////////////////////// + Operators ///////////////////////////////////

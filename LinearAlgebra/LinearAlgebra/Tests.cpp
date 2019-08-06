@@ -6,9 +6,10 @@
 
 int main()
 {
+    vectorTest();
     matrixTests();
     lllTests();
-    //SmartTests();
+    //smartTests();
     mangerTests();
     return 0;
 }
