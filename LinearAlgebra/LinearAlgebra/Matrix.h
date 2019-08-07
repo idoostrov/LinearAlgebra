@@ -229,13 +229,11 @@ public:
                     A[i][j] = this->rows[i][j];
                 }
             }
-            cout << A;
             for (int i = 0; i < other.width; ++i) {
                 for (int j = 0; j < other.length; ++j) {
                     B[i][j] = other[i][j];
                 }
             }
-            cout << B;
 
             is_first = 0;
             A = A.StrssenAlgorithm(B, is_first);
@@ -296,7 +294,7 @@ public:
         Matrix<T> M4 = (A22).StrssenAlgorithm((B21 - B11), is_first);
         Matrix<T> M5 = (A11 + A12).StrssenAlgorithm((B22), is_first);
         Matrix<T> M6 = (A21 - A11).StrssenAlgorithm((B11 + B12), is_first);
-        Matrix<T> M7 = (A12 - A22).StrssenAlgorithm((B21 - B22), is_first);
+        Matrix<T> M7 = (A12 - A22).StrssenAlgorithm((B21 + B22), is_first);
 
         Matrix<T> C11(M1 + M4 - M5 + M7);
         Matrix<T> C12(M3 + M5);
