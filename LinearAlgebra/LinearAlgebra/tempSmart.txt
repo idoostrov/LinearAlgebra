@@ -1,33 +1,3 @@
-//
-// Created by ido_o on 22-May-19.
-//
-
-#ifndef LINEARALGEBRA_SMARTVECTOR_H
-#define LINEARALGEBRA_SMARTVECTOR_H
-
-#include <list>
-#include <tuple>
-#include <iostream>
-#include <iterator>
-#include "AssignmentBuffer.h"
-#include "ListVector.h"
-#include "Vector.h"
-
-#define LOW_BOUND 5
-#define HIGH_BOUND 10
-
-using namespace std;
-
-template <class T>
-class Smart_Vector
-{
-private:
-	int length;
-	List_Vector<T> list;
-	Array_Vector<T> arr;
-	bool is_array;
-	bool is_list;
-	int non_zero_amount;
 public:
 	/////////////////////////////////////Constructors///////////////////////////////////
 
@@ -35,7 +5,7 @@ public:
 	 * Default constructor, initialize smart as empty list vector
 	 * @param length
 	 */
-	Smart_Vector<T>(const int length)
+	Smart_Vector<T>(int length)
 	{
 		this->length = length;
 		this->list = List_Vector<T>(length);
@@ -229,5 +199,3 @@ ostream& operator<<(ostream& os, const Smart_Vector<T> v)
     os << "]\n";
     return os;
 }
-
-#endif //LINEARALGEBRA_LISTVECTOR_H

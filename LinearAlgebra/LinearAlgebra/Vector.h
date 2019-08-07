@@ -26,6 +26,10 @@ private:
 public:
     
 	/////////////////////////////////////Constructors///////////////////////////////////
+	Array_Vector<T>()
+    {
+
+    }
 	/**
 	 * Constructor for an empty vector with the specified length
 	 * @param length
@@ -71,7 +75,8 @@ public:
         this->elements = vector<T>(length, 0);
         for(tuple<int, T> tup : other.get_elements())
         {
-            elements[std::get<0>(tup)] = std::get<1>(tup);
+            cout << get<0>(tup) << " " << get<1>(tup) << endl;
+            elements[get<0>(tup)] = get<1>(tup);
         }
     }
 
@@ -106,7 +111,7 @@ public:
 	}
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
-	Array_Vector<T> operator+(const Array_Vector<T>& other)
+	Array_Vector<T> operator+(const Array_Vector<T>& other) const
 	{
 		if (this->length != other.length)
 		{
@@ -121,7 +126,7 @@ public:
 	}
 
 	///////////////////////////////////// - Operators ///////////////////////////////////
-	Array_Vector<T> operator-(const Array_Vector<T>& other)
+	Array_Vector<T> operator-(const Array_Vector<T>& other) const
 	{
 		if (this->length != other.length)
 		{
@@ -141,7 +146,7 @@ public:
 	 * @param other
 	 * @return
 	 */
-	T operator*(const Array_Vector<T>& other)
+	T operator*(const Array_Vector<T>& other) const
 	{
 		int tmp;
 		if (this->length != other.length)
@@ -162,7 +167,7 @@ public:
 	 * @param scalar
 	 * @return
 	 */
-	Array_Vector<T> operator*(const T scalar)
+	Array_Vector<T> operator*(const T scalar) const
 	{
 		Array_Vector<T> vec(this->elements);
 		vec.scalar = this->scalar*scalar;
@@ -213,7 +218,7 @@ public:
 	/**
 	 * @return the vector scalar
 	 */
-	int get_scalar()
+	int get_scalar() const
 	{
 		return this->scalar;
 	}

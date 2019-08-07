@@ -7,13 +7,13 @@
 
 void matrixTests();
 void lllTests();
-//void SmartTests();
+void SmartTests();
 void mangerTests();
 
 #include "VectorTests.cpp"
 #include "MatrixTests.cpp"
 #include "LLL_Tests.cpp"
-//#include "SmartTests.cpp"
+#include "SmartTests.cpp"
 #include "Manger.cpp"
 
 #endif //LINEARALGEBRA_TESTS_H

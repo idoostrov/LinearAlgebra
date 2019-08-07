@@ -35,11 +35,19 @@ mpz_class mpz_round(mpq_class mpq)
     num = mpq.get_num();
     den = mpq.get_den();
     tmp = num/den;
-    if(2*(num-(tmp*den))>= den)
+    if(mpq > tmp)
     {
-        return tmp+1;
+        if(mpq - tmp < 0.5)
+            return tmp;
+        else
+            return tmp + 1;
     }
-    return tmp;
+    else
+    {
+        if(tmp - mpq < 0.5)
+            return tmp;
+        return tmp - 1;
+    }
 }
 
 /**
@@ -47,7 +55,7 @@ mpz_class mpz_round(mpq_class mpq)
  * recives a matrix mat and return a matrix thet its rows are the shortest vetors in the lattice of the original rows
  * @param mat
  * @param delta
- * @return a matrix thet its rows are redced vetors in the lattice of the original rows
+ * @return a matrix that its rows are redced vetors in the lattice of the original rows
  */
 Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta)
 {

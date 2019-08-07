@@ -35,7 +35,7 @@ public:
 	 * Default constructor, initialize smart as empty list vector
 	 * @param length
 	 */
-	Smart_Vector<T>(const int length)
+	Smart_Vector<T>(int length)
 	{
 		this->length = length;
 		this->list = List_Vector<T>(length);
@@ -86,11 +86,13 @@ public:
         {
 		    this->is_list = true;
 		    this->list = List_Vector<T>(vec);
+		    cout << this->list;
         }
 		if(this->non_zero_amount > LOW_BOUND)
         {
 		    this->is_array = true;
-		    this->array = Array_Vector<T>(vec);
+		    this->arr = Array_Vector<T>(vec);
+		    cout << this->arr;
         }
 	}
 
@@ -127,7 +129,7 @@ public:
 		else
 			return list[index];
 	}
-	
+
 	//////////////////////////////////////////////////Assignment Operators///////////////////////////////////
 	/**
 	 * This operator is designed to return a temporary assignment buffer in order to compute non_zero_amount change.
@@ -195,6 +197,13 @@ public:
 		else
 			return this->list * scalar;
 	}
+	T operator*(const Smart_Vector<T>& other) const
+    {
+	    if(is_array)
+	        return other*this->arr;
+        else
+            return other*this->list;
+    }
 
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
     int len() const
@@ -202,7 +211,7 @@ public:
         return this->length;
     }
 
-	T get_norm_squared()
+	T get_norm_squared() const
 	{
 		if (is_list)
 			return this->list.get_norm_squared();

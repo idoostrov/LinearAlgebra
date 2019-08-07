@@ -10,15 +10,15 @@ using namespace std;
 
 void test0()
 {
-    Smart_Vector<int> A(LENGTH);
-    cout << "Initialize Vector:" << endl;
-    cout << A << endl;
+    List_Vector<int> B(LENGTH);
     for (int i = 0; i < LENGTH; ++i)
     {
-        A[i] = 1;
+        B[i] = 1;
     }
+    Smart_Vector<int> A(B);
     cout << "Sum Vector:"<< endl;
     cout << A << endl;
+    cout << A*A << endl;
 }
 
 void smartTests()
