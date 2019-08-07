@@ -1,6 +1,12 @@
 #include "LLL.h"
 
-
+/**
+ * preforms the Gram shmidt Algorithm
+ * recives a matrix m and returns a new matrix thet the rows are orthogonal and in the span of the original rows
+ * @tparam T
+ * @param m
+ * @return a new matrix thet the rows are orthogonal and in the span of the original rows
+ */
 template <typename T>
 Matrix<T> GramSchmidt(Matrix<T>& m)
 {
@@ -18,6 +24,11 @@ Matrix<T> GramSchmidt(Matrix<T>& m)
     return M;
 }
 
+/**
+ * recived a number mpq
+ * @param mpq
+ * @return rowndws up the number
+ */
 mpz_class mpz_round(mpq_class mpq)
 {
     mpz_class num, den, tmp;
@@ -31,6 +42,13 @@ mpz_class mpz_round(mpq_class mpq)
     return tmp;
 }
 
+/**
+ * Preforms LLL Algorithm
+ * recives a matrix mat and return a matrix thet its rows are the shortest vetors in the lattice of the original rows
+ * @param mat
+ * @param delta
+ * @return a matrix thet its rows are redced vetors in the lattice of the original rows
+ */
 Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta)
 {
     Matrix<mpq_class> M(mat.getWidth(), mat.getLength());
