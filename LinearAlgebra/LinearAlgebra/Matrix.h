@@ -1,5 +1,6 @@
 #include "Vector.h"
 #include <math.h>
+#include <thread>
 
 #ifndef MATRIX_H
 #define MATRIX_H
@@ -207,17 +208,18 @@ public:
         }
         return target;
     }
-    Matrix<T> StrssenAlgorithm(const Matrix<T>& other, bool is_first = 1)
+    Matrix<T> DistrebutedStrssenAlgorithm(const Matrix<T>& other) const;
+    Matrix<T> StrssenAlgorithm(const Matrix<T>& other, bool is_first = 1) const
     {
-	    // last iteration
-	    if(this->length == 1)
+        // last iteration
+        if(this->length == 1)
         {
-	        Matrix<T> tmp(1);
-	        tmp[0][0] = this->rows[0][0]*other[0][0];
-	        return tmp;
+            Matrix<T> tmp(1);
+            tmp[0][0] = this->rows[0][0]*other[0][0];
+            return tmp;
         }
-	    // if first iteration
-	    if(is_first)
+        // if first iteration
+        if(is_first)
         {
             int newSize = pow(2,(ceil(log2(max(max(this->length, this->width), max(other.length, other.width))))));
             Matrix<T> A(newSize,newSize);
@@ -327,7 +329,7 @@ public:
     }
 	Matrix<T> operator*(const Matrix<T>& other)
 	{
-	    return this->StrssenAlgorithm(other);
+	    return this->DistrebutedStrssenAlgorithm(other);
 		/*if (this->length != other.width)
 		{
 			throw "Error: dimensions do not match\n";
@@ -399,6 +401,142 @@ ostream& operator<<(ostream& os, const Matrix<T> m )
     os << "}" << endl;
     return os;
 }
+
+
+
+
+
+
+
+template <class T>
+void threadFunk(Matrix<T>& M, const Matrix<T>& A, const Matrix<T>& B)
+{
+    M = A.StrssenAlgorithm(B);
+}
+
+template <class T>
+Matrix<T> Matrix<T>::DistrebutedStrssenAlgorithm(const Matrix<T>& other) const
+{
+
+    int newSize = pow(2,(ceil(log2(max(max(this->length, this->width), max(other.length, other.width))))));
+    Matrix<T> A(newSize,newSize);
+    Matrix<T> B(newSize,newSize);
+
+    // initialize new matrix's
+    for (int i = 0; i < this->width; ++i) {
+        for (int j = 0; j < this->length; ++j) {
+            A[i][j] = this->rows[i][j];
+        }
+    }
+    for (int i = 0; i < other.width; ++i) {
+        for (int j = 0; j < other.length; ++j) {
+            B[i][j] = other[i][j];
+        }
+    }
+
+
+    //strassen algorithem
+
+    // initialize sub matrix's
+    int sub_matrix_size = newSize / 2;
+    Matrix<T> A11(sub_matrix_size);
+    Matrix<T> A12(sub_matrix_size);
+    Matrix<T> A21(sub_matrix_size);
+    Matrix<T> A22(sub_matrix_size);
+    Matrix<T> B11(sub_matrix_size);
+    Matrix<T> B12(sub_matrix_size);
+    Matrix<T> B21(sub_matrix_size);
+    Matrix<T> B22(sub_matrix_size);
+
+    for (int i = 0; i < newSize; ++i) {
+        for (int j = 0; j < newSize; ++j) {
+            if(i/sub_matrix_size == 0 && j/sub_matrix_size == 0)
+            {
+                A11[i % sub_matrix_size][j % sub_matrix_size] = A[i][j];
+                B11[i % sub_matrix_size][j % sub_matrix_size] = B[i][j];
+            }
+            if(i/sub_matrix_size == 0 && j/sub_matrix_size == 1)
+            {
+                A12[i % sub_matrix_size][j % sub_matrix_size] = A[i][j];
+                B12[i % sub_matrix_size][j % sub_matrix_size] = B[i][j];
+            }
+            if(i/sub_matrix_size == 1 && j/sub_matrix_size == 0)
+            {
+                A21[i % sub_matrix_size][j % sub_matrix_size] = A[i][j];
+                B21[i % sub_matrix_size][j % sub_matrix_size] = B[i][j];
+            }
+            if(i/sub_matrix_size == 1 && j/sub_matrix_size == 1)
+            {
+                A22[i % sub_matrix_size][j % sub_matrix_size] = A[i][j];
+                B22[i % sub_matrix_size][j % sub_matrix_size] = B[i][j];
+            }
+        }
+    }
+
+    // thread creation and Stressen distribution
+
+
+    Matrix<T> M1(sub_matrix_size);
+    Matrix<T> M2(sub_matrix_size);
+    Matrix<T> M3(sub_matrix_size);
+    Matrix<T> M4(sub_matrix_size);
+    Matrix<T> M5(sub_matrix_size);
+    Matrix<T> M6(sub_matrix_size);
+    Matrix<T> M7(sub_matrix_size);
+
+    thread t1(threadFunk<T>, ref(M1), (A11 + A22), (B11 + B22));
+    thread t2(threadFunk<T>, ref(M2), (A21 + A22),B11);
+    thread t3(threadFunk<T>, ref(M3), A11,(B12 - B22));
+    thread t4(threadFunk<T>, ref(M4), A22,(B21 - B11));
+    thread t5(threadFunk<T>, ref(M5), (A11 + A12),B22);
+    thread t6(threadFunk<T>, ref(M6), (A21 - A11),(B11 + B12));
+    thread t7(threadFunk<T>, ref(M7), (A12 - A22),(B21 + B22));
+
+
+    t1.join();
+    t2.join();
+    t3.join();
+    t4.join();
+    t5.join();
+    t6.join();
+    t7.join();
+
+    Matrix<T> C11(M1 + M4 - M5 + M7);
+    Matrix<T> C12(M3 + M5);
+    Matrix<T> C21(M2 + M4);
+    Matrix<T> C22(M1 - M2 + M3 + M6);
+
+    Matrix<T> res(this->width, other.length);
+
+    for (int i = 0; i < this->width; ++i) {
+        for(int j = 0; j < other.length; ++j){
+            if(i/sub_matrix_size == 0 && j/sub_matrix_size == 0)
+            {
+                res[i][j] = C11[i % sub_matrix_size][j % sub_matrix_size];
+            }
+            if(i/sub_matrix_size == 0 && j/sub_matrix_size == 1)
+            {
+                res[i][j] = C12[i % sub_matrix_size][j % sub_matrix_size];
+            }
+            if(i/sub_matrix_size == 1 && j/sub_matrix_size == 0)
+            {
+                res[i][j] = C21[i % sub_matrix_size][j % sub_matrix_size];
+            }
+            if(i/sub_matrix_size == 1 && j/sub_matrix_size == 1)
+            {
+                res[i][j] = C22[i % sub_matrix_size][j % sub_matrix_size];
+            }
+        }
+    }
+    return res;
+}
+
+
+
+
+
+
+
 
 
 #endif //MATRIX_H
