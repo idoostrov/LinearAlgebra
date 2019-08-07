@@ -17,7 +17,6 @@ bool Test1() // checking matrix multiplication
     }
 
     Matrix<int> m = A * B;
-    cout << m;
     Matrix<int> result(2,2);
     result[0][0]=328;
     result[0][1]=118;
@@ -51,7 +50,6 @@ int Test3()
     Matrix<int> n(m);
     n = n + (~m)*3;
     Matrix<int> a = m*n;
-    cout << a;
     return m.deter() == -21 && n.deter() == -339 && a.deter()== (21*339);
 }
 
@@ -90,7 +88,6 @@ bool Test5()
 
     }
     Matrix<int> C = A*B;
-    cout << C;
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < 2; ++j) {
             if(C[i][j] != A[i][j])
