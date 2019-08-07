@@ -14,12 +14,13 @@
 using namespace std;
 
 template <class T>
+class Array_Vector;
+template <class T>
 class List_Vector
 {
-private:
+protected:
     int length{};
     list<tuple<int, T>> elements;
-    mutable T scalar;
     mutable T norm_squared;
 public:
 	/////////////////////////////////////Constructors///////////////////////////////////
@@ -27,13 +28,11 @@ public:
     {
         this->norm_squared = -1;//Unintialized
         this->length = length;
-        this->scalar = 1;
         this->elements = list<tuple<int, T>>();
     }
     explicit List_Vector<T>(const Array_Vector<T>& vec)
     {
         this->norm_squared = vec.get_norm_squared();
-        this->scalar = vec.get_scalar();
         this->length = vec.len();
         this->elements = list<tuple<int, T>>();
 		for (int i = 0; i < this->length; i++)
@@ -44,15 +43,24 @@ public:
 			}
 		}
     }
+    List_Vector<T>(List_Vector<T>& vec)
+    {
+        this->norm_squared = vec.norm_squared;
+        this->length = vec.length;
+        this->elements = list<tuple<int, T>>();
+        typename std::list<tuple<int,T>>::const_iterator it;
+        for (it = vec.elements.begin(); it != vec.elements.end(); ++it)
+        {
+            this->elements.push_back(make_tuple(get<0>(*it), get<1>(*it)));
+        }
+    }
 
 	///////////////////////////////////// [] Operators ///////////////////////////////////
     T operator[](const int index) const
     {
-        iterator<int ,T> it;
-		for (it = elements.begin(); it != elements.end(); ++it)
+        typename std::list<tuple<int,T>>::const_iterator it;
+        for (it = elements.begin(); it != elements.end(); ++it)
 		{
-			if (get<0>(*it) > index)
-				break;
 			if (get<0>(*it) == index)
 				return get <1>(*it);
 		}
@@ -61,25 +69,14 @@ public:
     T& operator[](int index)
     {
         this->norm_squared = -1;
-        iterator<int ,T> it;
-        if (this->scalar != 1)
-        {
-            for (it = elements.begin(); it != elements.end(); ++it)
-            {
-                this->elements[get<0>(*it)] *= this->scalar;
-            }
-            this->scalar = 1;
-        }
-		for (it = elements.begin(); it != elements.end(); ++it)
+		for (tuple<int , T> &tup : elements)
 		{
-			if (get<0>(*it) > index)
-				break;
-			if (get<0>(*it) == index)
-				return get<1>(*it);
+			if (get<0>(tup) == index)
+				return (get<1>(tup));
 		}
 		tuple<int, T> tmp(index, 0);
-		this->elements.insert(it, tmp);
-        return ref(get<1>(tmp));
+		this->elements.push_back(tmp);
+        return (get<1>(tmp));
     }
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
@@ -107,7 +104,7 @@ public:
         iterator<int ,T> it;
 		for (it = elements.begin(); it != elements.end(); ++it)
 		{
-			vec[get<0>(*it)] += get<1>(*it)*this->scalar;
+			vec[get<0>(*it)] += get<1>(*it);
 		}
 		return vec;
 	}
@@ -119,7 +116,16 @@ public:
     }
 	List_Vector<T> operator-(const List_Vector<T>& other) const
 	{
-		return this->operator+(other*(-1));
+        if (this->length != other.length)
+        {
+            throw new exception;
+        }
+        List_Vector<T> vec(other);
+        for (tuple<int, T> tup: elements)
+        {
+            vec[get<0>(tup)] = get<1>(tup) - vec[get<0>(tup)];
+        }
+        return vec;
 	}
 
 	///////////////////////////////////// * Operators ///////////////////////////////////
@@ -138,7 +144,7 @@ public:
 		{
 			sum += get<1>(*it)*other[get<0>(*it)];
 		}
-        return sum * this->scalar;
+        return sum;
     }
 	T operator*(const List_Vector<T>& other) const
 	{
@@ -150,28 +156,30 @@ public:
 			throw new exception;
 		}
 		int sum = 0;
-        iterator<int ,T> it;
-		for (it = elements.begin(); it != elements.end(); ++it)
+		for (tuple<int, T> tup: elements)
 		{
-			sum += get<1>(*it)*other[get<0>(*it)];
+			sum += get<1>(tup)*other[get<0>(tup)];
 		}
-		return sum * this->scalar;
+		return sum;
 	}
     List_Vector<T> operator*(const T scalar) const
     {
-        List_Vector<T> vec(this->elements);
-        vec.scalar = this->scalar*scalar;
+        List_Vector<T> vec(this->length);
+        for(tuple<int, T> tup : elements)
+        {
+            vec[get<0>(tup)] = get<1>(tup)*scalar;
+        }
         return vec;
     }
 
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
-    T get_norm_squared()
+    T get_norm_squared() const
     {
         if (this->norm_squared >= 0)
         {
-            return this->norm_squared * this->scalar*this->scalar;
+            return this->norm_squared;
         }
-		this->norm_squared = this->operator*(this);
+		this->norm_squared = this->operator*(*this);
 		return this->norm_squared;
     }
 	int len() const
@@ -182,13 +190,9 @@ public:
     {
 	    return this->elements.size();
     }
-	iterator<int, T> begin() const
+	list<tuple<int, T>> get_elements() const
     {
-	    return elements.begin();
-    }
-    iterator<int, T> end() const
-    {
-	    return elements.end();
+	    return this->elements;
     }
 };
 

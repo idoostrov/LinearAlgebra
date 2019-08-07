@@ -21,7 +21,7 @@ bool arrayVectorTests()
     return true;
 }
 
-/*bool listVectorTests()
+bool listVectorTests()
 {
     List_Vector<int> vec(5);
     vec[2] = 3;
@@ -35,11 +35,11 @@ bool arrayVectorTests()
         return false;
     }
     return true;
-}*/
+}
 
 void vectorTests()
 {
-    if(arrayVectorTests() /*&& listVectorTests()*/)
+    if(arrayVectorTests() && listVectorTests())
     {
         cout << "Success on vectorTests!" << endl;
     }

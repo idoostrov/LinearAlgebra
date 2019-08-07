@@ -26,6 +26,10 @@ private:
 public:
     
 	/////////////////////////////////////Constructors///////////////////////////////////
+	/**
+	 * Constructor for an empty vector with the specified length
+	 * @param length
+	 */
 	Array_Vector<T>(const int length)
 	{
 		this->norm_squared = -1;//Unintialized
@@ -33,6 +37,10 @@ public:
 		this->scalar = 1;
 		this->elements = vector<T>(length, 0);
 	}
+	/**
+	 * Constructor that makes our version of vector from a given std::vector
+	 * @param elements
+	 */
 	Array_Vector<T>(const vector<T>& elements)
 	{
 		this->norm_squared = -1;//Unintialized
@@ -40,6 +48,10 @@ public:
 		this->length = elements.size();
 		this->elements = vector<T>(elements);
 	}
+	/**
+	 * copy constructor from array vector
+	 * @param other
+	 */
 	Array_Vector<T>(const Array_Vector& other)
 	{
 		this->norm_squared = other.norm_squared;
@@ -47,25 +59,38 @@ public:
 		this->length = other.length;
         this->elements = vector<T>(other.elements);
 	}
+	/**
+	 * copy constructor from list vector
+	 * @param other
+	 */
     Array_Vector<T>(const List_Vector<T>& other)
     {
-        this->norm_squared = other.norm_squared;
-        this->scalar = other.scalar;
-        this->length = other.length;
+        this->norm_squared = other.get_norm_squared();
+        this->scalar = 1;
+        this->length = other.len();
         this->elements = vector<T>(length, 0);
-        iterator<int , T> it;
-        for(it = other.begin(); it != other.end(); ++it)
+        for(tuple<int, T> tup : other.get_elements())
         {
-            elements[std::get<0>(*it)] = std::get<1>(*it);
+            elements[std::get<0>(tup)] = std::get<1>(tup);
         }
     }
 
 
 	///////////////////////////////////// [] Operators ///////////////////////////////////
+	/**
+	 * Getter function
+	 * @param index
+	 * @return the specified value
+	 */
 	T operator[](const int index) const
 	{
 		return this->elements[index] * this->scalar;
 	}
+	/**
+	 * Assignment function
+	 * @param index
+	 * @return
+	 */
 	T& operator[](int index)
 	{
 		this->norm_squared = -1;
@@ -111,6 +136,11 @@ public:
 	}
 
 	///////////////////////////////////// * Operators ///////////////////////////////////
+	/**
+	 * Inner multiplication
+	 * @param other
+	 * @return
+	 */
 	T operator*(const Array_Vector<T>& other)
 	{
 		int tmp;
@@ -127,6 +157,11 @@ public:
         }
 		return sum * this->scalar*other.scalar;
 	}
+	/**
+	 * Scalar multiplication
+	 * @param scalar
+	 * @return
+	 */
 	Array_Vector<T> operator*(const T scalar)
 	{
 		Array_Vector<T> vec(this->elements);
@@ -151,7 +186,11 @@ public:
     }
 
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
-	T get_norm_squared()
+	/**
+	 * Calculates the vectors norm squared(using inner multiplication)
+	 * @return
+	 */
+	T get_norm_squared() const
 	{
 		if (this->norm_squared >= 0)
 		{
@@ -164,10 +203,16 @@ public:
 		}
 		return this->norm_squared * this->scalar*this->scalar;
 	}
+	/**
+	 * @return the vector length
+	 */
 	int len() const
 	{
 		return this->length;
 	}
+	/**
+	 * @return the vector scalar
+	 */
 	int get_scalar()
 	{
 		return this->scalar;
@@ -175,6 +220,13 @@ public:
 
 };
 
+/**
+ * Printing operator of the array vector
+ * @tparam T
+ * @param os
+ * @param v
+ * @return
+ */
 template <typename T>
 ostream& operator<<(ostream& os, const Array_Vector<T> v)
 {
