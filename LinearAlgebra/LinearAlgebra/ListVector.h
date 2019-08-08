@@ -66,7 +66,7 @@ public:
     {
 	    if(index >= len() || index < 0)
         {
-	        throw "Index out of range in List_Vector<T>::operator[]"
+	        throw "Index out of range in List_Vector<T>::operator[]";
         }
         if(elements.find(index) != elements.end())
         {
@@ -78,7 +78,7 @@ public:
     {
         if(index >= len() || index < 0)
         {
-            throw "Index out of range in List_Vector<T>::operator[]"
+            throw "Index out of range in List_Vector<T>::operator[]";
         }
         this->norm_squared = -1;
         if(elements.find(index) != elements.end())

@@ -156,7 +156,7 @@ public:
 	{
         if(index >= len() || index < 0)
         {
-            throw "Index out of range in Smart_Vector<T>::operator[]"
+            throw "Index out of range in Smart_Vector<T>::operator[]";
         }
 		if (is_array)
 			return arr[index];
@@ -174,7 +174,7 @@ public:
 	{
         if(index >= len() || index < 0)
         {
-            throw "Index out of range in Smart_Vector<T>::operator[]"
+            throw "Index out of range in Smart_Vector<T>::operator[]";
         }
         /////////////set_count handling////////////////////
 	    if(is_list)

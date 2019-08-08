@@ -6,9 +6,17 @@
 
 int main()
 {
-    vectorTests();
-    matrixTests();
-    lllTests();
-    mangerTests();
+    try {
+        vectorTests();
+        matrixTests();
+        lllTests();
+        mangerTests();
+    }
+    catch(string msg)
+    {
+        cout << "Error: " << msg << endl;
+        cout << "Quiting program due to unexpected error" << endl;
+        return 1;
+    }
     return 0;
 }
