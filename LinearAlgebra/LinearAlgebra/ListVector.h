@@ -64,6 +64,10 @@ public:
 	///////////////////////////////////// [] Operators ///////////////////////////////////
     T operator[](const int index) const
     {
+	    if(index >= len() || index < 0)
+        {
+	        throw "Index out of range in List_Vector<T>::operator[]"
+        }
         if(elements.find(index) != elements.end())
         {
             return elements.at(index);
@@ -72,6 +76,10 @@ public:
     }
     T& operator[](int index)
     {
+        if(index >= len() || index < 0)
+        {
+            throw "Index out of range in List_Vector<T>::operator[]"
+        }
         this->norm_squared = -1;
         if(elements.find(index) != elements.end())
         {
@@ -86,7 +94,7 @@ public:
     {
         if (this->length != other.len())
         {
-            throw new exception;
+            throw "Not suitable dimensions in List_Vector<T>::operator+";
         }
 		Array_Vector<T> vec(other);
         for(auto const& val: this->elements)
@@ -99,7 +107,7 @@ public:
 	{
 		if (this->length != other.length)
 		{
-			throw new exception;
+			throw "Not suitable dimensions in List_Vector<T>::operator+";
 		}
 		List_Vector<T> vec(other);
         for(auto const& val: this->elements)
@@ -118,7 +126,7 @@ public:
 	{
         if (this->length != other.length)
         {
-            throw new exception;
+            throw "Not suitable dimensions in List_Vector<T>::operator-";
         }
         List_Vector<T> vec(*this);
         for(auto const& val: other.get_elements())
@@ -134,7 +142,7 @@ public:
         int tmp;
         if (this->length != other.len())
         {
-            throw new exception;
+            throw "Not suitable dimensions in List_Vector<T>::operator*";
         }
         T sum = 0;
         for(auto const& val: this->elements)
@@ -148,7 +156,7 @@ public:
 		int tmp;
 		if (this->length != other.length)
 		{
-			throw new exception;
+            throw "Not suitable dimensions in List_Vector<T>::operator*";
 		}
 		T sum = 0;
         for(auto const& val: this->elements)

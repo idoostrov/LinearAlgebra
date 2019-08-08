@@ -110,6 +110,10 @@ public:
 	 */
 	void swap(int row1, int row2)
 	{
+	    if(row1 >= width || row2 >=width || row1 < 0 || row2 < 0)
+        {
+            throw "Index out of range in Matrix<T>::swap";
+        }
 		Array_Vector<T> temp = Array_Vector<T>(rows[row1]);
 		rows[row1] = rows[row2];
 		rows[row2] = temp;
@@ -122,6 +126,10 @@ public:
 	 */
 	T eliminate_col(int row, int col)
 	{
+        if(row >= width || col >=length || row < 0 || col < 0)
+        {
+            throw "Index out of range in Matrix<T>:eliminate_col";
+        }
 		for (int i = row + 1; i < this->length; i++)
 		{
 			rows[i] = rows[i] * rows[row][col] - rows[row] * rows[i][col];
@@ -136,6 +144,10 @@ public:
 	 */
 	T find_not_zero(int col, int start)
 	{
+        if(col >= length || col < 0 || start < 0)
+        {
+            throw "Index out of range in Matrix<T>::find_not_zero";
+        }
 		for (int i = start; i < this->length; i++)
 		{
 			if (this->rows[i][col] != 0)
@@ -192,8 +204,8 @@ public:
 	 */
 	Array_Vector<T>& operator[](int row)
 	{
-		if (row >= this->rows.size()) {
-			throw "Error: index is too big\n";
+		if (row >= this->rows.size() || row < 0) {
+			throw "Index out of range in Matrix<T>::operator[]";
 		}
 		this->det_calculated = false;
 		return this->rows[row];
@@ -205,9 +217,9 @@ public:
 	 */
 	const Array_Vector<T>& operator[](int row) const
 	{
-		if (row >= this->rows.size()) {
-			throw "Error: index is too big\n";
-		}
+        if (row >= this->rows.size() || row < 0) {
+            throw "Index out of range in Matrix<T>::operator[]";
+        }
 		return this->rows[row];
 	}
 
@@ -216,7 +228,7 @@ public:
 	{
 		if ((this->length != other.length) || (this->width != other.width))
 		{
-			throw "Error: dimensions do not match\n";
+            throw "Not suitable dimensions in Matrix<T>::operator+";
 		}
 		Matrix<T> m(this->width, this->length);
 		for (int i = 0; i < this->width; i++)
@@ -247,7 +259,7 @@ public:
 	{
 		if ((this->length != other.length) || (this->width != other.width))
 		{
-			throw "Error: dimensions do not match\n";
+            throw "Not suitable dimensions in Matrix<T>::operator+";
 		}
 		Matrix<T> m(this->width, this->length);
 		for (int i = 0; i < this->width; i++)
@@ -293,12 +305,12 @@ public:
      */
 	Matrix<T> operator*(const Matrix<T>& other)
 	{
-	    return this->DistrebutedStrssenAlgorithm(other);
-		/*if (this->length != other.width)
+		if (this->length != other.width)
 		{
-			throw "Error: dimensions do not match\n";
+            throw "Not suitable dimensions in Matrix<T>::operator*";
 		}
-		Matrix<T> temp = ~other;
+		return this->DistrebutedStrssenAlgorithm(other);
+		/*Matrix<T> temp = ~other;
 		Matrix<T> m(this->width, other.length);
 
 		for (int i = 0; i < this->width; i++)

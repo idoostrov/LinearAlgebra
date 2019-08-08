@@ -114,7 +114,7 @@ public:
 	{
 		if (this->length != other.length)
 		{
-			throw new exception;
+            throw "Not suitable dimensions in Array_Vector<T>::operator+";
 		}
 		Array_Vector<T> vec(this->length);
 		for (int i = 0; i < this->length; i++)
@@ -129,7 +129,7 @@ public:
 	{
 		if (this->length != other.length)
 		{
-			throw new exception;
+            throw "Not suitable dimensions in Array_Vector<T>::operator-";
 		}
 		Array_Vector<T> vec(this->length);
 		for (int i = 0; i < this->length; i++)
@@ -150,9 +150,7 @@ public:
 		int tmp;
 		if (this->length != other.length)
 		{
-			cout << "What?";
-			cin >> tmp;
-			throw new exception;
+            throw "Not suitable dimensions in Array_Vector<T>::operator*";
 		}
 		T sum = 0;
 		for (int i = 0; i < this->length; i++)

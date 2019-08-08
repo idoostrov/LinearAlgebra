@@ -17,7 +17,10 @@
 #define HIGH_BOUND 10
 
 using namespace std;
-
+/**
+ *
+ * Assuming List&Array vectors handle unsuitable dimensions, and thus, leave them to throw the exception
+ */
 template <class T>
 class Smart_Vector
 {
@@ -151,6 +154,10 @@ public:
 	 */
 	T operator[](const int index) const
 	{
+        if(index >= len() || index < 0)
+        {
+            throw "Index out of range in Smart_Vector<T>::operator[]"
+        }
 		if (is_array)
 			return arr[index];
 		else
@@ -165,6 +172,11 @@ public:
 	 */
 	T& operator[](int index)
 	{
+        if(index >= len() || index < 0)
+        {
+            throw "Index out of range in Smart_Vector<T>::operator[]"
+        }
+        /////////////set_count handling////////////////////
 	    if(is_list)
         {
 	        if(set_count == HIGH_BOUND)
@@ -207,6 +219,7 @@ public:
                 set_count = 0;
             }
         }
+	    ////////////assignment//////////////////
 	    set_count++;
 	    if(is_array)
         {
