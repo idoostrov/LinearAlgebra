@@ -86,58 +86,19 @@ public:
 	 * @param index
 	 * @return the specified value
 	 */
-	T operator[](const int index) const
-	{
-		return this->elements[index] * this->scalar;
-	}
+	T operator[](const int index) const;
 	/**
 	 * Assignment function
 	 * @param index
 	 * @return
 	 */
-	T& operator[](int index)
-	{
-		this->norm_squared = -1;
-		if (this->scalar != 1)
-		{
-			for (int i = 0; i < length; i++)
-			{
-				this->elements[i] *= this->scalar;
-			}
-			this->scalar = 1;
-		}
-		return this->elements[index];
-	}
+	T& operator[](int index);
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
-	Array_Vector<T> operator+(const Array_Vector<T>& other) const
-	{
-		if (this->length != other.length)
-		{
-            throw "Not suitable dimensions in Array_Vector<T>::operator+";
-		}
-		Array_Vector<T> vec(this->length);
-		for (int i = 0; i < this->length; i++)
-		{
-			vec.elements[i] = this->elements[i] * this->scalar + other.elements[i] * other.scalar;
-		}
-		return vec;
-	}
+	Array_Vector<T> operator+(const Array_Vector<T>& other) const;
 
 	///////////////////////////////////// - Operators ///////////////////////////////////
-	Array_Vector<T> operator-(const Array_Vector<T>& other) const
-	{
-		if (this->length != other.length)
-		{
-            throw "Not suitable dimensions in Array_Vector<T>::operator-";
-		}
-		Array_Vector<T> vec(this->length);
-		for (int i = 0; i < this->length; i++)
-		{
-			vec.elements[i] = this->elements[i] * this->scalar - other.elements[i] * other.scalar;
-		}
-		return vec;
-	}
+	Array_Vector<T> operator-(const Array_Vector<T>& other) const;
 
 	///////////////////////////////////// * Operators ///////////////////////////////////
 	/**
@@ -145,82 +106,143 @@ public:
 	 * @param other
 	 * @return
 	 */
-	T operator*(const Array_Vector<T>& other) const
-	{
-		int tmp;
-		if (this->length != other.length)
-		{
-            throw "Not suitable dimensions in Array_Vector<T>::operator*";
-		}
-		T sum = 0;
-		for (int i = 0; i < this->length; i++)
-        {
-			sum += this->elements[i] * other.elements[i];
-        }
-		return sum * this->scalar*other.scalar;
-	}
+	T operator*(const Array_Vector<T>& other) const;
 	/**
 	 * Scalar multiplication
 	 * @param scalar
 	 * @return
 	 */
-	Array_Vector<T> operator*(const T scalar) const
-	{
-		Array_Vector<T> vec(this->elements);
-		vec.scalar = this->scalar*scalar;
-		return vec;
-	}
+	Array_Vector<T> operator*(const T scalar) const;
 
 	///////////////////////////////////// Comparison Operators ///////////////////////////////////
-	bool operator==(const Array_Vector<T> other) const
-	{
-        if(this->length != other.length)
-            return false;
-        for (int i = 0; i < this->length; ++i) {
-            if(abs(this->elements[i] - other[i]) > MAX_ERROR)
-                return false;
-        }
-        return true;
-	}
-	bool operator!=(const Array_Vector<T> other) const
-    {
-        return !(this->operator==(other));
-    }
+	bool operator==(const Array_Vector<T> other) const;
+	bool operator!=(const Array_Vector<T> other) const;
 
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
 	/**
 	 * Calculates the vectors norm squared(using inner multiplication)
 	 * @return
 	 */
-	T get_norm_squared() const
-	{
-		if (this->norm_squared >= 0)
-		{
-			return this->norm_squared * this->scalar*this->scalar;
-		}
-		this->norm_squared = 0;
-		for (int i = 0; i < length; i++)
-		{
-			this->norm_squared += this->elements[i] * this->elements[i];
-		}
-		return this->norm_squared * this->scalar*this->scalar;
-	}
+	T get_norm_squared() const;
 	/**
 	 * @return the vector length
 	 */
-	int len() const
-	{
-		return this->length;
-	}
+	int len() const;
 	/**
 	 * @return the vector scalar
 	 */
-	int get_scalar() const
-	{
-		return this->scalar;
-	}
+	int get_scalar() const;
 
 };
+
+template<class T>
+T Array_Vector<T>::operator[](const int index) const {
+    return this->elements[index] * this->scalar;
+}
+
+template<class T>
+int Array_Vector<T>::get_scalar() const {
+    return this->scalar;
+}
+
+template<class T>
+int Array_Vector<T>::len() const {
+    return this->length;
+}
+
+template<class T>
+T Array_Vector<T>::get_norm_squared() const {
+    if (this->norm_squared >= 0)
+    {
+        return this->norm_squared * this->scalar*this->scalar;
+    }
+    this->norm_squared = 0;
+    for (int i = 0; i < length; i++)
+    {
+        this->norm_squared += this->elements[i] * this->elements[i];
+    }
+    return this->norm_squared * this->scalar*this->scalar;
+}
+
+template<class T>
+bool Array_Vector<T>::operator!=(const Array_Vector<T> other) const {
+    return !(this->operator==(other));
+}
+
+template<class T>
+bool Array_Vector<T>::operator==(const Array_Vector<T> other) const {
+    if(this->length != other.length)
+        return false;
+    for (int i = 0; i < this->length; ++i) {
+        if(abs(this->elements[i] - other[i]) > MAX_ERROR)
+            return false;
+    }
+    return true;
+}
+
+template<class T>
+Array_Vector<T> Array_Vector<T>::operator*(const T scalar) const {
+    Array_Vector<T> vec(this->elements);
+    vec.scalar = this->scalar*scalar;
+    return vec;
+}
+
+template<class T>
+T Array_Vector<T>::operator*(const Array_Vector<T> &other) const {
+    int tmp;
+    if (this->length != other.length)
+    {
+        throw "Not suitable dimensions in Array_Vector<T>::operator*";
+    }
+    T sum = 0;
+    for (int i = 0; i < this->length; i++)
+    {
+        sum += this->elements[i] * other.elements[i];
+    }
+    return sum * this->scalar*other.scalar;
+}
+
+template<class T>
+Array_Vector<T> Array_Vector<T>::operator-(const Array_Vector<T> &other) const {
+    if (this->length != other.length)
+    {
+        throw "Not suitable dimensions in Array_Vector<T>::operator-";
+    }
+    Array_Vector<T> vec(this->length);
+    for (int i = 0; i < this->length; i++)
+    {
+        vec.elements[i] = this->elements[i] * this->scalar - other.elements[i] * other.scalar;
+    }
+    return vec;
+}
+
+template<class T>
+Array_Vector<T> Array_Vector<T>::operator+(const Array_Vector<T> &other) const {
+    if (this->length != other.length)
+    {
+        throw "Not suitable dimensions in Array_Vector<T>::operator+";
+    }
+    Array_Vector<T> vec(this->length);
+    for (int i = 0; i < this->length; i++)
+    {
+        vec.elements[i] = this->elements[i] * this->scalar + other.elements[i] * other.scalar;
+    }
+    return vec;
+}
+
+template<class T>
+T &Array_Vector<T>::operator[](int index) {
+    this->norm_squared = -1;
+    if (this->scalar != 1)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            this->elements[i] *= this->scalar;
+        }
+        this->scalar = 1;
+    }
+    return this->elements[index];
+}
 
 /**
  * Printing operator of the array vector

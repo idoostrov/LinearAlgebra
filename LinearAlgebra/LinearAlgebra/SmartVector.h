@@ -152,189 +152,221 @@ public:
 	 * @param index
 	 * @return the value at the specific index
 	 */
-	T operator[](const int index) const
-	{
-        if(index >= len() || index < 0)
-        {
-            throw "Index out of range in Smart_Vector<T>::operator[]";
-        }
-		if (is_array)
-			return arr[index];
-		else
-			return list[index];
-	}
+	T operator[](const int index) const;
 
 	//////////////////////////////////////////////////Assignment Operators///////////////////////////////////
 	/**
-	 * This operator is designed to return a temporary assignment buffer in order to compute non_zero_amount change.
+	 * This operator is designed to use amortized analysis of code in order to determine what structure to maintain.
 	 * @param index
 	 * @return
 	 */
-	T& operator[](int index)
-	{
-        if(index >= len() || index < 0)
-        {
-            throw "Index out of range in Smart_Vector<T>::operator[]";
-        }
-        /////////////set_count handling////////////////////
-	    if(is_list)
-        {
-	        if(set_count == HIGH_BOUND)
-            {
-	            for(auto const& val: list.get_elements())
-                {
-	                if(val.second == 0)
-                    {
-	                    list.get_elements().erase(val.first);
-                    }
-                }
-	            non_zero_amount = list.size();
-	            if(non_zero_amount > HIGH_BOUND)
-                {
-	                if(!is_array)
-                    {
-	                    is_array = true;
-	                    arr = Array_Vector<T>(list);
-                    }
-	                is_list = false;
-                }
-	            set_count = 0;
-            }
-        } else
-        {
-	        if(set_count == length)
-            {
-	            non_zero_amount = 0;
-                for (int i = 0; i < length; ++i) {
-                    if(arr[i] != 0)
-                        non_zero_amount++;
-                }
-                if(non_zero_amount < LOW_BOUND) {
-                    if (!is_list) {
-                        is_list = true;
-                        list = List_Vector<T>(arr);
-                    }
-                    is_array = false;
-                }
-                set_count = 0;
-            }
-        }
-	    ////////////assignment//////////////////
-	    set_count++;
-	    if(is_array)
-        {
-	        return arr[index];
-        } else
-            return list[index];
-	}
+	T& operator[](int index);
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
-	Smart_Vector<T> operator+(const Array_Vector<T>& other) const
-	{
-		if (is_array)
-			return Smart_Vector<T>(this->arr + other);
-		else
-			return Smart_Vector<T>(this->list + other);
-	}
-	Smart_Vector<T> operator+(const List_Vector<T>& other) const
-	{
-		if (is_array)
-			return Smart_Vector<T>(other + this->arr);
-		else
-			return Smart_Vector<T>(other + this->list);
-	}
-    Smart_Vector<T> operator+(const Smart_Vector<T>& other) const
-    {
-        if (is_array)
-            return Smart_Vector<T>(other + this->arr);
-        else
-            return Smart_Vector<T>(other + this->list);
-    }
+	Smart_Vector<T> operator+(const Array_Vector<T>& other) const;
+	Smart_Vector<T> operator+(const List_Vector<T>& other) const;
+    Smart_Vector<T> operator+(const Smart_Vector<T>& other) const;
 
 	///////////////////////////////////// - Operators///////////////////////////////////
-	Smart_Vector<T> operator-(const Array_Vector<T>& other) const
-	{
-		return this->operator+(other*(T)(-1));
-	}
-	Smart_Vector<T> operator-(const List_Vector<T>& other) const
-	{
-		return this->operator+(other*(T)(-1));
-	}
-    Smart_Vector<T> operator-(const Smart_Vector<T>& other) const
-    {
-        if (is_array)
-            return Smart_Vector<T>(other - this->arr);
-        else
-            return Smart_Vector<T>(other - this->list);
-    }
+	Smart_Vector<T> operator-(const Array_Vector<T>& other) const;
+	Smart_Vector<T> operator-(const List_Vector<T>& other) const;
+    Smart_Vector<T> operator-(const Smart_Vector<T>& other) const;
 
 	///////////////////////////////////// * Operators ///////////////////////////////////
-	T operator*(const Array_Vector<T>& other) const
-	{
-		if (is_array)
-			return this->arr * other;
-		else
-			return this->list * other;
-	}
-	T operator*(const List_Vector<T>& other) const
-	{
-		if (is_array)
-			return other * this->arr;
-		else
-			return other * this->list;
-	}
-	Smart_Vector<T> operator*(const T scalar) const
-	{
-		if (is_array)
-			return this->arr * scalar;
-		else
-			return this->list * scalar;
-	}
-	T operator*(const Smart_Vector<T>& other) const
-    {
-	    if(is_array)
-	        return other*this->arr;
-        else
-            return other*this->list;
-    }
+	T operator*(const Array_Vector<T>& other) const;
+	T operator*(const List_Vector<T>& other) const;
+	Smart_Vector<T> operator*(const T scalar) const;
+	T operator*(const Smart_Vector<T>& other) const;
     ///////////////////////////////////// Comparison Operators /////////////////////////////
-    bool operator==(const Smart_Vector<T> other) const
-    {
-	    if(this->len() != other.len())
-	        return false;
-	    if(this->is_list)
-        {
-            for (int i = 0; i < this->len(); ++i) {
-                if(abs(this->list[i] - other[i]) > MAX_ERROR)
-                    return false;
-            }
-        } else {
-            for (int i = 0; i < this->len(); ++i) {
-                if (abs(this->arr[i] - other[i]) > MAX_ERROR)
-                    return false;
-            }
-        }
-        return true;
-    }
-    bool operator!=(const Smart_Vector<T> other) const
-    {
-        return !(this->operator==(other));
-    }
+    bool operator==(const Smart_Vector<T> other) const;
+    bool operator!=(const Smart_Vector<T> other) const;
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
-    int len() const
-    {
-        return this->length;
-    }
+    int len() const;
 
-	T get_norm_squared() const
-	{
-		if (is_list)
-			return this->list.get_norm_squared();
-		else
-			return this->arr.get_norm_squared();
-	}
+	T get_norm_squared() const;
 
 };
+
+template<class T>
+T Smart_Vector<T>::operator[](const int index) const {
+    if(index >= len() || index < 0)
+    {
+        throw "Index out of range in Smart_Vector<T>::operator[]";
+    }
+    if (is_array)
+        return arr[index];
+    else
+        return list[index];
+}
+
+template<class T>
+T Smart_Vector<T>::get_norm_squared() const {
+    if (is_list)
+        return this->list.get_norm_squared();
+    else
+        return this->arr.get_norm_squared();
+}
+
+template<class T>
+int Smart_Vector<T>::len() const {
+    return this->length;
+}
+
+template<class T>
+bool Smart_Vector<T>::operator!=(const Smart_Vector<T> other) const {
+    return !(this->operator==(other));
+}
+
+template<class T>
+bool Smart_Vector<T>::operator==(const Smart_Vector<T> other) const {
+    if(this->len() != other.len())
+        return false;
+    if(this->is_list)
+    {
+        for (int i = 0; i < this->len(); ++i) {
+            if(abs(this->list[i] - other[i]) > MAX_ERROR)
+                return false;
+        }
+    } else {
+        for (int i = 0; i < this->len(); ++i) {
+            if (abs(this->arr[i] - other[i]) > MAX_ERROR)
+                return false;
+        }
+    }
+    return true;
+}
+
+template<class T>
+Smart_Vector<T> Smart_Vector<T>::operator*(const T scalar) const {
+    if (is_array)
+        return this->arr * scalar;
+    else
+        return this->list * scalar;
+}
+
+template<class T>
+T Smart_Vector<T>::operator*(const Smart_Vector<T> &other) const {
+    if(is_array)
+        return other*this->arr;
+    else
+        return other*this->list;
+}
+
+template<class T>
+T Smart_Vector<T>::operator*(const Array_Vector<T> &other) const {
+    if (is_array)
+        return this->arr * other;
+    else
+        return this->list * other;
+}
+
+template<class T>
+T Smart_Vector<T>::operator*(const List_Vector<T> &other) const {
+    if (is_array)
+        return other * this->arr;
+    else
+        return other * this->list;
+}
+
+template<class T>
+Smart_Vector<T> Smart_Vector<T>::operator-(const Smart_Vector<T> &other) const {
+    if (is_array)
+        return Smart_Vector<T>(other - this->arr);
+    else
+        return Smart_Vector<T>(other - this->list);
+}
+
+template<class T>
+Smart_Vector<T> Smart_Vector<T>::operator-(const List_Vector<T> &other) const {
+    return this->operator+(other*(T)(-1));
+}
+
+template<class T>
+Smart_Vector<T> Smart_Vector<T>::operator-(const Array_Vector<T> &other) const {
+    return this->operator+(other*(T)(-1));
+}
+
+template<class T>
+Smart_Vector<T> Smart_Vector<T>::operator+(const Smart_Vector<T> &other) const {
+    if (is_array)
+        return Smart_Vector<T>(other + this->arr);
+    else
+        return Smart_Vector<T>(other + this->list);
+}
+
+template<class T>
+Smart_Vector<T> Smart_Vector<T>::operator+(const List_Vector<T> &other) const {
+    if (is_array)
+        return Smart_Vector<T>(other + this->arr);
+    else
+        return Smart_Vector<T>(other + this->list);
+}
+
+template<class T>
+Smart_Vector<T> Smart_Vector<T>::operator+(const Array_Vector<T> &other) const {
+    if (is_array)
+        return Smart_Vector<T>(this->arr + other);
+    else
+        return Smart_Vector<T>(this->list + other);
+}
+
+template<class T>
+T &Smart_Vector<T>::operator[](int index) {
+    if(index >= len() || index < 0)
+    {
+        throw "Index out of range in Smart_Vector<T>::operator[]";
+    }
+    /////////////set_count handling////////////////////
+    if(is_list)
+    {
+        if(set_count == HIGH_BOUND)
+        {
+            for(auto const& val: list.get_elements())
+            {
+                if(val.second == 0)
+                {
+                    list.get_elements().erase(val.first);
+                }
+            }
+            non_zero_amount = list.size();
+            if(non_zero_amount > HIGH_BOUND)
+            {
+                if(!is_array)
+                {
+                    is_array = true;
+                    arr = Array_Vector<T>(list);
+                }
+                is_list = false;
+            }
+            set_count = 0;
+        }
+    } else
+    {
+        if(set_count == length)
+        {
+            non_zero_amount = 0;
+            for (int i = 0; i < length; ++i) {
+                if(arr[i] != 0)
+                    non_zero_amount++;
+            }
+            if(non_zero_amount < LOW_BOUND) {
+                if (!is_list) {
+                    is_list = true;
+                    list = List_Vector<T>(arr);
+                }
+                is_array = false;
+            }
+            set_count = 0;
+        }
+    }
+    ////////////assignment//////////////////
+    set_count++;
+    if(is_array)
+    {
+        return arr[index];
+    } else
+        return list[index];
+}
 
 template <typename T>
 ostream& operator<<(ostream& os, const Smart_Vector<T> v)
