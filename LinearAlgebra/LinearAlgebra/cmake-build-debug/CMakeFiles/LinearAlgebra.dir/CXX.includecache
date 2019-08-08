@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-.././AssignmentBuffer.h
-Vector.h
-.././Vector.h
-ListVector.h
-.././ListVector.h
-
 .././LLL.h
 Matrix.h
 .././Matrix.h
@@ -36,6 +30,8 @@ tuple
 iostream
 -
 iterator
+-
+map
 -
 Vector.h
 .././Vector.h
@@ -65,8 +61,8 @@ time.h
 -
 
 .././Matrix.h
-Vector.h
-.././Vector.h
+SmartVector.h
+.././SmartVector.h
 math.h
 -
 thread
@@ -81,8 +77,6 @@ iostream
 -
 iterator
 -
-AssignmentBuffer.h
-.././AssignmentBuffer.h
 ListVector.h
 .././ListVector.h
 Vector.h
@@ -110,10 +104,6 @@ ListVector.h
 Matrix.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Matrix.h
 
-/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/SmartTests.cpp
-SmartVector.h
-/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/SmartVector.h
-
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Tests.cpp
 Tests.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Tests.h
@@ -125,8 +115,6 @@ MatrixTests.cpp
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/MatrixTests.cpp
 LLL_Tests.cpp
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/LLL_Tests.cpp
-SmartTests.cpp
-/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/SmartTests.cpp
 Manger.cpp
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Manger.cpp
 
@@ -135,4 +123,6 @@ Vector.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Vector.h
 ListVector.h
 /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/ListVector.h
+SmartVector.h
+/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/SmartVector.h
 

@@ -9,6 +9,7 @@
 #include <tuple>
 #include <iostream>
 #include <iterator>
+#include <map>
 #include "Vector.h"
 
 using namespace std;
@@ -20,7 +21,7 @@ class List_Vector
 {
 private:
     int length;
-    list<tuple<int, T>> elements;
+    map<int, T> elements;
     mutable T norm_squared;
 public:
 	/////////////////////////////////////Constructors///////////////////////////////////
@@ -28,24 +29,24 @@ public:
     {
 	    this->norm_squared = -1;
 	    this->length = 0;
-	    this->elements = list<tuple<int, T>>();
+	    this->elements = map<int, T>();
     }
 	List_Vector<T>(const int length)
     {
         this->norm_squared = -1;//Unintialized
         this->length = length;
-        this->elements = list<tuple<int, T>>();
+        this->elements = map<int, T>();
     }
     List_Vector<T>(const Array_Vector<T>& vec)
     {
         this->norm_squared = vec.get_norm_squared();
         this->length = vec.len();
-        this->elements = list<tuple<int, T>>();
+        this->elements = map<int, T>();
 		for (int i = 0; i < this->length; i++)
 		{
 			if (vec[i] != 0)
 			{
-				elements.push_back(tuple<int, T>(i, vec[i]));
+				elements[i] = vec[i];
 			}
 		}
     }
@@ -53,36 +54,31 @@ public:
     {
         this->norm_squared = vec.norm_squared;
         this->length = vec.length;
-        this->elements = list<tuple<int, T>>();
-        typename std::list<tuple<int,T>>::const_iterator it;
-        for (it = vec.elements.begin(); it != vec.elements.end(); ++it)
+        this->elements = map<int, T>();
+        for(auto const& val: vec.get_elements())
         {
-            this->elements.push_back(make_tuple(get<0>(*it), get<1>(*it)));
+            this->elements[val.first] = val.second;
         }
     }
 
 	///////////////////////////////////// [] Operators ///////////////////////////////////
     T operator[](const int index) const
     {
-        typename std::list<tuple<int,T>>::const_iterator it;
-        for (it = elements.begin(); it != elements.end(); ++it)
-		{
-			if (get<0>(*it) == index)
-				return get <1>(*it);
-		}
+        if(elements.find(index) != elements.end())
+        {
+            return elements.at(index);
+        }
 		return 0;
     }
     T& operator[](int index)
     {
         this->norm_squared = -1;
-		for (tuple<int , T> tup : elements)
-		{
-			if (get<0>(tup) == index)
-				return (get<1>(tup));
-		}
-		tuple<int, T> tmp(index, 0);
-		this->elements.push_back(tmp);
-        return (get<1>(tmp));
+        if(elements.find(index) != elements.end())
+        {
+            return elements[index];
+        }
+		elements[index] = 0;
+        return elements[index];
     }
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
@@ -93,11 +89,10 @@ public:
             throw new exception;
         }
 		Array_Vector<T> vec(other);
-        typename std::list<tuple<int,T>>::const_iterator it;
-		for (it = elements.begin(); it != elements.end(); ++it)
-		{
-			vec[get<0>(*it)] += get<1>(*it);
-		}
+        for(auto const& val: this->elements)
+        {
+            vec[val.first] += val.second;
+        }
         return vec;
     }
 	List_Vector<T> operator+(const List_Vector<T>& other) const
@@ -107,11 +102,10 @@ public:
 			throw new exception;
 		}
 		List_Vector<T> vec(other);
-        iterator<int ,T> it;
-		for (it = elements.begin(); it != elements.end(); ++it)
-		{
-			vec[get<0>(*it)] += get<1>(*it);
-		}
+        for(auto const& val: this->elements)
+        {
+            vec[val.first] += val.second;
+        }
 		return vec;
 	}
 
@@ -126,10 +120,10 @@ public:
         {
             throw new exception;
         }
-        List_Vector<T> vec(other);
-        for (tuple<int, T> tup: elements)
+        List_Vector<T> vec(*this);
+        for(auto const& val: other.get_elements())
         {
-            vec[get<0>(tup)] = get<1>(tup) - vec[get<0>(tup)];
+            vec[val.first] -= val.second;
         }
         return vec;
 	}
@@ -140,14 +134,12 @@ public:
         int tmp;
         if (this->length != other.len())
         {
-            cout << "What?";
-            cin >> tmp;
             throw new exception;
         }
-        int sum = 0;
-        for (tuple<int, T> tup: elements)
+        T sum = 0;
+        for(auto const& val: this->elements)
         {
-            sum += get<1>(tup)*other[get<0>(tup)];
+            sum += val.second*other[val.first];
         }
         return sum;
     }
@@ -156,23 +148,21 @@ public:
 		int tmp;
 		if (this->length != other.length)
 		{
-			cout << "What?";
-			cin >> tmp;
 			throw new exception;
 		}
-		int sum = 0;
-		for (tuple<int, T> tup: elements)
-		{
-			sum += get<1>(tup)*other[get<0>(tup)];
-		}
+		T sum = 0;
+        for(auto const& val: this->elements)
+        {
+            sum += val.second*other[val.first];
+        }
 		return sum;
 	}
     List_Vector<T> operator*(const T scalar) const
     {
         List_Vector<T> vec(this->length);
-        for(tuple<int, T> tup : elements)
+        for(auto const& val: this->elements)
         {
-            vec[get<0>(tup)] = get<1>(tup)*scalar;
+            vec[val.first] = val.second*scalar;
         }
         return vec;
     }
@@ -195,7 +185,7 @@ public:
     {
 	    return this->elements.size();
     }
-	list<tuple<int, T>> get_elements() const
+	map<int, T> get_elements() const
     {
 	    return this->elements;
     }

@@ -9,7 +9,7 @@
 #include <tuple>
 #include <iostream>
 #include <iterator>
-#include "AssignmentBuffer.h"
+//#include "AssignmentBuffer.h"
 #include "ListVector.h"
 #include "Vector.h"
 
@@ -28,6 +28,7 @@ private:
 	bool is_array;
 	bool is_list;
 	int non_zero_amount;
+	int set_count;
 public:
 	/////////////////////////////////////Constructors///////////////////////////////////
 
@@ -42,6 +43,7 @@ public:
 		this->is_array = false;
 		this->is_list = true;
 		this->non_zero_amount = 0;
+		this->set_count = 0;
 	}
 
 	/**
@@ -54,6 +56,7 @@ public:
 		this->arr = Array_Vector<T>(vec);
 		this->is_array = true;
 		this->non_zero_amount = 0;
+        this->set_count = 0;
 		for (int i = 0; i < this->length; i++)
 		{
 			if (vec[i] != 0)
@@ -71,6 +74,30 @@ public:
 		    this->is_list = false;
         }
 	}
+    Smart_Vector<T>(const vector<T>& vec)
+    {
+        this->length = vec.size();
+        this->arr = Array_Vector<T>(vec);
+        this->is_array = true;
+        this->non_zero_amount = 0;
+        this->set_count = 0;
+        for (int i = 0; i < this->length; i++)
+        {
+            if (vec[i] != 0)
+            {
+                this->non_zero_amount++;
+            }
+        }
+        if(this->non_zero_amount < LOW_BOUND)
+        {
+            this->list = List_Vector<T>(vec);
+            this->is_list = true;
+        }
+        else
+        {
+            this->is_list = false;
+        }
+    }
 
     /**
      * Constructor that recieves list vector and update the parameters and the type accordingly
@@ -82,17 +109,16 @@ public:
 		this->is_list = false;
 		this->is_array = false;
 		this->non_zero_amount = vec.size();
+        this->set_count = 0;
 		if(this->non_zero_amount < HIGH_BOUND)
         {
 		    this->is_list = true;
 		    this->list = List_Vector<T>(vec);
-		    cout << this->list;
         }
 		if(this->non_zero_amount > LOW_BOUND)
         {
 		    this->is_array = true;
 		    this->arr = Array_Vector<T>(vec);
-		    cout << this->arr;
         }
 	}
 
@@ -106,6 +132,7 @@ public:
 	    this->is_array = vec.is_array;
 	    this->is_list = vec.is_list;
 	    this->non_zero_amount = vec.non_zero_amount;
+        this->set_count = vec.set_count;
 	    if(this->is_array)
         {
 	        this->arr = Array_Vector<T>(vec.arr);
@@ -136,17 +163,56 @@ public:
 	 * @param index
 	 * @return
 	 */
-	Assignment_Buffer<T>& operator[](int index)
+	T& operator[](int index)
 	{
+	    if(is_list)
+        {
+	        if(set_count == HIGH_BOUND)
+            {
+	            for(auto const& val: list.get_elements())
+                {
+	                if(val.second == 0)
+                    {
+	                    list.get_elements().erase(val.first);
+                    }
+                }
+	            non_zero_amount = list.size();
+	            if(non_zero_amount > HIGH_BOUND)
+                {
+	                if(!is_array)
+                    {
+	                    is_array = true;
+	                    arr = Array_Vector<T>(list);
+                    }
+	                is_list = false;
+                }
+	            set_count = 0;
+            }
+        } else
+        {
+	        if(set_count == length)
+            {
+	            non_zero_amount = 0;
+                for (int i = 0; i < length; ++i) {
+                    if(arr[i] != 0)
+                        non_zero_amount++;
+                }
+                if(non_zero_amount < LOW_BOUND) {
+                    if (!is_list) {
+                        is_list = true;
+                        list = List_Vector<T>(arr);
+                    }
+                    is_array = false;
+                }
+                set_count = 0;
+            }
+        }
+	    set_count++;
 	    if(is_array)
         {
-	        if(is_list)
-            {
-	            return Assignment_Buffer<T>(this->arr, this->list, index, &this->non_zero_amount);
-            }
-            return Assignment_Buffer<T>(this->arr, index, &this->non_zero_amount);
-        }
-        return Assignment_Buffer<T>(this->list, index, &this->non_zero_amount);
+	        return arr[index];
+        } else
+            return list[index];
 	}
 
 	///////////////////////////////////// + Operators ///////////////////////////////////
@@ -164,16 +230,30 @@ public:
 		else
 			return Smart_Vector<T>(other + this->list);
 	}
+    Smart_Vector<T> operator+(const Smart_Vector<T>& other) const
+    {
+        if (is_array)
+            return Smart_Vector<T>(other + this->arr);
+        else
+            return Smart_Vector<T>(other + this->list);
+    }
 
 	///////////////////////////////////// - Operators///////////////////////////////////
 	Smart_Vector<T> operator-(const Array_Vector<T>& other) const
 	{
-		return this->operator+(other*(-1));
+		return this->operator+(other*(T)(-1));
 	}
 	Smart_Vector<T> operator-(const List_Vector<T>& other) const
 	{
-		return this->operator+(other*(-1));
+		return this->operator+(other*(T)(-1));
 	}
+    Smart_Vector<T> operator-(const Smart_Vector<T>& other) const
+    {
+        if (is_array)
+            return Smart_Vector<T>(other - this->arr);
+        else
+            return Smart_Vector<T>(other - this->list);
+    }
 
 	///////////////////////////////////// * Operators ///////////////////////////////////
 	T operator*(const Array_Vector<T>& other) const
@@ -204,7 +284,29 @@ public:
         else
             return other*this->list;
     }
-
+    ///////////////////////////////////// Comparison Operators /////////////////////////////
+    bool operator==(const Smart_Vector<T> other) const
+    {
+	    if(this->len() != other.len())
+	        return false;
+	    if(this->is_list)
+        {
+            for (int i = 0; i < this->len(); ++i) {
+                if(abs(this->list[i] - other[i]) > MAX_ERROR)
+                    return false;
+            }
+        } else {
+            for (int i = 0; i < this->len(); ++i) {
+                if (abs(this->arr[i] - other[i]) > MAX_ERROR)
+                    return false;
+            }
+        }
+        return true;
+    }
+    bool operator!=(const Smart_Vector<T> other) const
+    {
+        return !(this->operator==(other));
+    }
 	///////////////////////////////////// Miscellaneous ///////////////////////////////////
     int len() const
     {

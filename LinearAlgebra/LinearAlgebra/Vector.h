@@ -73,10 +73,9 @@ public:
         this->scalar = 1;
         this->length = other.len();
         this->elements = vector<T>(length, 0);
-        for(tuple<int, T> tup : other.get_elements())
+        for(auto const& tup : other.get_elements())
         {
-            cout << get<0>(tup) << " " << get<1>(tup) << endl;
-            elements[get<0>(tup)] = get<1>(tup);
+            elements[tup.first] = tup.second;
         }
     }
 
