@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /cygdrive/c/Users/ido_o/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe
+CMAKE_COMMAND = /cygdrive/c/Users/talth/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe
 
 # The command to remove a file.
-RM = /cygdrive/c/Users/ido_o/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe -E remove -f
+RM = /cygdrive/c/Users/talth/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra
+CMAKE_SOURCE_DIR = /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug
+CMAKE_BINARY_DIR = /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlg
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/cygdrive/c/Users/ido_o/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/cygdrive/c/Users/talth/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/cygdrive/c/Users/ido_o/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
+	/cygdrive/c/Users/talth/.CLion2019.1/system/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/ido_o/CLionProjects/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,6 +177,60 @@ Manger.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Manger.cpp.s
 .PHONY : Manger.cpp.s
 
+Tests/LLL_Tests.o: Tests/LLL_Tests.cpp.o
+
+.PHONY : Tests/LLL_Tests.o
+
+# target to build an object file
+Tests/LLL_Tests.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/LLL_Tests.cpp.o
+.PHONY : Tests/LLL_Tests.cpp.o
+
+Tests/LLL_Tests.i: Tests/LLL_Tests.cpp.i
+
+.PHONY : Tests/LLL_Tests.i
+
+# target to preprocess a source file
+Tests/LLL_Tests.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/LLL_Tests.cpp.i
+.PHONY : Tests/LLL_Tests.cpp.i
+
+Tests/LLL_Tests.s: Tests/LLL_Tests.cpp.s
+
+.PHONY : Tests/LLL_Tests.s
+
+# target to generate assembly for a file
+Tests/LLL_Tests.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/LLL_Tests.cpp.s
+.PHONY : Tests/LLL_Tests.cpp.s
+
+Tests/MatrixTests.o: Tests/MatrixTests.cpp.o
+
+.PHONY : Tests/MatrixTests.o
+
+# target to build an object file
+Tests/MatrixTests.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/MatrixTests.cpp.o
+.PHONY : Tests/MatrixTests.cpp.o
+
+Tests/MatrixTests.i: Tests/MatrixTests.cpp.i
+
+.PHONY : Tests/MatrixTests.i
+
+# target to preprocess a source file
+Tests/MatrixTests.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/MatrixTests.cpp.i
+.PHONY : Tests/MatrixTests.cpp.i
+
+Tests/MatrixTests.s: Tests/MatrixTests.cpp.s
+
+.PHONY : Tests/MatrixTests.s
+
+# target to generate assembly for a file
+Tests/MatrixTests.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/MatrixTests.cpp.s
+.PHONY : Tests/MatrixTests.cpp.s
+
 Tests/Tests.o: Tests/Tests.cpp.o
 
 .PHONY : Tests/Tests.o
@@ -204,6 +258,33 @@ Tests/Tests.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/Tests.cpp.s
 .PHONY : Tests/Tests.cpp.s
 
+Tests/VectorTests.o: Tests/VectorTests.cpp.o
+
+.PHONY : Tests/VectorTests.o
+
+# target to build an object file
+Tests/VectorTests.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/VectorTests.cpp.o
+.PHONY : Tests/VectorTests.cpp.o
+
+Tests/VectorTests.i: Tests/VectorTests.cpp.i
+
+.PHONY : Tests/VectorTests.i
+
+# target to preprocess a source file
+Tests/VectorTests.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/VectorTests.cpp.i
+.PHONY : Tests/VectorTests.cpp.i
+
+Tests/VectorTests.s: Tests/VectorTests.cpp.s
+
+.PHONY : Tests/VectorTests.s
+
+# target to generate assembly for a file
+Tests/VectorTests.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/VectorTests.cpp.s
+.PHONY : Tests/VectorTests.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -219,9 +300,18 @@ help:
 	@echo "... Manger.o"
 	@echo "... Manger.i"
 	@echo "... Manger.s"
+	@echo "... Tests/LLL_Tests.o"
+	@echo "... Tests/LLL_Tests.i"
+	@echo "... Tests/LLL_Tests.s"
+	@echo "... Tests/MatrixTests.o"
+	@echo "... Tests/MatrixTests.i"
+	@echo "... Tests/MatrixTests.s"
 	@echo "... Tests/Tests.o"
 	@echo "... Tests/Tests.i"
 	@echo "... Tests/Tests.s"
+	@echo "... Tests/VectorTests.o"
+	@echo "... Tests/VectorTests.i"
+	@echo "... Tests/VectorTests.s"
 .PHONY : help
 
 

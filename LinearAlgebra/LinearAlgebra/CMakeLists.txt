@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(main
+        Tests/VectorTests.cpp
+        Tests/LLL_Tests.cpp
+        Tests/MatrixTests.cpp
         Manger.cpp
         LLL.cpp
         Tests/Tests.cpp LLL.cpp)

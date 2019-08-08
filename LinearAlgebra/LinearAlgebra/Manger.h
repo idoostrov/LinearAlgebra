@@ -5,6 +5,17 @@
 #ifndef LINEARALGEBRA_MANGER_H
 #define LINEARALGEBRA_MANGER_H
 
+#include <stdlib.h>
+#include <iostream>
+#include <math.h>
+#include <tuple>
+#include <thread>
+#include <vector>
+#include "Matrix.h"
+#include "LLL.h"
+#include <gmp.h>
+#include <gmpxx.h>
+#include <time.h>
 
 ///////////////////////////Main Functions/////////////////////////////
 tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_calls, int seed);

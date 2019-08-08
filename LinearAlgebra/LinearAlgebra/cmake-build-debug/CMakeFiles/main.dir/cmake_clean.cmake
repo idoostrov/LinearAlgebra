@@ -1,4 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/main.dir/Tests/VectorTests.cpp.o"
+  "CMakeFiles/main.dir/Tests/LLL_Tests.cpp.o"
+  "CMakeFiles/main.dir/Tests/MatrixTests.cpp.o"
   "CMakeFiles/main.dir/Manger.cpp.o"
   "CMakeFiles/main.dir/LLL.cpp.o"
   "CMakeFiles/main.dir/Tests/Tests.cpp.o"

@@ -2,17 +2,7 @@
 // Created by ido_o on 23-Jul-19.
 //
 
-#include <stdlib.h>
-#include <iostream>
-#include <math.h>
-#include <tuple>
-#include <thread>
-#include <vector>
-#include "Matrix.h"
-#include "LLL.h"
-#include <gmp.h>
-#include <gmpxx.h>
-#include <time.h>
+
 #include "Manger.h"
 
 using namespace std;
