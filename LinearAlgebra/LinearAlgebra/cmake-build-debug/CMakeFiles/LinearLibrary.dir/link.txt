@@ -1,2 +1,0 @@
-C:/cygwin64/bin/ar.exe qc libLinearLibrary.a  CMakeFiles/LinearLibrary.dir/Manger.cpp.o
-C:/cygwin64/bin/ranlib.exe libLinearLibrary.a
