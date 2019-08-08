@@ -57,8 +57,8 @@ mpz_class modInverse(mpz_class a, mpz_class m)
 /**
  * Constants which used for encryption
  */
-mpz_class p = mpz_class("130178853482887258169192488464112048860230046820185171074951");// 1000000002217; //unknown
-mpz_class q = mpz_class("1444364652028799042026490302290910243247314635271107639158687");//999999995207; //unknown
+mpz_class p = mpz_class("130178853482887258169192488464112048860230046820185171074951"); //unknown
+mpz_class q = mpz_class("1444364652028799042026490302290910243247314635271107639158687"); //unknown
 mpz_class N = p*q; //known
 mpz_class phi = (p-1)*(q-1); //unknown
 mpz_class e = 65537; //known
@@ -101,11 +101,11 @@ int Manger_Oracle(mpz_class c)
 }
 
 /**
- * The blinding step of the attack, not in use in the non-parrallelalized algorithm
+ * The blinding step of the attack
  * @param c
  * @param number_of_oracle_calls
  * @param seed
- * @return
+ * @return s such that m*s is a legal input for the Manger attack, i.e the top byte is zero.
  */
 mpz_class blinding(mpz_class c, int& number_of_oracle_calls, int seed)
 {
@@ -113,12 +113,10 @@ mpz_class blinding(mpz_class c, int& number_of_oracle_calls, int seed)
     rr.seed(time(NULL) + seed);
 
     mpz_class s = rr.get_z_range(N-2) + 2;
-    while(!Manger_Oracle((modpow(s,e,N)*c)) /*&& number_of_oracle_calls--*/)
+    while(!Manger_Oracle((modpow(s,e,N)*c))) //should take 256 tries on average
     {
         s = rr.get_z_range(N-2) + 2;
     }
-    /*if(number_of_oracle_calls == -1)
-        number_of_oracle_calls = 0;*/
     return s;
 }
 
@@ -211,12 +209,11 @@ mpz_class step3(mpz_class c, mpz_class f2, int& number_of_oracle_calls) // retur
  * @param c
  * @param number_of_oracle_calls
  * @param seed
- * @return a and s as discribed in the article
+ * @return a and s as described in the article (s is the blinding value and a is a lower bound on m*s)
  */
 tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_calls, int seed)
 {
     int copy_number_of_oracle_calls = number_of_oracle_calls;
-    //mpz_class s = 2;
     mpz_class s = blinding(c, ref(copy_number_of_oracle_calls), seed);
     c *= modpow(s, e, N);
     c %= N;
@@ -248,7 +245,6 @@ void ThreadHandle(int oracle_calls, mpz_class cipher, int i, Matrix<mpz_class>& 
     m[i+1][i] = N;
     m[m.getWidth()-1][i] = a;
 
-    //cout << "Did I solve? " << ((a%N) == (s*modpow(cipher,d,N)%N)) << endl;
 }
 
 /**
@@ -260,7 +256,10 @@ void ThreadHandle(int oracle_calls, mpz_class cipher, int i, Matrix<mpz_class>& 
  */
 mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class cipher)
 {
+    // define matrix of size #threads + 2
     Matrix<mpz_class> matrix(thread_count + 2, thread_count + 2);
+
+    // creating threads and preforming the parallelized attack
     vector<thread> threads(thread_count);
     for (int i = 0; i < thread_count; ++i)
     {
@@ -270,23 +269,21 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
     {
         threads[i].join();
     }
+
+    //saving s and a of the first thread for later use beafore LLL
     mpz_class s1 = matrix[0][0] ;
     mpz_class a1 = matrix[thread_count + 1][0];
 
+    // last preparatioms of the matrix beafore the LLL
     matrix = matrix * (mpz_class)thread_count;
     matrix[thread_count + 1][thread_count] = N*(thread_count - 1);
 
-    //matrix[thread_count][thread_count + 1] = 1;
-
-    //cout << "matrix before LLL" << endl;
-    //cout << matrix;
-
+    // LLL
     matrix = LLL(matrix, 0.75);
 
-    //cout << "matrix after LLL" << endl;
-    //cout << matrix;
-
+    // saving r of the first thread
     mpz_class r1 = -matrix[thread_count + 1][0] / thread_count;
+
     return ((r1+a1)*modInverse(s1, N)) % N;
 }
 
@@ -294,15 +291,10 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
 void mangerTests()
 {
     cout << "||||||||||||||||||||||||||||||Manger||||||||||||||||||||||||||||||" << endl;
-    cout << "Number of threads: ";
-    int thread_count;
-    cin >> thread_count;
-    cout << "Number of oracle calls: ";
-    int calls_count;
-    cin >> calls_count;
-    cout << endl;
-    srand(time(0));
-    mpz_class m = rand();
+
+    gmp_randclass rr(gmp_randinit_default);
+    rr.seed(time(NULL));
+    mpz_class m = rr.get_z_bits((k-1)*8);
 
     tuple<mpz_class, mpz_class> tup = MangerAttack(modpow(m,e,N), -1, 0);
 
@@ -313,7 +305,14 @@ void mangerTests()
     {
         cout << "failed in Manger attack tester!" << endl;
     }
-    cout << "parallelized: " << endl;
+
+    cout << "Number of threads: ";
+    int thread_count;
+    cin >> thread_count;
+    cout << "Number of oracle calls: ";
+    int calls_count;
+    cin >> calls_count;
+    cout << endl;
 
     mpz_class a = ParallelizedMangerAttack(thread_count, calls_count, modpow(mpz_class(m), e,N));
     if(a == m)
@@ -323,26 +322,6 @@ void mangerTests()
     {
         cout << "failed in Parrellalized Manger attack tester!" << endl;
     }
-    //tuple<mpz_class, mpz_class> tup = MangerAttack(modpow(m,e,N), -1);
-    //mpz_class a = (get<0>(tup) * modInverse(get<1>(tup), N))% N;
 
-
-    /*Matrix<mpz_class> mat(3,3);
-
-    mat[0][0] = 69;
-    mat[0][1] = 26;
-    mat[0][2] = 15;
-
-    mat[1][0] = 21;
-    mat[1][1] = 96;
-    mat[1][2] = 85;
-
-    mat[2][0] = 333;
-    mat[2][1] = -9476;
-    mat[2][2] = -8694;
-
-
-    cout << mat << endl << LLL(mat,0.75) ;
-*/
     return;
 }

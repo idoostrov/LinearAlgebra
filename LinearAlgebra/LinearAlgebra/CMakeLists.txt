@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(LinearAlgebra
-        ListVector.h
         Tests/Tests.h
         Tests/Tests.cpp)
 
