@@ -5,13 +5,13 @@
 #ifndef LINEARALGEBRA_TESTS_H
 #define LINEARALGEBRA_TESTS_H
 
-void matrixTests();
-void lllTests();
-void mangerTests();
-
 #include "VectorTests.cpp"
 #include "MatrixTests.cpp"
 #include "LLL_Tests.cpp"
-#include "Manger.cpp"
+#include "Manger.h"
+
+void matrixTests();
+void lllTests();
+void mangerTests();
 
 #endif //LINEARALGEBRA_TESTS_H

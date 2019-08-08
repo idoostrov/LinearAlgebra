@@ -111,17 +111,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named LinearAlgebra
+# Target rules for targets named main
 
 # Build rule for target.
-LinearAlgebra: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 LinearAlgebra
-.PHONY : LinearAlgebra
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-LinearAlgebra/fast:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/build
-.PHONY : LinearAlgebra/fast
+main/fast:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+LLL.o: LLL.cpp.o
+
+.PHONY : LLL.o
+
+# target to build an object file
+LLL.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/LLL.cpp.o
+.PHONY : LLL.cpp.o
+
+LLL.i: LLL.cpp.i
+
+.PHONY : LLL.i
+
+# target to preprocess a source file
+LLL.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/LLL.cpp.i
+.PHONY : LLL.cpp.i
+
+LLL.s: LLL.cpp.s
+
+.PHONY : LLL.s
+
+# target to generate assembly for a file
+LLL.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/LLL.cpp.s
+.PHONY : LLL.cpp.s
+
+Manger.o: Manger.cpp.o
+
+.PHONY : Manger.o
+
+# target to build an object file
+Manger.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Manger.cpp.o
+.PHONY : Manger.cpp.o
+
+Manger.i: Manger.cpp.i
+
+.PHONY : Manger.i
+
+# target to preprocess a source file
+Manger.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Manger.cpp.i
+.PHONY : Manger.cpp.i
+
+Manger.s: Manger.cpp.s
+
+.PHONY : Manger.s
+
+# target to generate assembly for a file
+Manger.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Manger.cpp.s
+.PHONY : Manger.cpp.s
 
 Tests/Tests.o: Tests/Tests.cpp.o
 
@@ -129,7 +183,7 @@ Tests/Tests.o: Tests/Tests.cpp.o
 
 # target to build an object file
 Tests/Tests.cpp.o:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/Tests.cpp.o
 .PHONY : Tests/Tests.cpp.o
 
 Tests/Tests.i: Tests/Tests.cpp.i
@@ -138,7 +192,7 @@ Tests/Tests.i: Tests/Tests.cpp.i
 
 # target to preprocess a source file
 Tests/Tests.cpp.i:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.i
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/Tests.cpp.i
 .PHONY : Tests/Tests.cpp.i
 
 Tests/Tests.s: Tests/Tests.cpp.s
@@ -147,7 +201,7 @@ Tests/Tests.s: Tests/Tests.cpp.s
 
 # target to generate assembly for a file
 Tests/Tests.cpp.s:
-	$(MAKE) -f CMakeFiles/LinearAlgebra.dir/build.make CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.s
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Tests/Tests.cpp.s
 .PHONY : Tests/Tests.cpp.s
 
 # Help Target
@@ -157,8 +211,14 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... LinearAlgebra"
+	@echo "... main"
 	@echo "... edit_cache"
+	@echo "... LLL.o"
+	@echo "... LLL.i"
+	@echo "... LLL.s"
+	@echo "... Manger.o"
+	@echo "... Manger.i"
+	@echo "... Manger.s"
 	@echo "... Tests/Tests.o"
 	@echo "... Tests/Tests.i"
 	@echo "... Tests/Tests.s"

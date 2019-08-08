@@ -13,8 +13,28 @@
 #include <gmp.h>
 #include <gmpxx.h>
 #include <time.h>
+#include "Manger.h"
 
 using namespace std;
+
+
+/**
+ * Constants which used for encryption
+ */
+mpz_class p = mpz_class("130178853482887258169192488464112048860230046820185171074951"); //unknown
+mpz_class q = mpz_class("1444364652028799042026490302290910243247314635271107639158687"); //unknown
+mpz_class N = p*q; //known
+mpz_class phi = (p-1)*(q-1); //unknown
+mpz_class e = 65537; //known
+mpz_class d = modInverse(e,phi); //unknown
+
+unsigned int k = 50; // length of the key in bytes
+mpz_class B = mpz_class(1) << (8*(k-1)); // the approximate size of the key without the first byte
+
+
+
+///////////////////////////Side Channel Functions/////////////////////////
+
 
 // modInverse code credit: https://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/
 /**
@@ -53,19 +73,6 @@ mpz_class modInverse(mpz_class a, mpz_class m)
 
     return x;
 }
-
-/**
- * Constants which used for encryption
- */
-mpz_class p = mpz_class("130178853482887258169192488464112048860230046820185171074951"); //unknown
-mpz_class q = mpz_class("1444364652028799042026490302290910243247314635271107639158687"); //unknown
-mpz_class N = p*q; //known
-mpz_class phi = (p-1)*(q-1); //unknown
-mpz_class e = 65537; //known
-mpz_class d = modInverse(e,phi); //unknown
-
-unsigned int k = 50; // length of the key in bytes
-mpz_class B = mpz_class(1) << (8*(k-1)); // the approximate size of the key without the first byte
 
 
 // modpow's code credit: https://stackoverflow.com/questions/8496182/calculating-powa-b-mod-n
@@ -204,6 +211,33 @@ mpz_class step3(mpz_class c, mpz_class f2, int& number_of_oracle_calls) // retur
 
 }
 
+
+//////////////////////////////////////////////Prallelization///////////////////////////////////////////////////
+/**
+ * The individual thread function, which performs the manger attack with up to oracle_calls oracle calls
+ * Updates the matrix m accordingly
+ * @param oracle_calls
+ * @param cipher
+ * @param i
+ * @param m
+ */
+void ThreadHandle(int oracle_calls, mpz_class cipher, int i, Matrix<mpz_class>& m)
+{
+    tuple<mpz_class, mpz_class> tup = MangerAttack(cipher, oracle_calls, i);
+    mpz_class a = get<0>(tup);
+    mpz_class s = get<1>(tup);
+
+    m[0][i] = s;
+    m[i+1][i] = N;
+    m[m.getWidth()-1][i] = a;
+
+}
+
+
+
+
+///////////////////////////Main Functions/////////////////////////////
+
 /**
  * Manage the manger attack
  * @param c
@@ -226,26 +260,6 @@ tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_call
     return tup;
 }
 
-//////////////////////////////////////////////Prallelization///////////////////////////////////////////////////
-/**
- * The individual thread function, which performs the manger attack with up to oracle_calls oracle calls
- * Updates the matrix m accordingly
- * @param oracle_calls
- * @param cipher
- * @param i
- * @param m
- */
-void ThreadHandle(int oracle_calls, mpz_class cipher, int i, Matrix<mpz_class>& m)
-{
-    tuple<mpz_class, mpz_class> tup = MangerAttack(cipher, oracle_calls, i);
-    mpz_class a = get<0>(tup);
-    mpz_class s = get<1>(tup);
-
-    m[0][i] = s;
-    m[i+1][i] = N;
-    m[m.getWidth()-1][i] = a;
-
-}
 
 /**
  * Manage the parallel attack

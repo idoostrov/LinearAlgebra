@@ -29,7 +29,7 @@ Matrix<T> GramSchmidt(Matrix<T>& m)
  * @param mpq
  * @return rowndws up the number
  */
-mpz_class mpz_round(mpq_class mpq)
+mpz_class mpz_round1(mpq_class mpq)
 {
     mpz_class num, den, tmp;
     num = mpq.get_num();

@@ -41,7 +41,7 @@ int Test2() //checking Transpose function
 
 }
 
-int Test3()
+int Test3() //checking inverse and addition functions
 {
     Matrix<int> m(2, 2);
     m[0] = vector<int>(2, 3);
@@ -53,7 +53,7 @@ int Test3()
     return m.deter() == -21 && n.deter() == -339 && a.deter()== (21*339);
 }
 
-int Test4()
+int Test4()//checking swap function
 {
     Matrix<int> m(3, 3);
     for(int i=0; i < 3; i++)
@@ -77,7 +77,7 @@ int Test4()
             return false;
     return true;
 }
-bool Test5()
+bool Test5()//Another checking of multiplication function
 {
     Matrix<int> A(2), B(2);
     for (int i = 0; i < 2; ++i) {

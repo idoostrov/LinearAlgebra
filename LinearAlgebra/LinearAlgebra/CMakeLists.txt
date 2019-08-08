@@ -5,10 +5,11 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
-add_executable(LinearAlgebra
-        Tests/Tests.h
-        Tests/Tests.cpp)
+add_executable(main
+        Manger.cpp
+        LLL.cpp
+        Tests/Tests.cpp LLL.cpp)
 
 
 set(CMAKE_C_FLAGS "-lgmp")
-target_link_libraries(LinearAlgebra gmp gmpxx libgmp)
+target_link_libraries(main gmp gmpxx libgmp)

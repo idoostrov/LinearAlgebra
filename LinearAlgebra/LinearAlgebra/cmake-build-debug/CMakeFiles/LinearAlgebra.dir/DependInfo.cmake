@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Manger.cpp" "/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles/LinearAlgebra.dir/Manger.cpp.o"
   "/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/Tests/Tests.cpp" "/cygdrive/c/Users/talth/Documents/GitHub/LinearAlgebra/LinearAlgebra/LinearAlgebra/cmake-build-debug/CMakeFiles/LinearAlgebra.dir/Tests/Tests.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
@@ -11,6 +12,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../."
+  "../Tests"
   )
 
 # Targets to which this target links.
