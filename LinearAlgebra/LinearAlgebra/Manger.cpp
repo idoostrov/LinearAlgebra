@@ -285,6 +285,8 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
     // LLL
     matrix = LLL(matrix, 0.75);
 
+    cout << matrix;
+
     // saving r of the first thread
     mpz_class r1 = -matrix[thread_count + 1][0] / thread_count;
 
