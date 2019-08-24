@@ -26,12 +26,19 @@ mpz_class mpz_round(mpq_class mpq)
 }
 
 Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta) {
+
+    clock_t start = clock();
+
     Matrix<mpq_class> M(mat.getWidth(), mat.getLength());
     for (int i = 0; i < mat.getWidth(); ++i) {
         for (int j = 0; j < mat.getLength(); ++j) {
             M[i][j] = mat[i][j];
         }
     }
+
+    clock_t after = clock();
+    cout << "time for copying: " << (double(after - start) / CLOCKS_PER_SEC) << endl;
+
 
     Matrix<mpq_class> ortho(M);
     ortho = GramSchmidt(ortho);
@@ -41,7 +48,7 @@ Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta) {
         for (int j = k - 1; j >= 0; j--) {
             if (ortho[j].get_norm_squared() != 0) {
                 if (abs((M[k] * ortho[j])) / ortho[j].get_norm_squared() > 0.5) {
-                    M[k] = M[k] - M[j] * mpz_round((M[k] * ortho[j]) / ortho[j].get_norm_squared());
+                    M[k] -= M[j] * mpz_round((M[k] * ortho[j]) / ortho[j].get_norm_squared());
 //M[k] = M[k] - M[j]*((M[k]*ortho[j])/ ortho[j].get_norm_squared());
                     ortho = GramSchmidt(M);
                 }
@@ -61,11 +68,20 @@ Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta) {
             k++;
 
     }
+
+    clock_t after2 = clock();
+    cout << "time for LLL: " << (double(after2 - after) / CLOCKS_PER_SEC) << endl;
+
+
     for (int i = 0; i < mat.getWidth(); ++i) {
         for (int j = 0; j < mat.getLength(); ++j) {
             mat[i][j] = M[i][j];
         }
     }
+
+    clock_t after3 = clock();
+    cout << "time for copying: " << (double(after3 - after2) / CLOCKS_PER_SEC) << endl;
+
     return mat;
 
 }

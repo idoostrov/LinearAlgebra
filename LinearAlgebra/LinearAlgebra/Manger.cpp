@@ -2,7 +2,17 @@
 // Created by ido_o on 23-Jul-19.
 //
 
-
+#include <stdlib.h>
+#include <iostream>
+#include <math.h>
+#include <tuple>
+#include <thread>
+#include <vector>
+#include "Matrix.h"
+#include "LLL.h"
+#include <gmp.h>
+#include <gmpxx.h>
+#include <time.h>
 #include "Manger.h"
 
 using namespace std;
@@ -11,14 +21,16 @@ using namespace std;
 /**
  * Constants which used for encryption
  */
-mpz_class p = mpz_class("130178853482887258169192488464112048860230046820185171074951"); //unknown
-mpz_class q = mpz_class("1444364652028799042026490302290910243247314635271107639158687"); //unknown
+//mpz_class p = mpz_class("130178853482887258169192488464112048860230046820185171074951"); //unknown
+mpz_class p = mpz_class("5049552178168345450147467299079478804440160671854081068163654433408577648747293029264169652125229589925204964021483966083221593187094789544097320004886049");
+//mpz_class q = mpz_class("1444364652028799042026490302290910243247314635271107639158687"); //unknown
+mpz_class q = mpz_class("5238737590937950401110221348417351992255747695627507243198144804771052352003777275257239918599342466320703277308360551090618861339416385553447347568127323");
 mpz_class N = p*q; //known
 mpz_class phi = (p-1)*(q-1); //unknown
 mpz_class e = 65537; //known
 mpz_class d = modInverse(e,phi); //unknown
 
-unsigned int k = 50; // length of the key in bytes
+unsigned int k = 128;//50; // length of the key in bytes
 mpz_class B = mpz_class(1) << (8*(k-1)); // the approximate size of the key without the first byte
 
 
@@ -260,6 +272,8 @@ tuple<mpz_class , mpz_class> MangerAttack(mpz_class c, int number_of_oracle_call
  */
 mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class cipher)
 {
+    clock_t begin = clock();
+
     // define matrix of size #threads + 2
     Matrix<mpz_class> matrix(thread_count + 2, thread_count + 2);
 
@@ -279,16 +293,21 @@ mpz_class ParallelizedMangerAttack(int thread_count, int oracle_calls, mpz_class
     mpz_class a1 = matrix[thread_count + 1][0];
 
     // last preparatioms of the matrix beafore the LLL
-    matrix = matrix * (mpz_class)thread_count;
+    matrix *= (mpz_class)thread_count;
     matrix[thread_count + 1][thread_count] = N*(thread_count - 1);
+
+    clock_t before_LLL = clock();
 
     // LLL
     matrix = LLL(matrix, 0.75);
 
-    cout << matrix;
-
     // saving r of the first thread
     mpz_class r1 = -matrix[thread_count + 1][0] / thread_count;
+
+    clock_t end = clock();
+
+    cout << "Time for parralellized attack: " << (double(before_LLL - begin) / CLOCKS_PER_SEC) << endl;
+    cout << "Total time (including LLL): " << (double(end - begin) / CLOCKS_PER_SEC) << endl;
 
     return ((r1+a1)*modInverse(s1, N)) % N;
 }

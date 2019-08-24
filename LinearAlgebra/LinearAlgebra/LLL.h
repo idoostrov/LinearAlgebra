@@ -25,18 +25,30 @@ Matrix<mpz_class>& LLL(Matrix<mpz_class>& mat, float delta);
 template <typename T>
 Matrix<T> GramSchmidt(Matrix<T>& m)
 {
+    //clock_t before = clock();
+
+    Array_Vector<T> v;
+
     Matrix<T> M(m);
     for(int i=0; i<M.getWidth(); i++)
     {
-        Array_Vector<T> v(M[i]);
+        //Array_Vector<T> v(M[i]);
+        v = std::move(M[i]);
         for(int j=0; j<i; j++)
         {
             if(M[j].get_norm_squared() != 0)
                 v = v - (M[j] * (M[j]*M[i] / M[j].get_norm_squared()));
         }
         M[i] = v;
+        //delete (v);
     }
+
+    //clock_t after = clock();
+    //cout << "time for G-S: " << (double(after - before) / CLOCKS_PER_SEC) << endl;
+
     return M;
+
+
 }
 
 /**
